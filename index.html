@@ -1,91 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rohith | AWS Cloud Engineer Portfolio</title>
-    <link rel="stylesheet" href="style.css" />
-</head>
 
-<body>
+<!-- ============================= -->
+<p>AWS Cloud Engineer • DevOps Associate • Cloud Support Engineer</p>
+<a href="#projects" class="btn">Explore Projects</a>
+</div>
+</header>
 
-    <header class="header">
-        <h1>Rohith Jothilakshmi Periyasamy</h1>
-        <p>AWS Cloud Engineer • DevOps Engineer (Associate) • Cloud Support Engineer</p>
-    </header>
 
-    <section class="section about">
-        <h2>About Me</h2>
-        <p>
-            Results-driven AWS Cloud Engineer with hands-on experience designing and deploying secure,
-            production-grade cloud architectures on AWS. Skilled in EC2, RDS, S3, IAM, VPC, CloudWatch,
-            Linux, and troubleshooting web/application deployments end-to-end.
-        </p>
-    </section>
+<section class="section" id="about" data-aos="fade-up">
+<h2>About Me</h2>
+<p>
+Cloud Engineer with deep experience in deploying secure and scalable AWS architectures.
+Expertise includes EC2, RDS, S3, IAM, VPC, Linux, monitoring, logging systems, and DevOps automation.
+Passionate about solving cloud infrastructure challenges.
+</p>
+</section>
 
-    <section class="section skills">
-        <h2>Core Skills</h2>
-        <ul>
-            <li>AWS: EC2, S3, RDS, VPC, IAM, CloudWatch, Route53</li>
-            <li>Linux (Ubuntu), Bash scripting, automation</li>
-            <li>Nginx, Apache, PHP, Django, Gunicorn</li>
-            <li>MySQL (RDS & On-prem)</li>
-            <li>Rsyslog, AWS CloudWatch monitoring</li>
-            <li>Networking: Subnets, NAT, Security Groups, Route Tables</li>
-        </ul>
-    </section>
 
-    <section class="section projects">
-        <h2>Projects</h2>
+<section class="section" id="projects" data-aos="fade-up">
+<h2>Projects</h2>
+<div class="project-grid">
+<a href="projects/project1.html" class="project-card" data-aos="zoom-in">
+<h3>Two-tier Web App with Private MySQL</h3>
+<p>Secure VPC, EC2, MySQL</p>
+</a>
+<a href="projects/project2.html" class="project-card" data-aos="zoom-in">
+<h3>Multi-Tier WordPress Deployment</h3>
+<p>Reverse Proxy, NAT, Backup</p>
+</a>
+<a href="projects/project3.html" class="project-card" data-aos="zoom-in">
+<h3>Django CRUD App on AWS</h3>
+<p>Gunicorn, RDS, Migrations</p>
+</a>
+<a href="projects/project4.html" class="project-card" data-aos="zoom-in">
+<h3>PHP Hosting with RDS</h3>
+<p>Nginx, PHP-FPM, MySQL</p>
+</a>
+<a href="projects/project5.html" class="project-card" data-aos="zoom-in">
+<h3>SFTP → S3 Secure Workflow</h3>
+<p>IAM, Chroot, Automation</p>
+</a>
+<a href="projects/project6.html" class="project-card" data-aos="zoom-in">
+<h3>Centralized Log Mgmt</h3>
+<p>Rsyslog, CloudWatch, Alerts</p>
+</a>
+</div>
+</section>
 
-        <div class="project">
-            <h3>Two-tier Web App with Private MySQL</h3>
-            <p>Secure VPC architecture with public EC2 web server and private MySQL backend.</p>
-        </div>
 
-        <div class="project">
-            <h3>Multi-Tier WordPress Deployment</h3>
-            <p>Reverse proxy + web + database tier. Configured NAT, UFW, Fail2ban, DB backups.</p>
-        </div>
+<section class="section" id="contact" data-aos="fade-up">
+<h2>Contact</h2>
+<p>Email: rohithjpu1@gmail.com</p>
+<p>Phone: +91 73588 89412</p>
+<p>Location: Chennai, India</p>
+<p>LinkedIn: linkedin.com/in/rohithjp</p>
+</section>
 
-        <div class="project">
-            <h3>Django CRUD App on AWS</h3>
-            <p>Django + Gunicorn deployed on EC2 with RDS MySQL and production WSGI setup.</p>
-        </div>
 
-        <div class="project">
-            <h3>PHP Website Hosting with RDS</h3>
-            <p>Hosted PHP app using Nginx + PHP-FPM with secure RDS MySQL configuration.</p>
-        </div>
+<footer class="footer">© 2025 Rohith Jothilakshmi Periyasamy</footer>
 
-        <div class="project">
-            <h3>Secure File Transfer Workflow (SFTP → S3)</h3>
-            <p>Chrooted SFTP users, automated S3 uploads via IAM role + cron jobs.</p>
-        </div>
 
-        <div class="project">
-            <h3>Centralized Log Management</h3>
-            <p>Rsyslog → Log collector → CloudWatch logs + metric filters + alerts.</p>
-        </div>
-
-        <div class="project">
-            <h3>Automated Web Hosting System</h3>
-            <p>EC2 user-data automation with S3 sync for static website deployments.</p>
-        </div>
-
-    </section>
-
-    <section class="section contact">
-        <h2>Contact</h2>
-        <p><strong>Email:</strong> rohithjpu1@gmail.com</p>
-        <p><strong>Phone:</strong> +91 73588 89412</p>
-        <p><strong>Location:</strong> Chennai, India</p>
-        <p><strong>LinkedIn:</strong> linkedin.com/in/rohithjp</p>
-    </section>
-
-    <footer class="footer">
-        © 2025 Rohith Jothilakshmi Periyasamy
-    </footer>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>AOS.init({ duration: 1000, once: true });</script>
 </body>
 </html>
