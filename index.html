@@ -1,153 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rohith JP – AWS Cloud Portfolio</title>
-
-<link rel="stylesheet" href="style.css?v=999999">
-
-<style>
-/* Extra polish for homepage only */
-.hero {
-    padding: 130px 20px;
-    text-align: center;
-}
-.projects {
-    padding: 50px 30px;
-    max-width: 1200px;
-    margin: auto;
-}
-.card h3 {
-    color: var(--neon-purple);
-    font-family: "Orbitron";
-    margin-bottom: 10px;
-    text-shadow: 0 0 10px var(--neon-purple);
-}
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rohith J. Periyasamy | AWS Cloud Engineer</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="homepage">
+<body>
 
 <!-- NAVIGATION -->
-<div class="nav">
+<nav class="nav">
     <div class="logo">ROHITH JP</div>
-    <div>
+    <div class="nav-links">
+        <a href="#home">Home</a>
         <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
         <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
     </div>
-</div>
+</nav>
 
 <!-- HERO SECTION -->
-<section class="hero">
-    <h1 class="title">AWS Cloud Portfolio</h1>
-    <p class="subtitle">
-        Cloud Engineer • AWS Specialist • DevOps Learner  
-        <br>Building scalable, automated, and secure cloud solutions
-    </p>
+<section id="home" class="hero">
+    <h2 class="subtitle">AWS Cloud Engineer</h2>
+    <h1 class="title">ROHITH J. PERIYASAMY</h1>
+    <p class="subtitle">Production-grade AWS • Automation • Observability • Secure Infrastructure</p>
 
     <div class="button-group">
         <a href="#projects" class="btn">View Projects</a>
-        <a href="Rohith_JP_Resume.pdf" class="btn-outline" target="_blank">Download Resume</a>
+        <a href="#contact" class="btn-outline">Get in Touch</a>
     </div>
+
+    <p style="margin-top:20px;">VPC • EC2 • RDS • CloudWatch • Terraform</p>
 </section>
 
-<!-- PROJECTS -->
-<section class="projects" id="projects">
+
+<!-- PROJECTS SECTION -->
+<section id="projects" class="section">
     <h2 class="section-title">Projects</h2>
 
     <div class="card-grid">
 
-        <!-- Project 1 -->
-        <div class="card">
-            <h3>Project 1 – AWS S3 Static Hosting</h3>
-            <p>Static website hosting • Versioning • CloudFront CDN</p>
-            <a class="btn" href="projects/project1.html">View Project</a>
-        </div>
+        <a href="projects/project1.html" class="card">
+            <h3>Project 1</h3>
+            <p>AWS EC2 Static Website Hosting</p>
+        </a>
 
-        <!-- Project 2 -->
-        <div class="card">
-            <h3>Project 2 – Automated Web Hosting</h3>
-            <p>EC2 • User-data automation • S3 sync • Nginx</p>
-            <a class="btn" href="projects/project2.html">View Project</a>
-        </div>
+        <a href="projects/project2.html" class="card">
+            <h3>Project 2</h3>
+            <p>Automated Web Hosting System — EC2 + S3 + Bash</p>
+        </a>
 
-        <!-- Project 3 -->
-        <div class="card">
-            <h3>Project 3 – Centralized Log Management</h3>
-            <p>Rsyslog • Multi-EC2 log forwarding • CloudWatch</p>
-            <a class="btn" href="projects/project3.html">View Project</a>
-        </div>
+        <a href="projects/project3.html" class="card">
+            <h3>Project 3</h3>
+            <p>Centralized Log Management — Rsyslog + CloudWatch</p>
+        </a>
 
-        <!-- Project 4 -->
-        <div class="card">
-            <h3>Project 4 – Secure SFTP + S3 Workflow</h3>
-            <p>SFTP • Chroot isolation • S3 versioning • IAM roles</p>
-            <a class="btn" href="projects/project4.html">View Project</a>
-        </div>
+        <a href="projects/project4.html" class="card">
+            <h3>Project 4</h3>
+            <p>Secure File Transfer System — SFTP + S3 + IAM</p>
+        </a>
 
-        <!-- Project 5 -->
-        <div class="card">
-            <h3>Project 5 – PHP Website on EC2 + RDS</h3>
-            <p>EC2 • Nginx • PHP-FPM • RDS MySQL • GitHub deploy</p>
-            <a class="btn" href="projects/project5.html">View Project</a>
-        </div>
+        <a href="projects/project5.html" class="card">
+            <h3>Project 5</h3>
+            <p>PHP Website Hosting — Nginx + RDS MySQL</p>
+        </a>
 
-        <!-- Project 6 -->
-        <div class="card">
-            <h3>Project 6 – Django CRUD App + RDS</h3>
-            <p>Django • Gunicorn • MySQL RDS • EC2 hosting</p>
-            <a class="btn" href="projects/project6.html">View Project</a>
-        </div>
+        <a href="projects/project6.html" class="card">
+            <h3>Project 6</h3>
+            <p>Django CRUD App — Gunicorn + RDS MySQL</p>
+        </a>
 
-        <!-- Project 7 -->
-        <div class="card">
-            <h3>Project 7 – Two-Tier Web + Private MySQL</h3>
-            <p>VPC • NACLs • SG-to-SG • Private DB • PHP-FPM</p>
-            <a class="btn" href="projects/project7.html">View Project</a>
-        </div>
+        <a href="projects/project7.html" class="card">
+            <h3>Project 7</h3>
+            <p>Two-Tier AWS Architecture — Private MySQL + Public Web</p>
+        </a>
 
     </div>
 </section>
 
-<!-- SKILLS -->
-<section class="section" id="skills">
+
+<!-- EXPERIENCE SECTION -->
+<section id="experience" class="section">
+    <h2 class="section-title">Experience</h2>
+
+    <div class="card">
+        <h3>AWS Cloud Engineer</h3>
+        <p>Hands-on experience building secure, scalable AWS environments, automation systems,
+            networking, and production-grade cloud applications.</p>
+        <ul>
+            <li>Designed VPC architectures (public + private subnets)</li>
+            <li>Configured EC2, RDS, CloudWatch, Lambda, IAM</li>
+            <li>Automated deployments using Bash & AWS CLI</li>
+            <li>Built secure SFTP + S3 workflows</li>
+            <li>Integrated monitoring, logging & alerts</li>
+        </ul>
+    </div>
+</section>
+
+
+<!-- SKILLS SECTION -->
+<section id="skills" class="section">
     <h2 class="section-title">Skills</h2>
-    <div class="chip-group">
-        <span>AWS EC2</span>
-        <span>AWS RDS</span>
-        <span>AWS S3</span>
-        <span>CloudFront</span>
-        <span>IAM</span>
-        <span>VPC / Subnets</span>
-        <span>Security Groups</span>
-        <span>NACL</span>
-        <span>Nginx</span>
-        <span>Linux</span>
-        <span>Python</span>
-        <span>Django</span>
-        <span>PHP</span>
-        <span>GitHub</span>
-        <span>MySQL</span>
+
+    <div class="skills-container">
+        <div class="skill-item">AWS EC2</div>
+        <div class="skill-item">AWS RDS</div>
+        <div class="skill-item">AWS S3</div>
+        <div class="skill-item">CloudFront</div>
+        <div class="skill-item">IAM</div>
+        <div class="skill-item">VPC / Subnets</div>
+        <div class="skill-item">Security Groups</div>
+        <div class="skill-item">NACL</div>
+        <div class="skill-item">Nginx</div>
+        <div class="skill-item">Linux</div>
+        <div class="skill-item">Python</div>
+        <div class="skill-item">Django</div>
+        <div class="skill-item">PHP</div>
+        <div class="skill-item">GitHub</div>
+        <div class="skill-item">MySQL</div>
     </div>
 </section>
 
-<!-- CONTACT -->
-<section class="section" id="contact">
+
+<!-- CONTACT SECTION -->
+<section id="contact" class="section">
     <h2 class="section-title">Contact</h2>
-    <p>Email: <strong>rohithjpu1@gmail.com</strong></p>
-    <p>Phone: <strong>07440365040</strong></p>
-    <p>Location: Croydon, UK</p>
+
+    <div class="card" style="text-align:center;">
+        <p>Rohith J. Periyasamy</p>
+        <p>AWS Cloud Engineer</p>
+
+        <p>
+            <a href="mailto:rohithjpu1@gmail.com">📧 Email</a> &nbsp;|&nbsp;
+            <a href="https://github.com/RohithJP">🐙 GitHub</a> &nbsp;|&nbsp;
+            <a href="https://www.linkedin.com/in/rohith-jp/">💼 LinkedIn</a>
+        </p>
+    </div>
 </section>
 
+
+<!-- FOOTER -->
 <footer>
-    © 2025 Rohith JP • AWS Cloud Portfolio
+    © 2025 Rohith J. Periyasamy — All Rights Reserved
 </footer>
 
 </body>
 </html>
+
 
 
 
