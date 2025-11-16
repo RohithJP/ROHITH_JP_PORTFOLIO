@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project 7 – Two-Tier Web + Private MySQL on AWS</title>
+
+<link rel="stylesheet" href="../style.css?v=7000">
+
+<style>
+body {
+  padding: 40px;
+  max-width: 900px;
+  margin: auto;
+  font-size: 17px;
+  line-height: 1.7;
+}
+h1, h2, h3 {
+  font-family: "Orbitron";
+  color: var(--neon-blue);
+  text-shadow: 0 0 12px var(--neon-blue);
+}
+.section-box {
+  background: rgba(255,255,255,0.03);
+  padding: 22px;
+  margin: 22px 0;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+code, pre {
+  background: rgba(255,255,255,0.05);
+  padding: 12px;
+  border-radius: 8px;
+  display: block;
+  overflow-x: auto;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+</style>
+</head>
+
+<body>
+
+<a href="../index.html" class="btn" style="margin-bottom:20px; display:inline-block;">← Back to Portfolio</a>
+
+<h1>Two-Tier Web + Private MySQL on AWS</h1>
+<p><strong>A secure multi-tier environment: Public EC2 (Nginx + PHP) → Private EC2 (MySQL) using VPC, SGs, NACLs, routing, debugging & hardening.</strong></p>
+
+<!-- SECTION 1 -->
+<div class="section-box">
+<h2>1⃣ One-Sentence Summary</h2>
+<p>You built a secure two-tier setup: a public EC2 (Nginx + PHP) serving the website and a private EC2 (MySQL) holding the DB, connected end-to-end with correct VPC networking, SGs, NACLs, routing, and MySQL privileges.</p>
+</div>
+
+<!-- SECTION 2 -->
+<div class="section-box">
+<h2>2⃣ Final Architecture (Diagram)</h2>
+
+<pre><code>Internet
+ └─> Public Subnet (10.10.1.0/24) 
+       └─ Public EC2 (Nginx + PHP) [sg_web]
+
+           ↕  (Security Group reference: sg_web → sg_db)
+
+ └─> Private Subnet (10.10.2.0/24)
+       └─ Private EC2 (MySQL) [sg_db]
+
+VPC: 10.10.0.0/16
+Public EC2 = rotating public IP (no EIP)
+Private EC2 = no public IP
+MySQL listens 0.0.0.0, user allowed only from 10.10.% 
+NAT Gateway created temporarily for apt installs
+</code></pre>
+</div>
+
+<!-- SECTION 3 -->
+<div class="section-box">
+<h2>3⃣ Technologies Used</h2>
+<ul>
+<li>AWS VPC, Subnets, Route Tables, NAT Gateway, EC2</li>
+<li>Security Groups vs Network ACLs</li>
+<li>Ubuntu 22.04 LTS</li>
+<li>Nginx + PHP-FPM 8.3</li>
+<li>MySQL 8.0 on private EC2</li>
+<li>SSH via bastion / ProxyJump</li>
+<li>Debug tools: <code>ssh -vvv</code>, <code>nc -zv</code>, <code>ss</code>, <code>systemctl</code>, logs</li>
+</ul>
+</div>
+
+<!-- SECTION 4 -->
+<div class="section-box">
+<h2>4⃣ Step-by-Step: What You Built</h2>
+<ol>
+<li>Created VPC 10.10.0.0/16 with public + private subnets.</li>
+<li>Attached IGW and updated public route table.</li>
+<li>Configured NACLs to allow VPC internal + ephemeral ports.</li>
+<li>Created SGs: public (web) and private (db) with SG-to-SG references.</li>
+<li>Launched EC2 instances: public (web) + private (mysql).</li>
+<li>Installed Nginx, PHP-FPM, mysql-client; cloned website.</li>
+<li>Created Nginx site; fixed PHP socket mismatches.</li>
+<li>Created NAT Gateway temporarily for private instance apt installs.</li>
+<li>Installed and configured MySQL on private instance.</li>
+<li>Fixed MySQL bind-address and user host rules (10.10.%).</li>
+<li>Tested connectivity end-to-end using <code>nc -zv</code>.</li>
+<li>Imported DB and verified application works.</li>
+</ol>
+</div>
+
+<!-- SECTION 5 -->
+<div class="section-box">
+<h2>5⃣ Mistakes Made & What They Cost</h2>
+<ul>
+<li><strong>Forgot IGW route</strong> → public instance wasn't public.</li>
+<li><strong>NACL mismatch</strong> → SSH/MySQL hung because stateless rules blocked replies.</li>
+<li><strong>Wrong SG sources</strong> → DB unreachable; fixed by sg_web → sg_db reference.</li>
+<li><strong>MySQL bind & host mistakes</strong> → access denied until corrected.</li>
+<li><strong>Broken nginx config</strong> due to accidental pasted shell commands.</li>
+<li><strong>Apt lock issues</strong> after NAT misconfiguration → fixed dpkg/lock cleanup.</li>
+</ul>
+</div>
+
+<!-- SECTION 6 -->
+<div class="section-box">
+<h2>6⃣ Diagnostic Commands That Solved Everything</h2>
+
+<pre><code># NETWORK
+ssh -vvv ubuntu@10.10.2.137
+nc -zv 10.10.2.137 3306
+nc -zv 10.10.2.137 22
+ip route
+
+# SERVICES
+systemctl status mysql
+systemctl status php8.3-fpm
+ss -tulpen | grep 3306
+ss -tulpen | grep :80
+
+# LOGS
+tail -n 100 /var/log/nginx/error.log
+tail -n 200 /var/log/mysql/error.log
+
+# MYSQL FIXES
+SELECT user,host FROM mysql.user;
+DROP USER 'sms_user'@'localhost';
+CREATE USER 'sms_user'@'10.10.%' IDENTIFIED BY 'StrongSmsPassword!23';
+GRANT ALL ON sms_db.* TO 'sms_user'@'10.10.%';
+</code></pre>
+</div>
+
+<!-- SECTION 7 -->
+<div class="section-box">
+<h2>7⃣ Root Cause Summary</h2>
+<ul>
+<li><strong>NACL blocks</strong> → replies dropped due to missing ephemeral rules.</li>
+<li><strong>MySQL not listening</strong> → default 127.0.0.1 bind-address.</li>
+<li><strong>Wrong MySQL host entries</strong> → matched localhost instead of 10.10.%.</li>
+<li><strong>Nginx errors</strong> → caused by accidental edits.</li>
+</ul>
+</div>
+
+<!-- SECTION 8 -->
+<div class="section-box">
+<h2>8⃣ Current Working State</h2>
+<ul>
+<li>Public EC2 serves site using Nginx + PHP-FPM 8.3.</li>
+<li>PHP can reach private MySQL successfully.</li>
+<li>Private MySQL listens only inside VPC.</li>
+<li>Security Groups are least-privilege.</li>
+<li>NAT Gateway removable; no longer required.</li>
+</ul>
+</div>
+
+<!-- SECTION 9 -->
+<div class="section-box">
+<h2>9⃣ Rapid Recovery Checklist</h2>
+<ol>
+<li>Check MySQL port from public:  
+<pre><code>nc -zv <PRIVATE_IP> 3306</code></pre></li>
+<li>If timeout → NACL / route issue.</li>
+<li>If refused → restart MySQL and check bind-address.</li>
+<li>If access denied → fix user host rules.</li>
+<li>If 502/500 → verify PHP-FPM socket + Nginx config.</li>
+</ol>
+</div>
+
+<!-- SECTION 10 -->
+<div class="section-box">
+<h2>🔟 Costs & Start/Stop Notes</h2>
+<ul>
+<li>Stopping EC2 keeps private IP; public IP changes.</li>
+<li>No EIP = new IP every start (acceptable).</li>
+<li>NAT Gateway costs — remove if unused.</li>
+</ul>
+</div>
+
+<!-- SECTION 11 -->
+<div class="section-box">
+<h2>1⃣1⃣ Pre-Shutdown Runbook</h2>
+<ul>
+<li>Import DB & test site.</li>
+<li>Delete NAT Gateway (if temporary).</li>
+<li>Stop both EC2 instances.</li>
+<li>Next start → only update public IP.</li>
+</ul>
+</div>
+
+<!-- SECTION 12 -->
+<div class="section-box">
+<h2>1⃣2⃣ Future Improvements</h2>
+<ul>
+<li>Migrate DB to RDS (backups, snapshots, Multi-AZ).</li>
+<li>Use IAM + Secrets Manager for DB credentials.</li>
+<li>Enable HTTPS (Let’s Encrypt).</li>
+<li>Automate infra using Terraform.</li>
+<li>Harden MySQL (disable root, TLS, restricted CIDR).</li>
+</ul>
+</div>
+
+<!-- SECTION 13 -->
+<div class="section-box">
+<h2>1⃣3⃣ Appendix — Helpful One-Liners</h2>
+
+<pre><code># Test MySQL:
+nc -zv 10.10.2.137 3306
+
+# Test SSH:
+nc -zv 10.10.2.137 22
+
+# Show MySQL users:
+sudo mysql -e "SELECT user,host FROM mysql.user;"
+
+# Fix bind address:
+sudo sed -i 's/^bind-address.*/bind-address = 0.0.0.0/' \
+/etc/mysql/mysql.conf.d/mysqld.cnf && sudo systemctl restart mysql
+
+# Clean apt locks:
+sudo kill -9 $(pgrep apt dpkg) || true
+sudo rm -f /var/lib/dpkg/lock* /var/lib/apt/lists/lock \
+/var/cache/apt/archives/lock
+sudo dpkg --configure -a
+
+# Test and reload nginx:
+sudo nginx -t && sudo systemctl reload nginx
+</code></pre>
+</div>
+
+<!-- SECTION 14 -->
+<div class="section-box">
+<h2>1⃣4⃣ Closing</h2>
+<p>You built a true production-style two-tier architecture: VPC networking, NACLs, SG-to-SG 
+referencing, private MySQL, public Nginx, debugging, routing, and MySQL privilege mastery.  
+This project shows real AWS engineering skills — the same issues real companies face.</p>
+</div>
+
+</body>
+</html>
