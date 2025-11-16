@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project 6 – Django CRUD App with MySQL RDS</title>
+
+<link rel="stylesheet" href="../style.css?v=6000">
+
+<style>
+body {
+  padding: 40px;
+  max-width: 900px;
+  margin: auto;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+h1, h2, h3 {
+  font-family: "Orbitron";
+  color: var(--neon-blue);
+  text-shadow: 0 0 12px var(--neon-blue);
+}
+
+.section-box {
+  background: rgba(255,255,255,0.03);
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+code, pre {
+  background: rgba(255,255,255,0.05);
+  padding: 12px;
+  border-radius: 8px;
+  display: block;
+  overflow-x: auto;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+</style>
+</head>
+
+<body>
+
+<a href="../index.html" class="btn" style="margin-bottom:20px; display:inline-block;">← Back to Portfolio</a>
+
+<h1>Django Student CRUD Web App on AWS with MySQL RDS</h1>
+<p><strong>Deploying a full Django CRUD system on EC2 → connected to RDS MySQL → publicly accessible web app</strong></p>
+
+<div class="section-box">
+<h2>Project Overview</h2>
+<p><strong>Goal:</strong> Host a Django Student CRUD web application on AWS EC2 and connect it to AWS RDS MySQL.</p>
+
+<p><strong>Scenario:</strong>  
+A student management system is deployed for real users. Backend runs Django, database runs on RDS.</p>
+</div>
+
+<div class="section-box">
+<h2>Learning Objectives</h2>
+<ul>
+<li>Launch EC2 and install Python, pip, virtualenv</li>
+<li>Deploy Django with Gunicorn</li>
+<li>Create & configure MySQL RDS</li>
+<li>Connect Django ORM to RDS</li>
+<li>Run migrations + CRUD operations</li>
+<li>Fix common Django deployment errors</li>
+<li>Manage file permissions, SGs, networking</li>
+</ul>
+</div>
+
+<div class="section-box">
+<h2>Architecture</h2>
+<p><strong>Flow:</strong></p>
+<p>[GitHub / Local] → Clone → [EC2 Ubuntu] → Django + Gunicorn → [MySQL RDS] → Browser</p>
+
+<ul>
+<li>EC2 (Ubuntu 22.04)</li>
+<li>Django (Python 3.12)</li>
+<li>Gunicorn (WSGI Server)</li>
+<li>AWS RDS (MySQL)</li>
+<li>Security groups + Linux permissions</li>
+</ul>
+</div>
+
+<div class="section-box">
+<h2>1⃣ EC2 Instance Setup</h2>
+
+<pre><code>chmod 400 mykey.pem
+ssh -i "mykey.pem" ubuntu@&lt;EC2-PUBLIC-IP&gt;
+
+sudo apt update && sudo apt upgrade -y
+sudo apt install git python3-pip python3-venv \
+build-essential libmysqlclient-dev -y
+</code></pre>
+</div>
+
+<div class="section-box">
+<h2>2⃣ Django Project Setup</h2>
+
+<h3>Create environment:</h3>
+<pre><code>mkdir ~/djangoapp
+cd ~/djangoapp
+python3 -m venv venv
+source venv/bin/activate
+</code></pre>
+
+<h3>Install packages:</h3>
+<pre><code>pip install --upgrade pip
+pip install django mysqlclient gunicorn
+</code></pre>
+
+<h3>Create Django project:</h3>
+<pre><code>django-admin startproject studentcrud
+cd studentcrud
+python manage.py startapp students
+</code></pre>
+</div>
+
+<div class="section-box">
+<h2>3⃣ Configure AWS RDS MySQL</h2>
+
+<ul>
+<li>Create RDS MySQL (db.t4g.micro)</li>
+<li>Allow EC2 → RDS on port 3306</li>
+</ul>
+
+<h3>Create DB + user:</h3>
+<pre><code>CREATE DATABASE studentdb CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+CREATE USER 'studentuser'@'%' IDENTIFIED BY 'StrongPassword123!';
+GRANT ALL PRIVILEGES ON studentdb.* TO 'studentuser'@'%';
+FLUSH PRIVILEGES;
+</code></pre>
+</div>
+
+<div class="section-box">
+<h2>4⃣ Connect Django to MySQL RDS</h2>
+
+<h3>settings.py</h3>
+<pre><code>DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'studentdb',
+        'USER': 'studentuser',
+        'PASSWORD': 'StrongPassword123!',
+        'HOST': '&lt;RDS-ENDPOINT&gt;',
+        'PORT': '3306',
+    }
+}
+</code></pre>
+
+<h3>Add students app:</h3>
+
+<pre><code>INSTALLED_APPS = [
+    # Django defaults…
+    'students',
+]
+</code></pre>
+</div>
+
+<div class="section-box">
+<h2>5⃣ Models & Forms</h2>
+
+<h3>models.py:</h3>
+<pre><code>from django.db import models
+
+class Student(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} ({self.email})"
+</code></pre>
+
+<h3>forms.py:</h3>
+<pre><code>from django import forms
+from .models import Student
+
+class StudentForm(forms.ModelForm):
+    class Meta:
+        model = Student
+        fields = ['name', 'email']
+</code></pre>
+</div>
+
+<div class="section-box">
+<h2>6⃣ Views (CRUD)</h2>
+
+<h3>views.py:</h3>
+<pre><code>from django.shortcuts import render, redirect, get_object_or_404
+from .models import Student
+from .forms import StudentForm
+
+def index(request):
+    students = Student.objects.all().order_by('-created_at')
+    form = StudentForm()
+    return render(request, 'index.html', {'students': students, 'form': form})
+
+def add_student(request):
+    if request.method == 'POST':
+        form = StudentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+
+def edit_student(request, id):
+    student = get_object_or_404(Student, id=id)
+    if request.method == 'POST':
+        form = StudentForm(request.POST, instance=student)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = StudentForm(instance=student)
+    return render(request, 'edit.html', {'form': form, 'student': student})
+
+def delete_student(request, id):
+    student = get_object_or_404(Student, id=id)
+    if request.method == 'POST':
+        student.delete()
+        return redirect('index')
+    return render(request, 'confirm_delete.html', {'student': student})
+</code></pre>
+</div>
+
+<div class="section-box">
+<h2>7⃣ URLs & Templates</h2>
+
+<h3>students/urls.py:</h3>
+<pre><code>from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='index'),
+    path('add/', views.add_student, name='add_student'),
+    path('edit/&lt;int:id&gt;/', views.edit_student, name='edit_student'),
+    path('delete/&lt;int:id&gt;/', views.delete_student, name='delete_student'),
+]
+</code></pre>
+
+<h3>Template: index.html (snippet)</h3>
+<pre><code>&lt;form method="post" action="{% url 'add_student' %}"&gt;
+    {% csrf_token %}
+    {{ form.as_p }}
+    &lt;button type="submit"&gt;Add Student&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;table&gt;
+&lt;tr&gt;&lt;th&gt;ID&lt;/th&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Email&lt;/th&gt;&lt;th&gt;Actions&lt;/th&gt;&lt;/tr&gt;
+{% for s in students %}
+&lt;tr&gt;
+  &lt;td&gt;{{ s.id }}&lt;/td&gt;
+  &lt;td&gt;{{ s.name }}&lt;/td&gt;
+  &lt;td&gt;{{ s.email }}&lt;/td&gt;
+  &lt;td&gt;
+     &lt;a href="{% url 'edit_student' s.id %}"&gt;Edit&lt;/a&gt; |
+     &lt;a href="{% url 'delete_student' s.id %}"&gt;Delete&lt;/a&gt;
+  &lt;/td&gt;
+&lt;/tr&gt;
+{% endfor %}
+&lt;/table&gt;
+</code></pre>
+</div>
+
+<div class="section-box">
+<h2>8⃣ Migrations & Run Server</h2>
+
+<pre><code>python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver 0.0.0.0:8000
+</code></pre>
+</div>
+
+<div class="section-box">
+<h2>9⃣ Troubleshooting & Mistakes</h2>
+
+<table>
+<tr><th>Error</th><th>Cause</th><th>Fix</th></tr>
+
+<tr>
+<td>OperationalError (2005)</td>
+<td>Wrong RDS endpoint</td>
+<td>Check endpoint & SG</td>
+</tr>
+
+<tr>
+<td>Access denied</td>
+<td>User priv or password wrong</td>
+<td>Grant privileges again</td>
+</tr>
+
+<tr>
+<td>Unknown database</td>
+<td>DB not created</td>
+<td>Create DB first</td>
+</tr>
+
+<tr>
+<td>Django not found</td>
+<td>Not in virtualenv</td>
+<td>Activate venv</td>
+</tr>
+
+<tr>
+<td>mysqlclient fails</td>
+<td>Missing dev libs</td>
+<td>Install libmysqlclient-dev</td>
+</tr>
+
+</table>
+</div>
+
+<div class="section-box">
+<h2>Lessons Learned</h2>
+<ul>
+<li>Cloud deployment must be validated step-by-step</li>
+<li>Django stack traces are extremely helpful</li>
+<li>Permissions matter (chmod, chown)</li>
+<li>RDS SG must allow EC2 inbound</li>
+<li>Virtualenvs prevent dependency conflicts</li>
+</ul>
+</div>
+
+<p><strong>Outcome:</strong> Django CRUD app deployed on EC2 with MySQL RDS — stable, secure, and production-ready.</p>
+
+</body>
+</html>
