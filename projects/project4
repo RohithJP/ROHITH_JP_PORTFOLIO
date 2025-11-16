@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project 4 – Secure File Transfer & Storage Workflow</title>
+
+<link rel="stylesheet" href="../style.css?v=4000">
+
+<style>
+body {
+  padding: 40px;
+  max-width: 900px;
+  margin: auto;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+h1, h2, h3 {
+  font-family: "Orbitron";
+  color: var(--neon-blue);
+  text-shadow: 0 0 12px var(--neon-blue);
+}
+
+.section-box {
+  background: rgba(255,255,255,0.03);
+  padding: 18px 22px;
+  margin: 18px 0;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+code, pre {
+  background: rgba(255,255,255,0.05);
+  padding: 12px;
+  border-radius: 8px;
+  display: block;
+  overflow-x: auto;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+</style>
+</head>
+
+<body>
+
+<a href="../index.html" class="btn" style="margin-bottom:20px; display:inline-block;">← Back to Portfolio</a>
+
+<h1>Secure File Transfer & Storage Workflow</h1>
+<p><strong>SFTP → EC2 → Automated S3 Upload → Versioned Secure Storage</strong></p>
+
+<div class="section-box">
+<h2>Project Overview</h2>
+<p><strong>Goal:</strong> Build a secure file transfer system to exchange daily product files between India & UK teams using:</p>
+<ul>
+<li>SFTP server hosted on EC2</li>
+<li>Automated S3 uploads</li>
+<li>IAM roles & secure permissions</li>
+<li>S3 versioning for rollback</li>
+</ul>
+
+<p><strong>Scenario:</strong> Sensitive product data must be securely transferred daily and versioned for recovery.</p>
+</div>
+
+<div class="section-box">
+<h2>Learning Objectives</h2>
+<ul>
+<li>Configure Linux EC2 as hardened SFTP server</li>
+<li>Implement chroot user isolation</li>
+<li>Automate file uploads to S3</li>
+<li>Setup IAM roles & least-privilege access</li>
+<li>Enable & test S3 versioning</li>
+<li>Troubleshoot networking and permissions</li>
+</ul>
+</div>
+
+<div class="section-box">
+<h2>Architecture</h2>
+<p><strong>[India Dev Team]</strong> → SFTP → <strong>[EC2 SFTP Server]</strong> → Automated Upload → <strong>[S3 Bucket]</strong> → <strong>[UK Sales Team]</strong></p>
+<ul>
+<li>EC2: Ubuntu / Amazon Linux</li>
+<li>SFTP: OpenSSH</li>
+<li>Storage: S3 + Versioning</li>
+<li>Security: SGs, IAM Roles, Chroot</li>
+</ul>
+</div>
+
+<div class="section-box">
+<h2>1⃣ EC2 Setup</h2>
+
+<pre><code>sudo apt update && sudo apt upgrade -y
+sudo apt install openssh-server -y
+</code></pre>
+
+<p>Security Group:</p>
+<ul>
+<li>Allow SSH (22)</li>
+<li>Allow SFTP (22)</li>
+<li>Restrict access to India office IP</li>
+</ul>
+</div>
+
+<div class="section-box">
+<h2>2⃣ User Management & Isolation</h2>
+
+<h3>Create User & Directories</h3>
+<pre><code>sudo adduser sftp_user
+sudo passwd sftp_user
+
+sudo mkdir -p /home/sftp_user/uploads
+sudo chown root:root /home/sftp_user
+sudo chmod 755 /home/sftp_user
+sudo chown sftp_user:sftp_user /home/sftp_user/uploads
+</code></pre>
+
+<h3>Configure Chroot (sshd_config)</h3>
+<pre><code>Subsystem sftp internal-sftp
+
+Match User sftp_user
+ChrootDirectory /home/sftp_user
+ForceCommand internal-sftp
+AllowTCPForwarding no
+X11Forwarding no
+</code></pre>
+
+Restart SSH:
+<pre><code>sudo sshd -t
+sudo systemctl restart ssh
+</code></pre>
+</div>
+
+<div class="section-box">
+<h2>3⃣ Automate Upload to S3</h2>
+
+<h3>Install AWS CLI</h3>
+<pre><code>curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+sudo apt install unzip -y
+unzip awscliv2.zip
+sudo ./aws/install
+aws --version
+</code></pre>
+
+<h3>Automation Script (Cron)</h3>
+<pre><code>#!/bin/bash
+aws s3 sync /home/sftp_user/uploads s3://projrct4-buck --exact-timestamps
+</code></pre>
+
+Add to cron:
+<pre><code>crontab -e
+0 * * * * /home/sftp_user/upload_s3.sh
+</code></pre>
+</div>
+
+<div class="section-box">
+<h2>4⃣ S3 Bucket Configuration</h2>
+
+<h3>Enable Versioning</h3>
+<pre><code>aws s3api put-bucket-versioning \
+--bucket projrct4-buck \
+--versioning-configuration Status=Enabled
+</code></pre>
+
+<p>Versioning allows restoring overwritten files instantly.</p>
+</div>
+
+<div class="section-box">
+<h2>Troubleshooting & Lessons Learned</h2>
+<ul>
+<li><strong>SSH restart failed:</strong> Fix directory permissions</li>
+<li><strong>AWS CLI issues:</strong> Solved using IAM roles instead of keys</li>
+<li><strong>Version restore:</strong> CLI v2 or AWS Console</li>
+<li><strong>Chroot errors:</strong> Parent folder must be root-owned</li>
+</ul>
+</div>
+
+<div class="section-box">
+<h2>Cost Optimization</h2>
+<ul>
+<li>Use t2.micro for free-tier</li>
+<li>Stop EC2 when not needed</li>
+<li>Use lifecycle rules for old S3 versions</li>
+<li>Keep bucket private</li>
+</ul>
+</div>
+
+<div class="section-box">
+<h2>Future Enhancements</h2>
+<ul>
+<li>Enable S3 encryption</li>
+<li>CloudWatch monitoring</li>
+<li>Multiple users with isolated directories</li>
+<li>Use Lambda for event triggers</li>
+</ul>
+</div>
+
+<p><strong>Outcome:</strong> A secure, automated, and version-controlled file transfer system ready for daily cross-team operations.</p>
+
+</body>
+</html>
