@@ -1,32 +1,149 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rohith J. Periyasamy — AWS Cloud Engineer</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rohith J. Periyasamy — AWS Cloud Engineer</title>
 
-    <!-- FORCE CSS LOAD -->
-    <link rel="stylesheet" href="style.css?v=9999">
+  <!-- CSS (cache-bust) -->
+  <link rel="stylesheet" href="style.css?v=1">
+
+  <!-- Theme meta -->
+  <meta name="theme-color" content="#07060a">
 </head>
-
 <body>
-    <div class="container">
+  <div class="site-overlay"></div>
 
-        <div class="card">
-            <h1>Rohith Jothilakshmi Periyasamy</h1>
-            <h3>AWS Cloud Engineer</h3>
-            <p>
-                I design scalable, production-grade AWS infrastructures using VPC, EC2, RDS, IAM,
-                CloudWatch, automation scripting (Bash + AWS CLI).
-            </p>
+  <header class="topbar">
+    <div class="brand">Rohith J. Periyasamy</div>
+    <nav class="nav">
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="hero card glass">
+      <div class="hero-left">
+        <h1 class="neon">AWS Cloud Engineer</h1>
+        <p class="lead">Production-grade AWS architectures · automation · observability · secure networking</p>
+
+        <div class="cta-row">
+          <a class="btn primary" href="#projects">View Projects</a>
+          <a class="btn ghost" href="https://github.com/RohithJP/Portfolio" target="_blank">View Source</a>
         </div>
 
-        <div class="card">
-            <h2>Projects</h2>
-            <a href="#">Project 1</a><br>
-            <a href="#">Project 2</a>
+        <div class="badges">
+          <span>VPC</span><span>EC2</span><span>RDS</span><span>CloudWatch</span><span>Terraform</span>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="profile-card glass">
+          <img src="bg.jpg" alt="avatar" class="profile-bg">
+          <div class="profile-info">
+            <div class="name">Rohith J. Periyasamy</div>
+            <div class="role">AWS Cloud Engineer</div>
+            <div class="links">
+              <a href="mailto:rohithjpu1@gmail.com" title="Email">✉</a>
+              <a href="tel:+917358889412" title="Phone">📞</a>
+              <a href="https://github.com/RohithJP" target="_blank" title="GitHub">GH</a>
+              <a href="https://linkedin.com/in/rohith-jothilakshmi-periyasamy" target="_blank" title="LinkedIn">in</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <h2 class="section-title">Highlighted Projects</h2>
+      <div class="grid projects-grid">
+        <a class="project glass" href="projects/wordpress-multitier.html">
+          <div class="p-head">Multi-Tier WordPress</div>
+          <div class="p-meta">EC2 · RDS · VPC · CloudWatch</div>
+          <p>Production hardened VPC with ALB, private app subnets & monitoring.</p>
+        </a>
+
+        <a class="project glass" href="projects/ec2-s3-pipeline.html">
+          <div class="p-head">EC2 + S3 Pipeline</div>
+          <div class="p-meta">Bash · AWS CLI</div>
+          <p>Automated deployment pipeline for static builds and EC2 updates.</p>
+        </a>
+
+        <a class="project glass" href="projects/centralized-logging.html">
+          <div class="p-head">Centralized Logging</div>
+          <div class="p-meta">Rsyslog → CloudWatch</div>
+          <p>Log aggregation, metric filters & alerts to shorten MTTR.</p>
+        </a>
+
+        <a class="project glass" href="projects/sftp-s3-workflow.html">
+          <div class="p-head">Secure SFTP → S3</div>
+          <div class="p-meta">S3 · IAM · CloudTrail</div>
+          <p>Transfer Family endpoint, versioning & lifecycle for compliance.</p>
+        </a>
+
+        <a class="project glass" href="projects/django-rds-deployment.html">
+          <div class="p-head">Django + RDS</div>
+          <div class="p-meta">Gunicorn · Nginx · RDS</div>
+          <p>Private subnet app servers, secure SGs & CloudWatch observability.</p>
+        </a>
+      </div>
+    </section>
+
+    <section id="experience" class="section">
+      <h2 class="section-title">Experience</h2>
+
+      <div class="timeline glass">
+        <div class="event">
+          <div class="ev-head">Cloud Engineer — RR IT Solutions</div>
+          <div class="ev-sub">Jun 2024 — Present</div>
+          <p>Built production AWS environments (VPC, EC2, RDS), automated provisioning with Bash & AWS CLI, centralized monitoring.</p>
         </div>
 
-    </div>
+        <div class="event">
+          <div class="ev-head">Cloud Assistant (Intern) — Ahnaizn Business Group (UK)</div>
+          <div class="ev-sub">Jan 2022 — Jan 2023</div>
+          <p>Managed EC2/RDS/S3 resources, assisted in multi-tier deployments and logging pipelines.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <h2 class="section-title">Core Skills</h2>
+      <div class="chips">
+        <span>EC2</span><span>VPC</span><span>RDS</span><span>S3</span><span>IAM</span><span>CloudWatch</span><span>Bash</span><span>AWS CLI</span><span>Docker</span><span>Terraform</span>
+      </div>
+    </section>
+
+    <section id="contact" class="section glass contact-card">
+      <h2 class="section-title">Contact</h2>
+      <div class="contact-grid">
+        <div>
+          <p><strong>Email</strong><br><a href="mailto:rohithjpu1@gmail.com">rohithjpu1@gmail.com</a></p>
+          <p><strong>Phone</strong><br>+91 7358889412</p>
+        </div>
+        <div>
+          <p><strong>GitHub</strong><br><a href="https://github.com/RohithJP" target="_blank">github.com/RohithJP</a></p>
+          <p><strong>LinkedIn</strong><br><a href="https://linkedin.com/in/rohith-jothilakshmi-periyasamy" target="_blank">linkedin.com/in/rohith-jothilakshmi-periyasamy</a></p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <small>© 2025 Rohith J. Periyasamy • Built with ⚡ Cloud energy</small>
+    </footer>
+  </main>
+
+  <!-- small script for smooth scroll & small animation triggers -->
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        e.preventDefault();
+        document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'});
+      });
+    });
+  </script>
 </body>
 </html>
