@@ -3,107 +3,147 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rohith JP – AWS Cloud Engineer</title>
-<link rel="stylesheet" href="style.css?v=5">
+<title>Rohith JP – AWS Cloud Portfolio</title>
+
+<link rel="stylesheet" href="style.css?v=999999">
+
+<style>
+/* Extra polish for homepage only */
+.hero {
+    padding: 130px 20px;
+    text-align: center;
+}
+.projects {
+    padding: 50px 30px;
+    max-width: 1200px;
+    margin: auto;
+}
+.card h3 {
+    color: var(--neon-purple);
+    font-family: "Orbitron";
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px var(--neon-purple);
+}
+</style>
+
 </head>
 
-<body>
+<body class="homepage">
 
 <!-- NAVIGATION -->
-<header class="nav">
-  <div class="logo">ROHITH JP</div>
-  <nav>
-      <a href="#home">Home</a>
-      <a href="#projects">Projects</a>
-      <a href="#experience">Experience</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
-  </nav>
-</header>
+<div class="nav">
+    <div class="logo">ROHITH JP</div>
+    <div>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+    </div>
+</div>
 
 <!-- HERO SECTION -->
-<section class="hero" id="home">
-    <h1 class="title">ROHITH J. PERIYASAMY</h1>
-    <p class="subtitle">AWS Cloud Engineer • Automation • Observability • Infrastructure Security</p>
+<section class="hero">
+    <h1 class="title">AWS Cloud Portfolio</h1>
+    <p class="subtitle">
+        Cloud Engineer • AWS Specialist • DevOps Learner  
+        <br>Building scalable, automated, and secure cloud solutions
+    </p>
 
     <div class="button-group">
         <a href="#projects" class="btn">View Projects</a>
-        <a href="#contact" class="btn-outline">Get in Touch</a>
+        <a href="Rohith_JP_Resume.pdf" class="btn-outline" target="_blank">Download Resume</a>
     </div>
 </section>
 
 <!-- PROJECTS -->
-<section class="section" id="projects">
+<section class="projects" id="projects">
     <h2 class="section-title">Projects</h2>
 
     <div class="card-grid">
 
-        <!-- PROJECT 1 -->
+        <!-- Project 1 -->
         <div class="card">
-            <h3>Multi-Tier WordPress Architecture</h3>
-            <p>3-tier production deployment with NGINX, Apache, MySQL, VPC, NAT & security layers.</p>
-            <a class="btn-outline" href="projects/wordpress-multitier.html">
-                Read Case Study →
-            </a>
+            <h3>Project 1 – AWS S3 Static Hosting</h3>
+            <p>Static website hosting • Versioning • CloudFront CDN</p>
+            <a class="btn" href="projects/project1.html">View Project</a>
         </div>
 
-        <!-- MORE PROJECTS CAN BE ADDED HERE -->
+        <!-- Project 2 -->
+        <div class="card">
+            <h3>Project 2 – Automated Web Hosting</h3>
+            <p>EC2 • User-data automation • S3 sync • Nginx</p>
+            <a class="btn" href="projects/project2.html">View Project</a>
+        </div>
 
-    </div>
-</section>
+        <!-- Project 3 -->
+        <div class="card">
+            <h3>Project 3 – Centralized Log Management</h3>
+            <p>Rsyslog • Multi-EC2 log forwarding • CloudWatch</p>
+            <a class="btn" href="projects/project3.html">View Project</a>
+        </div>
 
-<!-- EXPERIENCE -->
-<section class="section" id="experience">
-    <h2 class="section-title">Experience</h2>
+        <!-- Project 4 -->
+        <div class="card">
+            <h3>Project 4 – Secure SFTP + S3 Workflow</h3>
+            <p>SFTP • Chroot isolation • S3 versioning • IAM roles</p>
+            <a class="btn" href="projects/project4.html">View Project</a>
+        </div>
 
-    <div class="card">
-        <h3>Cloud Engineer — RR IT Solutions</h3>
-        <p>Jun 2024 – Present</p>
-        <p>Managing production AWS workloads: EC2, VPC, RDS, automation, security, monitoring.</p>
-    </div>
+        <!-- Project 5 -->
+        <div class="card">
+            <h3>Project 5 – PHP Website on EC2 + RDS</h3>
+            <p>EC2 • Nginx • PHP-FPM • RDS MySQL • GitHub deploy</p>
+            <a class="btn" href="projects/project5.html">View Project</a>
+        </div>
 
-    <div class="card">
-        <h3>Cloud Assistant Intern — Ahnaizn Business Group</h3>
-        <p>Jan 2022 – Jan 2023</p>
-        <p>Supported cloud migrations, provisioning, monitoring and server automation.</p>
+        <!-- Project 6 -->
+        <div class="card">
+            <h3>Project 6 – Django CRUD App + RDS</h3>
+            <p>Django • Gunicorn • MySQL RDS • EC2 hosting</p>
+            <a class="btn" href="projects/project6.html">View Project</a>
+        </div>
+
+        <!-- Project 7 -->
+        <div class="card">
+            <h3>Project 7 – Two-Tier Web + Private MySQL</h3>
+            <p>VPC • NACLs • SG-to-SG • Private DB • PHP-FPM</p>
+            <a class="btn" href="projects/project7.html">View Project</a>
+        </div>
+
     </div>
 </section>
 
 <!-- SKILLS -->
 <section class="section" id="skills">
     <h2 class="section-title">Skills</h2>
-
     <div class="chip-group">
-        <span>EC2</span>
-        <span>VPC</span>
-        <span>RDS</span>
-        <span>S3</span>
-        <span>CloudWatch</span>
+        <span>AWS EC2</span>
+        <span>AWS RDS</span>
+        <span>AWS S3</span>
+        <span>CloudFront</span>
         <span>IAM</span>
-        <span>Bash</span>
-        <span>Terraform</span>
-        <span>AWS CLI</span>
+        <span>VPC / Subnets</span>
+        <span>Security Groups</span>
+        <span>NACL</span>
+        <span>Nginx</span>
+        <span>Linux</span>
+        <span>Python</span>
+        <span>Django</span>
+        <span>PHP</span>
+        <span>GitHub</span>
+        <span>MySQL</span>
     </div>
 </section>
 
 <!-- CONTACT -->
 <section class="section" id="contact">
     <h2 class="section-title">Contact</h2>
-
-    <div class="card">
-        <p>Email: <strong>rohithjpu1@gmail.com</strong></p>
-        <p>Phone: <strong>+91 73588 89412</strong></p>
-
-        <div class="chip-group">
-            <span><a href="mailto:rohithjpu1@gmail.com" style="color:#4ac9ff;">Email</a></span>
-            <span><a href="https://github.com/RohithJP" target="_blank" style="color:#4ac9ff;">GitHub</a></span>
-            <span><a href="https://linkedin.com/in/rohith-jothilakshmi-periyasamy" target="_blank" style="color:#4ac9ff;">LinkedIn</a></span>
-        </div>
-    </div>
+    <p>Email: <strong>rohithjpu1@gmail.com</strong></p>
+    <p>Phone: <strong>07440365040</strong></p>
+    <p>Location: Croydon, UK</p>
 </section>
 
 <footer>
-    © 2025 Rohith JP — Cyberpunk Portfolio
+    © 2025 Rohith JP • AWS Cloud Portfolio
 </footer>
 
 </body>
