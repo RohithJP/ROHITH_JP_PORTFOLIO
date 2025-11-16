@@ -1,12 +1,121 @@
-/* TEST CSS - IF THIS DOESN'T LOAD, WE KNOW THE ISSUE */
-body {
-    background: red !important;
-    color: white;
-    font-size: 30px;
+/* Dark Cyber Neon theme for Rohith - style.css */
+/* Font */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&display=swap');
+
+:root{
+  --bg-dark: #05040a;
+  --panel: rgba(10,12,20,0.55);
+  --glass: rgba(255,255,255,0.03);
+  --neon: #39f0ff; /* cyan neon */
+  --neon-2: #7b39ff; /* purple accent */
+  --muted: #9aa6b3;
+  --radius: 14px;
+  --glass-border: rgba(57,240,255,0.12);
+  --accent-shadow: 0 8px 40px rgba(57,240,255,0.06);
 }
 
-.card {
-    background: black;
-    padding: 20px;
-    margin-bottom: 20px;
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:"JetBrains Mono", monospace;background: #000;}
+body{
+  color: #cfeff6;
+  background-image: linear-gradient(rgba(2,4,8,0.55), rgba(2,4,8,0.55)), url('bg.jpg');
+  background-size: cover;
+  background-position: center;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-y:auto;
+}
+
+/* subtle animated grid overlay */
+.site-overlay{
+  position:fixed;inset:0;pointer-events:none;
+  background:
+    linear-gradient(0deg, rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+  background-size: 60px 60px, 60px 60px;
+  mix-blend-mode: overlay;
+  opacity:0.12;
+  animation: moveGrid 30s linear infinite;
+}
+@keyframes moveGrid{from{background-position:0 0,0 0}to{background-position:600px 600px,600px 600px}}
+
+/* Topbar */
+.topbar{
+  position:sticky;top:0;z-index:30;
+  display:flex;justify-content:space-between;align-items:center;padding:18px 32px;
+  background:linear-gradient(180deg, rgba(2,4,8,0.6), rgba(2,4,8,0.35));
+  border-bottom:1px solid rgba(255,255,255,0.03);
+  backdrop-filter: blur(6px);
+}
+.brand{font-weight:600;color:var(--neon);letter-spacing:0.6px}
+.nav a{color:var(--muted);margin-left:18px;text-decoration:none}
+.nav a:hover{color:var(--neon);text-shadow:0 0 12px rgba(57,240,255,0.12)}
+
+/* page wrapper */
+.wrap{max-width:1100px;margin:36px auto;padding:0 20px}
+
+/* glass card base */
+.card{border-radius:var(--radius);background:var(--panel);padding:20px;margin-bottom:20px;border:1px solid rgba(255,255,255,0.03);box-shadow:var(--accent-shadow)}
+
+/* glass helper */
+.glass{backdrop-filter: blur(8px);border:1px solid var(--glass-border)}
+
+/* HERO */
+.hero{display:grid;grid-template-columns: 1fr 340px;gap:20px;padding:28px;align-items:center}
+.hero-left .neon{
+  font-size:28px;color:var(--neon);margin:0 0 6px 0;
+  text-shadow:0 6px 30px rgba(57,240,255,0.06), 0 0 8px rgba(123,57,255,0.04);
+}
+.hero-left .lead{color:var(--muted);line-height:1.6;margin-bottom:14px}
+.cta-row{display:flex;gap:12px;margin-bottom:12px}
+.btn{padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:600;letter-spacing:0.3px}
+.btn.primary{background:linear-gradient(90deg,var(--neon),var(--neon-2));color:#04040a;box-shadow:0 8px 30px rgba(59,200,255,0.06) ;border: none}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--neon)}
+
+/* badges */
+.badges{display:flex;gap:8px;flex-wrap:wrap}
+.badges span{background:rgba(255,255,255,0.02);padding:6px 10px;border-radius:8px;color:var(--muted);font-size:13px;border:1px solid rgba(255,255,255,0.02)}
+
+/* profile card */
+.profile-card{position:relative;padding:0;overflow:hidden;height:160px;display:flex;align-items:flex-end}
+.profile-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(20%) contrast(0.75) brightness(0.6)}
+.profile-info{position:relative;padding:16px;color:var(--neon)}
+.profile-info .name{font-weight:700;margin-bottom:4px}
+.profile-info .role{color:var(--muted);font-size:13px;margin-bottom:10px}
+.profile-info .links a{margin-right:8px;color:var(--neon);text-decoration:none;padding:6px;border-radius:8px;border:1px solid rgba(57,240,255,0.06)}
+
+/* PROJECTS GRID */
+.section{margin-top:14px}
+.section-title{color:var(--neon);font-weight:700;margin:0 0 12px 0}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.project{padding:16px;background:linear-gradient(180deg,rgba(6,8,12,0.6),rgba(6,8,12,0.45));border-radius:12px;border:1px solid rgba(57,240,255,0.06);transition:transform .25s ease, box-shadow .25s ease}
+.project:hover{transform:translateY(-8px);box-shadow:0 16px 40px rgba(57,240,255,0.08)}
+.p-head{font-weight:700;color:#eaffff;margin-bottom:6px}
+.p-meta{color:var(--muted);font-size:12px;margin-bottom:8px}
+
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column;gap:12px}
+.event{padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));border:1px solid rgba(255,255,255,0.02)}
+.ev-head{font-weight:700;color:var(--neon)}
+.ev-sub{color:var(--muted);font-size:13px}
+
+/* chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{padding:8px 12px;border-radius:8px;background:rgba(255,255,255,0.02);color:var(--neon);border:1px solid rgba(57,240,255,0.06)}
+
+/* contact grid */
+.contact-card{display:flex;align-items:center;justify-content:space-between}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.contact-grid a{color:var(--neon);text-decoration:none}
+
+/* footer */
+.footer{text-align:center;color:var(--muted);margin:30px 0 80px 0}
+
+/* responsive */
+@media(max-width:980px){
+  .hero{grid-template-columns:1fr; padding:18px}
+  .profile-card{height:140px}
+  .contact-grid{grid-template-columns:1fr}
+  .topbar{padding:12px}
+  .nav{display:none}
 }
