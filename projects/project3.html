@@ -1,92 +1,73 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Project 03 — Centralized Log Management</title>
+<!-- ================================
+     NEW WORKFLOW DIAGRAM — PROJECT 3
+=================================== -->
+<section class="section-dark">
+  <h2 class="section-title">Architecture Workflow</h2>
 
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../style.css?v=22">
-</head>
+  <div class="arch-diagram">
+    <svg class="workflow-svg" viewBox="0 0 1250 150" xmlns="http://www.w3.org/2000/svg">
 
-<body>
+      <!-- Client Servers -->
+      <rect x="10" y="40" width="220" height="60" rx="12"
+            fill="#05131a" stroke="#2ec4ff" stroke-width="1.8"/>
+      <text x="120" y="72" text-anchor="middle" font-size="13" fill="#2ec4ff">
+        Client Servers (EC2 / Apps)
+      </text>
 
-<header class="site-header">
-  <div class="container header-inner">
-    <a href="../index.html" class="brand-link"><span class="brand-logo">ROHITH JP</span></a>
-    <nav class="nav">
-      <a href="../index.html">Home</a>
-      <a href="project1.html">Projects</a>
-      <a href="../experience/experience.html">Experience</a>
-      <a href="../index.html#contact">Contact</a>
-    </nav>
+      <!-- Rsyslog Forwarder -->
+      <rect x="260" y="40" width="220" height="60" rx="12"
+            fill="#05131a" stroke="#7e3cff" stroke-width="1.8"/>
+      <text x="370" y="72" text-anchor="middle" font-size="13" fill="#7e3cff">
+        Rsyslog Forwarder (UDP/TCP 514)
+      </text>
+
+      <!-- Central Rsyslog Server -->
+      <rect x="510" y="40" width="260" height="60" rx="12"
+            fill="#05131a" stroke="#ff9900" stroke-width="1.8"/>
+      <text x="640" y="72" text-anchor="middle" font-size="13" fill="#ff9900">
+        Central Rsyslog Server (Log Processor)
+      </text>
+
+      <!-- Storage -->
+      <rect x="800" y="40" width="220" height="60" rx="12"
+            fill="#05131a" stroke="#2ec4ff" stroke-width="1.8"/>
+      <text x="910" y="72" text-anchor="middle" font-size="13" fill="#2ec4ff">
+        Local Storage / S3 Archive
+      </text>
+
+      <!-- Monitoring -->
+      <rect x="1040" y="40" width="190" height="60" rx="12"
+            fill="#05131a" stroke="#7e3cff" stroke-width="1.8"/>
+      <text x="1135" y="72" text-anchor="middle" font-size="13" fill="#7e3cff">
+        Dashboard / Alerts
+      </text>
+
+      <!-- Arrows -->
+      <line x1="230" y1="70" x2="260" y2="70" stroke="#2ec4ff" stroke-width="2"/>
+      <line x1="480" y1="70" x2="510" y2="70" stroke="#7e3cff" stroke-width="2"/>
+      <line x1="770" y1="70" x2="800" y2="70" stroke="#ff9900" stroke-width="2"/>
+      <line x1="1020" y1="70" x2="1040" y2="70" stroke="#2ec4ff" stroke-width="2"/>
+
+    </svg>
   </div>
-</header>
 
-<main>
+  <h2 class="section-title">Detailed Explanation</h2>
 
-<section class="hero-small">
-  <div class="container">
-    <h1 class="page-title">03 — Centralized Log Management (Rsyslog + CloudWatch)</h1>
-    <p class="lead">
-      Implemented centralized log collection across EC2 instances using Rsyslog + CloudWatch.
-    </p>
-  </div>
+  <p class="lead">
+    This project demonstrates how production servers securely forward logs to a central Rsyslog
+    instance for monitoring, troubleshooting, and long-term retention.
+  </p>
+
+  <ul class="exp-list">
+    <li><strong>Client Systems:</strong> Applications and EC2 instances generate logs (auth, nginx, syslog, app logs).</li>
+
+    <li><strong>Rsyslog Forwarder:</strong> Each node is configured with <code>*.* @@&lt;server-ip&gt;:514</code> using TCP for reliability.</li>
+
+    <li><strong>Central Server:</strong> Collects all remote logs, applies filters, templates, and categorises logs using 
+        dynamic file structure (<code>/var/log/remote/$HOSTNAME/</code>).</li>
+
+    <li><strong>Storage:</strong> Logs stored locally and optionally pushed to an S3 bucket for long-term archiving.</li>
+
+    <li><strong>Monitoring:</strong> Alerts created for SSH failures, Nginx errors, and application-specific patterns.</li>
+  </ul>
 </section>
-
-<section class="section-light">
-  <div class="container">
-
-    <h2 class="section-title">Overview</h2>
-    <p class="lead">
-      Logs from multiple EC2 servers are forwarded into a single log collector instance and streamed to CloudWatch.
-    </p>
-
-    <h2 class="workflow-title">Workflow</h2>
-    <div class="workflow-img">
-      EC2 Web → EC2 DB → Log Collector → CloudWatch Log Groups → Metrics + Alarms
-    </div>
-
-  </div>
-</section>
-
-<section class="section-light">
-  <div class="container">
-
-    <h2 class="section-title">Troubleshooting</h2>
-    <ul class="exp-list">
-      <li>Rsyslog permission fixes</li>
-      <li>UDP packet drops resolved</li>
-      <li>Template syntax corrected</li>
-      <li>journalctl for realtime debugging</li>
-    </ul>
-
-  </div>
-</section>
-
-<section class="section-light">
-  <div class="container">
-    <h2 class="section-title">Repository</h2>
-
-    <a class="btn-nav-primary" href="https://github.com/RohithJP/Projects/tree/main/project3" target="_blank">
-      View Repo
-    </a>
-
-    <div class="project-nav">
-      <a class="btn-nav-outline" href="project2.html">← Previous</a>
-      <a class="btn-nav-primary" href="project4.html">Next →</a>
-    </div>
-
-  </div>
-</section>
-
-</main>
-
-<footer class="site-footer">
-  <div class="container">
-    <small>© 2025 Rohith J. Periyasamy — AWS Cloud Engineer</small>
-  </div>
-</footer>
-
-</body>
-</html>
