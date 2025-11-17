@@ -26,170 +26,104 @@
   </div>
 </header>
 
-
 <main>
 
 <section class="hero-small">
   <div class="container">
-    <h1 class="page-title" style="font-size:44px;font-weight:700;">
+    <h1 class="page-title" style="font-size:42px;font-weight:700;">
       02 — Automated Web Hosting System
     </h1>
-    <p class="lead">
-      Static Website Hosting using EC2, S3, IAM, Nginx and Bash Automation.
-    </p>
+    <p class="lead">Static hosting automation using EC2, S3, IAM, Nginx, and Bash.</p>
   </div>
 </section>
-
 
 <section class="section-light">
   <div class="container">
 
-    <!-- OVERVIEW -->
     <h2 class="section-title">Project Overview</h2>
     <p class="lead">
       This project automates the hosting of a static website using AWS EC2, S3, IAM roles, and a fully automated
-      User Data provisioning script. The EC2 instance installs Nginx, fetches content from S3, configures permissions,
-      enables the firewall, and becomes production-ready within minutes.
+      User Data provisioning script.
     </p>
 
     <h3 class="sub-title">Goal</h3>
-    <p>
-      To automate the provisioning and deployment of a static website end-to-end using AWS services and Bash scripting.
-    </p>
+    <p>Automate the provisioning and deployment of a static website end-to-end.</p>
 
     <h3 class="sub-title">Technologies Used</h3>
     <ul class="exp-list">
-      <li>AWS EC2 – Hosting the Nginx web server</li>
-      <li>AWS S3 – Storing static HTML files</li>
-      <li>IAM Role – Credential-free secure S3 access</li>
-      <li>AWS CLI v2 – Automated S3 sync operations</li>
-      <li>Nginx – Web server for static hosting</li>
-      <li>Bash (User Data) – Automated provisioning script</li>
-      <li>Mac Terminal – Deployment & verification</li>
+      <li>EC2 — Nginx Web Hosting</li>
+      <li>S3 — Static File Storage</li>
+      <li>IAM Roles — Secure Access</li>
+      <li>AWS CLI v2 — Deployment Automation</li>
+      <li>Nginx — Web Server</li>
+      <li>Bash User Data — Provisioning</li>
     </ul>
 
     <h3 class="sub-title">Key Deliverable</h3>
-    <p>
-      A fully automated EC2 instance that installs Nginx, syncs files from S3, sets permissions, configures
-      the firewall, logs all steps, and serves the website immediately after launch.
-    </p>
-
+    <p>A fully automated EC2 instance that installs Nginx, syncs files from S3, configures permissions & firewall, logs all steps, and instantly serves the website.</p>
 
     <!-- WORKFLOW -->
     <h2 class="section-title">Workflow</h2>
 
-    <div class="workflow-container" style="
+    <div style="
       background:#0a0f14;
       border:1px solid #2ec4ff30;
-      padding:22px;
+      padding:20px;
       border-radius:16px;
-      margin-top:14px;
       box-shadow:0 0 18px #0e3a53 inset, 0 0 12px #2ec4ff50;
       overflow-x:auto;
     ">
-
       <svg width="900" height="330" viewBox="0 0 900 330">
 
-        <!-- Step 1 -->
         <rect x="50" y="20" width="300" height="60" rx="12"
           fill="#05131a" stroke="#2ec4ff" stroke-width="2"/>
         <text x="200" y="57" text-anchor="middle" fill="#2ec4ff"
-          font-family="IBM Plex Mono" font-size="14">
-          Developer (Mac Terminal)
-        </text>
+          font-family="IBM Plex Mono" font-size="14">Developer (Mac Terminal)</text>
 
-        <!-- Arrow -->
-        <line x1="200" y1="80" x2="200" y2="115"
-          stroke="#2ec4ff" stroke-width="2"/>
+        <line x1="200" y1="80" x2="200" y2="115" stroke="#2ec4ff" stroke-width="2"/>
         <polygon points="200,120 195,110 205,110" fill="#2ec4ff"/>
 
-        <!-- Step 2 -->
         <rect x="50" y="130" width="300" height="60" rx="12"
           fill="#05131a" stroke="#7e3cff" stroke-width="2"/>
         <text x="200" y="165" text-anchor="middle" fill="#7e3cff"
-          font-family="IBM Plex Mono" font-size="14">
-          S3 Bucket (Static Files)
-        </text>
+          font-family="IBM Plex Mono" font-size="14">S3 Bucket (Static Files)</text>
 
-        <!-- Arrow -->
-        <line x1="200" y1="190" x2="200" y2="225"
-          stroke="#7e3cff" stroke-width="2"/>
+        <line x1="200" y1="190" x2="200" y2="225" stroke="#7e3cff" stroke-width="2"/>
         <polygon points="200,230 195,220 205,220" fill="#7e3cff"/>
 
-        <!-- Step 3 -->
         <rect x="50" y="240" width="300" height="60" rx="12"
           fill="#05131a" stroke="#ff9900" stroke-width="2"/>
         <text x="200" y="275" text-anchor="middle" fill="#ff9900"
-          font-family="IBM Plex Mono" font-size="14">
-          EC2 Instance (User Data Automation)
-        </text>
+          font-family="IBM Plex Mono" font-size="14">EC2 + User Data Automation</text>
 
-        <!-- Arrow to next box -->
-        <line x1="350" y1="270" x2="430" y2="270"
-          stroke="#2ec4ff" stroke-width="2"/>
+        <line x1="350" y1="270" x2="430" y2="270" stroke="#2ec4ff" stroke-width="2"/>
         <polygon points="435,270 425,265 425,275" fill="#2ec4ff"/>
 
-        <!-- Step 4 -->
         <rect x="450" y="240" width="360" height="60" rx="12"
           fill="#05131a" stroke="#2ec4ff" stroke-width="2"/>
         <text x="630" y="275" text-anchor="middle" fill="#2ec4ff"
-          font-family="IBM Plex Mono" font-size="14">
-          NGINX Serves Website Immediately
-        </text>
+          font-family="IBM Plex Mono" font-size="14">Nginx Serves Website</text>
 
       </svg>
     </div>
 
-
-    <!-- SECTION: WHAT I LEARNED -->
     <h2 class="section-title">What I Learned</h2>
     <ul class="exp-list">
-      <li>Deep understanding of EC2, S3, IAM, Nginx and provisioning automation</li>
-      <li>Debugging User Data scripts and AWS CLI errors</li>
-      <li>Fixing permission issues leading to Nginx 403 Forbidden</li>
-      <li>Configuring HTTPS using self-signed certificates</li>
-      <li>Networking concepts like SG rules and firewall configuration</li>
+      <li>IAM roles over static credentials</li>
+      <li>User Data automation</li>
+      <li>Fixing Nginx 403 Forbidden errors</li>
+      <li>Installing AWS CLI v2</li>
+      <li>Understanding S3 → EC2 automation</li>
     </ul>
 
-
-    <!-- SECTION: TECHNIQUES -->
-    <h2 class="section-title">Techniques That Worked</h2>
+    <h2 class="section-title">Troubleshooting</h2>
     <ul class="exp-list">
-      <li>IAM Role instead of static credentials</li>
-      <li>`aws s3 sync` for fast deployments</li>
-      <li>Logging system: `/var/log/site_setup.log`</li>
-      <li>Correct web root permissions fixing 403 errors</li>
-      <li>Consistent Nginx document root setup</li>
+      <li>403 Forbidden: Fixed permissions</li>
+      <li>Default Nginx page: Removed default index</li>
+      <li>AWS CLI not found: Installed CLI bundle</li>
+      <li>User Data not running: Relaunched instance</li>
     </ul>
 
-
-    <!-- TROUBLESHOOTING -->
-    <h2 class="section-title">Troubleshooting & Fixes</h2>
-    <ul class="exp-list">
-      <li><strong>Default Nginx Welcome Page:</strong> removed default HTML file</li>
-      <li><strong>403 Forbidden:</strong> incorrect permissions → fixed with `www-data` ownership</li>
-      <li><strong>AWS CLI not found:</strong> installed AWS CLI v2 bundle</li>
-      <li><strong>HTTPS Privacy Error:</strong> using self-signed certs for testing</li>
-      <li><strong>User Data not running:</strong> instance relaunched with correct script</li>
-    </ul>
-
-
-    <!-- RUNBOOK -->
-    <h2 class="section-title">Step-by-Step Runbook</h2>
-    <pre class="code-block">
-# 1. Create S3 bucket & upload site
-aws s3 mb s3://rohit-static-site-2025
-aws s3 sync ./site/ s3://rohit-static-site-2025/
-
-# 2. SSH into EC2
-ssh -i ~/.ssh/webKey.pem ubuntu@&lt;public-ip&gt;
-
-# 3. View logs
-sudo tail -n 50 /var/log/site_setup.log
-    </pre>
-
-
-    <!-- USER DATA SCRIPT -->
     <h2 class="section-title">Final User Data Script</h2>
 
     <div style="
@@ -197,28 +131,26 @@ sudo tail -n 50 /var/log/site_setup.log
       border:1px solid #7e3cff40;
       border-radius:14px;
       padding:20px;
-      margin-top:12px;
       box-shadow:0 0 18px #2d1b47 inset, 0 0 14px #7e3cff50;
     ">
-    <pre class="code-block" style="white-space:pre-wrap;font-size:14px;line-height:1.55;">#!/bin/bash
+      <pre class="code-block" style="white-space:pre-wrap;">#!/bin/bash
 set -e
 LOG="/var/log/site_setup.log"
 echo "=== Site setup started at $(date) ===" >> $LOG
 
-apt update -y >> $LOG
-apt install -y nginx unzip curl ufw >> $LOG
+apt-get update -y
+apt-get install -y nginx unzip curl ufw
 
-# Install AWS CLI v2
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" \
-  -o "/tmp/awscliv2.zip" >> $LOG
-unzip /tmp/awscliv2.zip -d /tmp >> $LOG
-/tmp/aws/install >> $LOG
+  -o "/tmp/awscliv2.zip"
+unzip /tmp/awscliv2.zip -d /tmp
+/tmp/aws/install
 
 systemctl enable nginx
 systemctl start nginx
 
 rm -rf /var/www/html/*
-aws s3 sync s3://rohit-static-site-2025 /var/www/html >> $LOG
+aws s3 sync s3://rohit-static-site-2025 /var/www/html
 
 chown -R www-data:www-data /var/www/html
 chmod -R 755 /var/www/html
@@ -231,34 +163,15 @@ echo "=== Site setup finished at $(date) ===" >> $LOG
 </pre>
     </div>
 
+    <!-- NAVIGATION -->
+    <div class="project-nav" style="margin-top:28px; display:flex; gap:16px;">
+      <a class="btn btn-outline-strong" href="project1.html">← Previous</a>
+      <a class="btn btn-strong" href="project3.html">Next →</a>
+    </div>
 
-    <!-- NEXT STEPS -->
-    <h2 class="section-title">Next Steps</h2>
-    <ul class="exp-list">
-      <li>Implement CI/CD for automated deployments</li>
-      <li>Use CloudFront for CDN + SSL + caching</li>
-      <li>Deploy using Terraform or CloudFormation</li>
-      <li>Monitor uptime using CloudWatch</li>
-    </ul>
-
-    <!-- CONCLUSION -->
-    <h2 class="section-title">Conclusion</h2>
-    <p>
-      This project successfully automated the deployment of a static website using EC2, S3, IAM, Nginx, and Bash scripting.
-      It demonstrates strong AWS fundamentals, automation expertise, Linux configuration, and debugging skills.
-    </p>
-
-    <!-- BUTTONS -->
-   
-<div class="project-nav" style="margin-top:28px; display:flex; gap:16px;">
-  <a class="btn btn-outline-strong" href="project1.html">← Previous</a>
-  <a class="btn btn-strong" href="project3.html">Next →</a>
-</div>
   </div>
 </section>
-
 </main>
-
 
 <footer class="site-footer">
   <div class="container">
@@ -266,6 +179,5 @@ echo "=== Site setup finished at $(date) ===" >> $LOG
   </div>
 </footer>
 
-  
 </body>
 </html>
