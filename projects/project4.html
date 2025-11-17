@@ -1,198 +1,207 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Project 4 – Secure File Transfer & Storage Workflow</title>
-
-<link rel="stylesheet" href="../style.css?v=4000">
-
-<style>
-body {
-  padding: 40px;
-  max-width: 900px;
-  margin: auto;
-  font-size: 17px;
-  line-height: 1.7;
-}
-
-h1, h2, h3 {
-  font-family: "Orbitron";
-  color: var(--neon-blue);
-  text-shadow: 0 0 12px var(--neon-blue);
-}
-
-.section-box {
-  background: rgba(255,255,255,0.03);
-  padding: 18px 22px;
-  margin: 18px 0;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.06);
-}
-
-code, pre {
-  background: rgba(255,255,255,0.05);
-  padding: 12px;
-  border-radius: 8px;
-  display: block;
-  overflow-x: auto;
-  border: 1px solid rgba(255,255,255,0.08);
-}
-</style>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Project 4 — Secure File Transfer & Storage Workflow — Rohith J. Periyasamy</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css?v=1" />
 </head>
 
 <body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand-link" href="../index.html"><span class="brand-logo">ROHITH JP</span></a>
+    <nav class="nav">
+      <a href="../index.html">Home</a>
+      <a class="active" href="#">Project</a>
+      <a href="../experience/experience.html">Experience</a>
+    </nav>
+  </div>
+</header>
 
-<a href="../index.html" class="btn" style="margin-bottom:20px; display:inline-block;">← Back to Portfolio</a>
+<main class="container">
 
-<h1>Secure File Transfer & Storage Workflow</h1>
-<p><strong>SFTP → EC2 → Automated S3 Upload → Versioned Secure Storage</strong></p>
+  <section class="project-hero">
+    <div class="title">Secure File Transfer & Storage Workflow</div>
+    <div class="subtitle">SFTP → EC2 SFTP server → Automated upload → AWS S3 (versioned). Secure, auditable, and automated file sharing across teams.</div>
+  </section>
 
-<div class="section-box">
-<h2>Project Overview</h2>
-<p><strong>Goal:</strong> Build a secure file transfer system to exchange daily product files between India & UK teams using:</p>
-<ul>
-<li>SFTP server hosted on EC2</li>
-<li>Automated S3 uploads</li>
-<li>IAM roles & secure permissions</li>
-<li>S3 versioning for rollback</li>
-</ul>
+  <div class="showcase">
+    <div>
+      <!-- Architecture + Diagram -->
+      <div class="block">
+        <h3>Architecture</h3>
+        <p><strong>[India Dev Team] → SFTP → EC2 SFTP Server → Automated Upload → S3 Bucket (versioning) → UK Sales Team</strong></p>
 
-<p><strong>Scenario:</strong> Sensitive product data must be securely transferred daily and versioned for recovery.</p>
-</div>
+        <div class="arch-grid">
+          <div>
+            <p class="lead">
+              • EC2 acts as the SFTP endpoint with chrooted users.<br>
+              • Files placed into user uploads are synced to an S3 bucket via cron/script using an attached IAM role.<br>
+              • S3 versioning is enabled for recovery and auditability.
+            </p>
 
-<div class="section-box">
-<h2>Learning Objectives</h2>
-<ul>
-<li>Configure Linux EC2 as hardened SFTP server</li>
-<li>Implement chroot user isolation</li>
-<li>Automate file uploads to S3</li>
-<li>Setup IAM roles & least-privilege access</li>
-<li>Enable & test S3 versioning</li>
-<li>Troubleshoot networking and permissions</li>
-</ul>
-</div>
+            <div class="badges">
+              <span class="badge">SFTP</span>
+              <span class="badge">EC2</span>
+              <span class="badge">S3</span>
+              <span class="badge">IAM</span>
+              <span class="badge">Versioning</span>
+            </div>
+          </div>
 
-<div class="section-box">
-<h2>Architecture</h2>
-<p><strong>[India Dev Team]</strong> → SFTP → <strong>[EC2 SFTP Server]</strong> → Automated Upload → <strong>[S3 Bucket]</strong> → <strong>[UK Sales Team]</strong></p>
-<ul>
-<li>EC2: Ubuntu / Amazon Linux</li>
-<li>SFTP: OpenSSH</li>
-<li>Storage: S3 + Versioning</li>
-<li>Security: SGs, IAM Roles, Chroot</li>
-</ul>
-</div>
+          <div class="arch-diagram">
+            <svg class="workflow-svg" viewBox="0 0 980 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Workflow diagram">
+              <!-- Client -->
+              <rect x="10" y="30" width="200" height="50" rx="10" fill="#05131a" stroke="#2ec4ff" stroke-width="1.6"/>
+              <text x="110" y="62" text-anchor="middle" fill="#2ec4ff" font-family="IBM Plex Mono" font-size="12">India Dev Team (SFTP Client)</text>
 
-<div class="section-box">
-<h2>1⃣ EC2 Setup</h2>
+              <!-- EC2 SFTP -->
+              <rect x="240" y="30" width="220" height="50" rx="10" fill="#05131a" stroke="#7e3cff" stroke-width="1.6"/>
+              <text x="350" y="62" text-anchor="middle" fill="#7e3cff" font-family="IBM Plex Mono" font-size="12">EC2 SFTP Server (chrooted)</text>
 
-<pre><code>sudo apt update && sudo apt upgrade -y
-sudo apt install openssh-server -y
-</code></pre>
+              <!-- Upload Script -->
+              <rect x="490" y="30" width="220" height="50" rx="10" fill="#05131a" stroke="#2ec4ff" stroke-width="1.6"/>
+              <text x="600" y="62" text-anchor="middle" fill="#2ec4ff" font-family="IBM Plex Mono" font-size="12">Upload Script (cron / user-data)</text>
 
-<p>Security Group:</p>
-<ul>
-<li>Allow SSH (22)</li>
-<li>Allow SFTP (22)</li>
-<li>Restrict access to India office IP</li>
-</ul>
-</div>
+              <!-- S3 Bucket -->
+              <rect x="740" y="30" width="220" height="50" rx="10" fill="#05131a" stroke="#ff9900" stroke-width="1.6"/>
+              <text x="850" y="62" text-anchor="middle" fill="#ff9900" font-family="IBM Plex Mono" font-size="12">S3 Bucket (Versioned)</text>
 
-<div class="section-box">
-<h2>2⃣ User Management & Isolation</h2>
+              <!-- Arrows -->
+              <line x1="210" y1="55" x2="240" y2="55" stroke="#2ec4ff" stroke-width="2" />
+              <line x1="460" y1="55" x2="490" y2="55" stroke="#7e3cff" stroke-width="2" />
+              <line x1="710" y1="55" x2="740" y2="55" stroke="#2ec4ff" stroke-width="2" />
+            </svg>
+          </div>
+        </div>
+      </div>
 
-<h3>Create User & Directories</h3>
-<pre><code>sudo adduser sftp_user
-sudo passwd sftp_user
+      <!-- Overview -->
+      <div class="block">
+        <h3>Project Overview</h3>
+        <p>
+          Goal: Build a secure file transfer system using OpenSSH SFTP on EC2 with chrooted users and automated upload to an S3 bucket with versioning enabled.
+          The system ensures secure daily product-file exchange between India development and UK sales teams with recoverability and audit trails.
+        </p>
+      </div>
 
+      <!-- Setup & Configuration -->
+      <div class="block">
+        <h3>Setup & Configuration</h3>
+        <div class="steps">
+          <div class="step">
+            <div class="num">Step 1</div>
+            <strong>Launch EC2</strong><br/>Ubuntu instance with attached IAM role for S3 access.
+          </div>
+
+          <div class="step">
+            <div class="num">Step 2</div>
+            <strong>Create SFTP Users</strong><br/>`adduser sftp_user` + create `/home/sftp_user/uploads` and set correct ownership/permissions.
+          </div>
+
+          <div class="step">
+            <div class="num">Step 3</div>
+            <strong>Chroot Configuration</strong><br/>Edit `/etc/ssh/sshd_config` — `Subsystem sftp internal-sftp` + `Match User sftp_user` with `ChrootDirectory /home/sftp_user` & `ForceCommand internal-sftp`.
+          </div>
+
+          <div class="step">
+            <div class="num">Step 4</div>
+            <strong>AWS CLI & Upload Script</strong><br/>Install AWS CLI v2; create `/home/sftp_user/upload_s3.sh`:
+            <pre style="color:var(--muted);font-size:13px;line-height:1.35;margin-top:8px">#!/bin/bash
+aws s3 sync /home/sftp_user/uploads s3://projrct4-buck --exact-timestamps
+</pre>
+            Add to crontab: `0 * * * * /home/sftp_user/upload_s3.sh`
+          </div>
+
+          <div class="step">
+            <div class="num">Step 5</div>
+            <strong>S3 Versioning</strong><br/>Enable versioning in the bucket: `aws s3api put-bucket-versioning --bucket projrct4-buck --versioning-configuration Status=Enabled`
+          </div>
+        </div>
+      </div>
+
+      <!-- Troubleshooting -->
+      <div class="block">
+        <h3>Troubleshooting & Lessons Learned</h3>
+        <ul class="exp-list">
+          <li><strong>SSH restart errors</strong> — usually misconfigured `sshd_config` or wrong directory ownership (chroot dirs must be root-owned).</li>
+          <li><strong>AWS CLI access denied</strong> — attach IAM role to EC2 instead of using static keys.</li>
+          <li><strong>Cron job not running</strong> — ensure script has shebang, full paths, executable bit, and correct owner.</li>
+          <li><strong>Version restore testing</strong> — use S3 console or `aws s3api list-object-versions` then copy older version as needed.</li>
+        </ul>
+      </div>
+
+      <!-- Techniques Learned -->
+      <div class="block">
+        <h3>Techniques Learned</h3>
+        <ul class="exp-list">
+          <li>Implementing chrooted SFTP users to isolate file uploads.</li>
+          <li>Using IAM roles to securely grant EC2 S3 access (no credentials on disk).</li>
+          <li>Automating periodic syncs via cron and ensuring atomic file operations.</li>
+          <li>Enabling S3 versioning for safe rollbacks and retention policies.</li>
+        </ul>
+      </div>
+
+      <!-- Achievements & Next Steps -->
+      <div class="block">
+        <h3>Achievements & Next Steps</h3>
+        <p class="lead">Achievements</p>
+        <ul class="exp-list">
+          <li>Secure daily transfer workflow implemented with chrooted SFTP and automatic S3 sync.</li>
+          <li>Versioning enabled on S3 for recovery and auditing.</li>
+          <li>Operational scripts and cron schedules implemented and tested.</li>
+        </ul>
+
+        <p class="lead">Next Steps</p>
+        <p>
+          Add server-side encryption for S3 objects, integrate CloudWatch metrics/alarms for failed uploads,
+          and consider event-driven processing (Lambda) for downstream ingestion.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- RIGHT SIDEBAR -->
+    <aside>
+      <div class="block card">
+        <h3>Project Summary</h3>
+        <p class="card-text">SFTP server with secure chroot, automated S3 sync, and versioning for cross-team file exchange.</p>
+        <div class="badges"><span class="badge">SFTP</span><span class="badge">S3</span><span class="badge">IAM</span></div>
+      </div>
+
+      <div class="block card">
+        <h3>Quick Commands</h3>
+        <pre style="color:var(--muted);font-size:13px;line-height:1.35">
+# Create upload dir & set permissions
 sudo mkdir -p /home/sftp_user/uploads
 sudo chown root:root /home/sftp_user
-sudo chmod 755 /home/sftp_user
 sudo chown sftp_user:sftp_user /home/sftp_user/uploads
-</code></pre>
 
-<h3>Configure Chroot (sshd_config)</h3>
-<pre><code>Subsystem sftp internal-sftp
+# Enable S3 versioning
+aws s3api put-bucket-versioning --bucket projrct4-buck --versioning-configuration Status=Enabled
+        </pre>
+      </div>
 
-Match User sftp_user
-ChrootDirectory /home/sftp_user
-ForceCommand internal-sftp
-AllowTCPForwarding no
-X11Forwarding no
-</code></pre>
+      <div class="block card">
+        <h3>Repo & Docs</h3>
+        <p class="card-text">Scripts, sshd_config snippets and the upload script are available in the repo.</p>
+        <a class="btn btn-primary" href="https://github.com/RohithJP/Portfolio" target="_blank" rel="noopener">View Repo</a>
+      </div>
+    </aside>
+  </div>
 
-Restart SSH:
-<pre><code>sudo sshd -t
-sudo systemctl restart ssh
-</code></pre>
-</div>
+  <section style="margin-top:28px;">
+    <a class="btn btn-outline" href="project3.html">← Previous</a>
+    <a class="btn btn-primary" href="project5.html" style="margin-left:12px">Next →</a>
+  </section>
 
-<div class="section-box">
-<h2>3⃣ Automate Upload to S3</h2>
+</main>
 
-<h3>Install AWS CLI</h3>
-<pre><code>curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-sudo apt install unzip -y
-unzip awscliv2.zip
-sudo ./aws/install
-aws --version
-</code></pre>
-
-<h3>Automation Script (Cron)</h3>
-<pre><code>#!/bin/bash
-aws s3 sync /home/sftp_user/uploads s3://projrct4-buck --exact-timestamps
-</code></pre>
-
-Add to cron:
-<pre><code>crontab -e
-0 * * * * /home/sftp_user/upload_s3.sh
-</code></pre>
-</div>
-
-<div class="section-box">
-<h2>4⃣ S3 Bucket Configuration</h2>
-
-<h3>Enable Versioning</h3>
-<pre><code>aws s3api put-bucket-versioning \
---bucket projrct4-buck \
---versioning-configuration Status=Enabled
-</code></pre>
-
-<p>Versioning allows restoring overwritten files instantly.</p>
-</div>
-
-<div class="section-box">
-<h2>Troubleshooting & Lessons Learned</h2>
-<ul>
-<li><strong>SSH restart failed:</strong> Fix directory permissions</li>
-<li><strong>AWS CLI issues:</strong> Solved using IAM roles instead of keys</li>
-<li><strong>Version restore:</strong> CLI v2 or AWS Console</li>
-<li><strong>Chroot errors:</strong> Parent folder must be root-owned</li>
-</ul>
-</div>
-
-<div class="section-box">
-<h2>Cost Optimization</h2>
-<ul>
-<li>Use t2.micro for free-tier</li>
-<li>Stop EC2 when not needed</li>
-<li>Use lifecycle rules for old S3 versions</li>
-<li>Keep bucket private</li>
-</ul>
-</div>
-
-<div class="section-box">
-<h2>Future Enhancements</h2>
-<ul>
-<li>Enable S3 encryption</li>
-<li>CloudWatch monitoring</li>
-<li>Multiple users with isolated directories</li>
-<li>Use Lambda for event triggers</li>
-</ul>
-</div>
-
-<p><strong>Outcome:</strong> A secure, automated, and version-controlled file transfer system ready for daily cross-team operations.</p>
+<footer class="site-footer">
+  <div class="container"><small>© 2025 Rohith J. Periyasamy</small></div>
+</footer>
 
 </body>
 </html>
