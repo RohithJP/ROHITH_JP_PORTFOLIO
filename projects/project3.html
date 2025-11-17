@@ -1,73 +1,263 @@
-<!-- ================================
-     NEW WORKFLOW DIAGRAM — PROJECT 3
-=================================== -->
-<section class="section-dark">
-  <h2 class="section-title">Architecture Workflow</h2>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Project 03 — Centralized Log Management (Rsyslog)</title>
 
-  <div class="arch-diagram">
-    <svg class="workflow-svg" viewBox="0 0 1250 150" xmlns="http://www.w3.org/2000/svg">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css?v=40" />
+</head>
 
-      <!-- Client Servers -->
-      <rect x="10" y="40" width="220" height="60" rx="12"
-            fill="#05131a" stroke="#2ec4ff" stroke-width="1.8"/>
-      <text x="120" y="72" text-anchor="middle" font-size="13" fill="#2ec4ff">
-        Client Servers (EC2 / Apps)
-      </text>
+<body>
 
-      <!-- Rsyslog Forwarder -->
-      <rect x="260" y="40" width="220" height="60" rx="12"
-            fill="#05131a" stroke="#7e3cff" stroke-width="1.8"/>
-      <text x="370" y="72" text-anchor="middle" font-size="13" fill="#7e3cff">
-        Rsyslog Forwarder (UDP/TCP 514)
-      </text>
-
-      <!-- Central Rsyslog Server -->
-      <rect x="510" y="40" width="260" height="60" rx="12"
-            fill="#05131a" stroke="#ff9900" stroke-width="1.8"/>
-      <text x="640" y="72" text-anchor="middle" font-size="13" fill="#ff9900">
-        Central Rsyslog Server (Log Processor)
-      </text>
-
-      <!-- Storage -->
-      <rect x="800" y="40" width="220" height="60" rx="12"
-            fill="#05131a" stroke="#2ec4ff" stroke-width="1.8"/>
-      <text x="910" y="72" text-anchor="middle" font-size="13" fill="#2ec4ff">
-        Local Storage / S3 Archive
-      </text>
-
-      <!-- Monitoring -->
-      <rect x="1040" y="40" width="190" height="60" rx="12"
-            fill="#05131a" stroke="#7e3cff" stroke-width="1.8"/>
-      <text x="1135" y="72" text-anchor="middle" font-size="13" fill="#7e3cff">
-        Dashboard / Alerts
-      </text>
-
-      <!-- Arrows -->
-      <line x1="230" y1="70" x2="260" y2="70" stroke="#2ec4ff" stroke-width="2"/>
-      <line x1="480" y1="70" x2="510" y2="70" stroke="#7e3cff" stroke-width="2"/>
-      <line x1="770" y1="70" x2="800" y2="70" stroke="#ff9900" stroke-width="2"/>
-      <line x1="1020" y1="70" x2="1040" y2="70" stroke="#2ec4ff" stroke-width="2"/>
-
-    </svg>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand-link" href="../index.html">
+      <span class="brand-logo">ROHITH JP</span>
+    </a>
+    <nav class="nav">
+      <a href="../index.html">Home</a>
+      <a class="active" href="#">Project</a>
+      <a href="../experience/experience.html">Experience</a>
+    </nav>
   </div>
+</header>
 
-  <h2 class="section-title">Detailed Explanation</h2>
+<main class="container">
 
-  <p class="lead">
-    This project demonstrates how production servers securely forward logs to a central Rsyslog
-    instance for monitoring, troubleshooting, and long-term retention.
-  </p>
+  <!-- HERO -->
+  <section class="project-hero">
+    <div class="hero-title" style="font-size:34px; font-weight:700;">
+      03 — Centralized Log Management with Rsyslog & CloudWatch
+    </div>
+    <p class="subtitle">
+      A complete centralized logging solution collecting logs from multiple EC2 instances
+      into a Log Collector server using Rsyslog, with optional CloudWatch integration for
+      monitoring, alerts, and long-term visibility.
+    </p>
+  </section>
 
-  <ul class="exp-list">
-    <li><strong>Client Systems:</strong> Applications and EC2 instances generate logs (auth, nginx, syslog, app logs).</li>
+  <!-- WORKFLOW -->
+  <section class="block">
+    <h3>Workflow</h3>
 
-    <li><strong>Rsyslog Forwarder:</strong> Each node is configured with <code>*.* @@&lt;server-ip&gt;:514</code> using TCP for reliability.</li>
+    <div class="arch-diagram" style="margin-top:18px; overflow-x:auto;">
+      <svg viewBox="0 0 1600 150"
+           xmlns="http://www.w3.org/2000/svg"
+           class="workflow-svg"
+           style="min-width:1600px; height:150px;">
 
-    <li><strong>Central Server:</strong> Collects all remote logs, applies filters, templates, and categorises logs using 
-        dynamic file structure (<code>/var/log/remote/$HOSTNAME/</code>).</li>
+        <!-- Web Server -->
+        <rect x="20" y="40" width="260" height="55" rx="10"
+              fill="#05131a" stroke="#2ec4ff" stroke-width="1.8"/>
+        <text x="150" y="72" text-anchor="middle" fill="#2ec4ff"
+              font-family="IBM Plex Mono" font-size="12">Web Server (EC2)</text>
 
-    <li><strong>Storage:</strong> Logs stored locally and optionally pushed to an S3 bucket for long-term archiving.</li>
+        <!-- DB Server -->
+        <rect x="320" y="40" width="260" height="55" rx="10"
+              fill="#05131a" stroke="#7e3cff" stroke-width="1.8"/>
+        <text x="450" y="72" text-anchor="middle" fill="#7e3cff"
+              font-family="IBM Plex Mono" font-size="12">DB Server (EC2)</text>
 
-    <li><strong>Monitoring:</strong> Alerts created for SSH failures, Nginx errors, and application-specific patterns.</li>
-  </ul>
-</section>
+        <!-- Arrows -->
+        <line x1="280" y1="67" x2="320" y2="67" stroke="#2ec4ff" stroke-width="2.5"/>
+        <line x1="580" y1="67" x2="620" y2="67" stroke="#7e3cff" stroke-width="2.5"/>
+
+        <!-- Log Collector -->
+        <rect x="620" y="40" width="330" height="55" rx="10"
+              fill="#05131a" stroke="#ff9900" stroke-width="1.8"/>
+        <text x="785" y="72" text-anchor="middle" fill="#ff9900"
+              font-family="IBM Plex Mono" font-size="12">Log Collector (Rsyslog Server)</text>
+
+        <line x1="950" y1="67" x2="990" y2="67" stroke="#ff9900" stroke-width="2.5"/>
+
+        <!-- CloudWatch -->
+        <rect x="990" y="40" width="360" height="55" rx="10"
+              fill="#05131a" stroke="#2ec4ff" stroke-width="1.8"/>
+        <text x="1170" y="72" text-anchor="middle" fill="#2ec4ff"
+              font-family="IBM Plex Mono" font-size="12">AWS CloudWatch Logs (Optional)</text>
+
+      </svg>
+    </div>
+  </section>
+
+  <!-- PROJECT OVERVIEW -->
+  <section class="block">
+    <h3>Project Overview</h3>
+    <p>
+      This project delivers a centralized logging system where multiple EC2 instances
+      (Web & DB servers) forward their logs to a dedicated Log Collector using Rsyslog.
+      CloudWatch integration provides advanced monitoring, dashboards, and alerting.
+    </p>
+  </section>
+
+  <section class="block">
+    <h3>Goal</h3>
+    <p>
+      Collect and monitor logs from multiple EC2 Linux servers in real-time for security,
+      auditing, monitoring, and operational visibility.
+    </p>
+  </section>
+
+  <section class="block">
+    <h3>Highlights</h3>
+    <ul class="exp-list">
+      <li>Centralized logs from Web & DB servers.</li>
+      <li>Tested end-to-end Rsyslog forwarding.</li>
+      <li>Structured logs stored under <code>/var/log/remote/&lt;hostname&gt;/user.log</code>.</li>
+      <li>Optional CloudWatch integration with alarms.</li>
+    </ul>
+  </section>
+
+  <section class="block">
+    <h3>Techniques Learned</h3>
+    <ul class="exp-list">
+      <li>Forwarding logs via Rsyslog using TCP ( @@ ) and UDP ( @ ).</li>
+      <li>Creating custom Rsyslog templates to organize logs by hostname.</li>
+      <li>Security group design for internal VPC log forwarding.</li>
+      <li>Testing with <code>logger</code> and verifying on collector nodes.</li>
+      <li>Monitoring with CloudWatch Agent + metric filters.</li>
+    </ul>
+  </section>
+
+  <!-- ARCHITECTURE -->
+  <section class="block">
+    <h3>Architecture</h3>
+    <ul class="exp-list">
+      <li>Web Server (EC2 Ubuntu 22.04)</li>
+      <li>DB Server (EC2 Ubuntu 22.04)</li>
+      <li>Log Collector (EC2 Ubuntu 22.04)</li>
+      <li>Optional: CloudWatch Logs</li>
+    </ul>
+  </section>
+
+  <section class="block">
+    <h3>1️⃣ AWS Setup</h3>
+
+    <p class="lead">EC2 Instances:</p>
+    <ul class="exp-list">
+      <li>Log Collector</li>
+      <li>Web Server</li>
+      <li>DB Server</li>
+    </ul>
+
+    <p class="lead">Security Groups:</p>
+    <ul class="exp-list">
+      <li>TCP 514 — From Web & DB → Log Collector</li>
+      <li>UDP 514 — From Web & DB → Log Collector</li>
+      <li>Outbound 514 open from Web/DB to collector</li>
+    </ul>
+  </section>
+
+  <section class="block">
+    <h3>2️⃣ Log Collector Setup</h3>
+    <pre class="code-block">
+sudo mkdir -p /var/log/remote
+sudo chown syslog:syslog /var/log/remote
+sudo chmod 755 /var/log/remote
+    </pre>
+
+    <p><strong>/etc/rsyslog.d/30-remote.conf</strong></p>
+    <pre class="code-block">
+module(load="imtcp")
+input(type="imtcp" port="514")
+
+module(load="imudp")
+input(type="imudp" port="514")
+
+$template RemoteLogs,"/var/log/remote/%HOSTNAME%/user.log"
+*.* ?RemoteLogs
+stop
+    </pre>
+
+    <pre class="code-block">
+sudo systemctl restart rsyslog
+sudo systemctl enable rsyslog
+sudo ss -tulpn | grep 514
+    </pre>
+  </section>
+
+  <section class="block">
+    <h3>3️⃣ Web & DB Server Setup</h3>
+    <p><strong>/etc/rsyslog.d/50-remote.conf</strong></p>
+
+    <pre class="code-block">
+*.* @@&lt;LOG_COLLECTOR_PRIVATE_IP&gt;:514
+    </pre>
+
+    <pre class="code-block">
+sudo systemctl restart rsyslog
+nc -vz &lt;collector-ip&gt; 514
+    </pre>
+  </section>
+
+  <section class="block">
+    <h3>4️⃣ Testing Logs</h3>
+    <pre class="code-block">
+logger -p local0.info -t webtest "Web server test log”
+logger -p local0.info -t dbtest "DB server test log”
+    </pre>
+
+    <p>Verify on Log Collector:</p>
+    <pre class="code-block">
+ls /var/log/remote/
+cat /var/log/remote/ip-&lt;web-ip&gt;/user.log
+cat /var/log/remote/ip-&lt;db-ip&gt;/user.log
+    </pre>
+  </section>
+
+  <section class="block">
+    <h3>5️⃣ CloudWatch Integration (Optional)</h3>
+    <pre class="code-block">
+sudo apt install amazon-cloudwatch-agent -y
+sudo systemctl start amazon-cloudwatch-agent
+    </pre>
+    <p>Create metric filters for keywords: <strong>error</strong>, <strong>failed login</strong>.</p>
+  </section>
+
+  <section class="block">
+    <h3>6️⃣ Troubleshooting Notes</h3>
+    <ul class="exp-list">
+      <li>Use <code>journalctl -u rsyslog -f</code> for errors.</li>
+      <li>Verify SG rules allow 514 inbound/outbound.</li>
+      <li>Use <code>nc -vz</code> to test connectivity.</li>
+      <li>Ensure Rsyslog config syntax is correct.</li>
+    </ul>
+  </section>
+
+  <section class="block">
+    <h3>7️⃣ Cleanup</h3>
+    <ul class="exp-list">
+      <li>Terminate EC2 instances.</li>
+      <li>Delete CloudWatch log groups.</li>
+      <li>Remove Security Groups + Elastic IPs.</li>
+    </ul>
+  </section>
+
+  <section class="block">
+    <h3>8️⃣ Tips for Future Projects</h3>
+    <ul class="exp-list">
+      <li>Always use private IPs inside VPC.</li>
+      <li>Use identifiable tags in logger.</li>
+      <li>Keep logs structured per host.</li>
+      <li>Monitor Rsyslog status regularly.</li>
+    </ul>
+  </section>
+
+  <!-- NAVIGATION -->
+  <section class="project-nav" style="margin-top:35px; display:flex; gap:16px;">
+    <a class="btn btn-outline" href="project2.html">← Previous</a>
+    <a class="btn btn-primary" href="project4.html">Next →</a>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <small>© 2025 Rohith J. Periyasamy</small>
+  </div>
+</footer>
+
+</body>
+</html>
