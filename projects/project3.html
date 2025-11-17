@@ -1,198 +1,155 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Project 3 — Centralized Logging — Rohith J. Periyasamy</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Project 3 — Centralized Log Management</title>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../style.css?v=1" />
+  <link rel="stylesheet" href="../style.css?v=20">
 </head>
 
 <body>
+
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand-link" href="../index.html"><span class="brand-logo">ROHITH JP</span></a>
+    <a href="../index.html" class="brand-link">
+      <span class="brand-logo">ROHITH JP</span>
+    </a>
+
     <nav class="nav">
       <a href="../index.html">Home</a>
-      <a class="active" href="#">Project</a>
+      <a href="project1.html">Projects</a>
       <a href="../experience/experience.html">Experience</a>
+      <a href="../index.html#contact">Contact</a>
     </nav>
   </div>
 </header>
 
-<main class="container">
+<main>
 
-<section class="project-hero">
-  <div class="title">Centralized Log Management</div>
-  <div class="subtitle">Rsyslog forwarding system with CloudWatch integration for multi-server observability.</div>
+<section class="hero-small">
+  <div class="container">
+    <h1 class="page-title">Project 3 — Centralized Log Management (Rsyslog + CloudWatch)</h1>
+    <p class="lead">Implemented secure, centralized log collection across multiple EC2 instances using Rsyslog, directory templating, and AWS CloudWatch integration.</p>
+
+    <a href="https://github.com/RohithJP/Projects/tree/main/project3" 
+       class="btn btn-primary" target="_blank">View Repository →</a>
+  </div>
 </section>
 
-<div class="showcase">
-  <div>
-    <!-- Architecture -->
-    <div class="block">
-      <h3>Architecture</h3>
-      <p><strong>Web & DB Instances → Log Collector → CloudWatch Logs</strong></p>
 
-      <div class="arch-grid">
-        <div>
-          <p class="lead">
-            • Multiple EC2 servers forward logs securely<br>
-            • Log collector receives & organizes logs by hostname<br>
-            • CloudWatch enables central monitoring & alerts
-          </p>
+<!-- OVERVIEW -->
+<section class="section-light">
+  <div class="container two-col">
 
-          <div class="badges">
-            <span class="badge">Rsyslog</span>
-            <span class="badge">EC2</span>
-            <span class="badge">CloudWatch</span>
-            <span class="badge">Linux</span>
-            <span class="badge">Monitoring</span>
-          </div>
-        </div>
-
-        <div class="arch-diagram">
-          <svg class="workflow-svg" viewBox="0 0 900 200">
-
-            <!-- Web Server -->
-            <rect x="20" y="20" width="200" height="55" rx="10" fill="#05131a" stroke="#2ec4ff"/>
-            <text x="120" y="52" text-anchor="middle" fill="#2ec4ff" font-size="12" font-family="IBM Plex Mono">
-              Web Server (EC2)
-            </text>
-
-            <!-- DB Server -->
-            <rect x="20" y="100" width="200" height="55" rx="10" fill="#05131a" stroke="#7e3cff"/>
-            <text x="120" y="132" text-anchor="middle" fill="#7e3cff" font-size="12" font-family="IBM Plex Mono">
-              DB Server (EC2)
-            </text>
-
-            <!-- Arrows -->
-            <line x1="220" y1="47" x2="400" y2="47" stroke="#2ec4ff" stroke-width="2"/>
-            <line x1="220" y1="127" x2="400" y2="127" stroke="#7e3cff" stroke-width="2"/>
-
-            <!-- Log Collector -->
-            <rect x="400" y="60" width="220" height="55" rx="10" fill="#05131a" stroke="#ff9900"/>
-            <text x="510" y="92" text-anchor="middle" fill="#ff9900" font-size="12" font-family="IBM Plex Mono">
-              Log Collector (Rsyslog)
-            </text>
-
-            <!-- Arrow -->
-            <line x1="620" y1="87" x2="800" y2="87" stroke="#ff9900" stroke-width="2"/>
-
-            <!-- CloudWatch -->
-            <rect x="800" y="60" width="200" height="55" rx="10" fill="#05131a" stroke="#00d26a"/>
-            <text x="900" y="92" text-anchor="middle" fill="#00d26a" font-size="12" font-family="IBM Plex Mono">
-              CloudWatch Logs
-            </text>
-
-          </svg>
-        </div>
-      </div>
-    </div>
-
-    <!-- Overview -->
-    <div class="block">
-      <h3>Project Overview</h3>
-      <p>
-        Built a centralized log management system where multiple EC2 servers forward logs to a dedicated log collector via Rsyslog.
-        The collector categorizes logs using hostname-based templates, and CloudWatch ingests these logs for monitoring,
-        alerting, and audit visibility.
+    <div>
+      <h2 class="section-title">Overview</h2>
+      <p class="lead">
+        The objective was to centralize application and system logs from multiple EC2 servers 
+        (Web & DB) into a single Log Collector instance using Rsyslog. Logs were further streamed 
+        to AWS CloudWatch for real-time monitoring, alerting, and auditing.
       </p>
-    </div>
 
-    <!-- Sections: Troubleshooting, Techniques, Steps -->
-    <div class="block">
-      <h3>What I Troubleshooted</h3>
-      <ul class="exp-list">
-        <li>Misconfigured Rsyslog modules causing no forwarding.</li>
-        <li>Port 514 blocked in security groups.</li>
-        <li>CloudWatch agent not detecting remote log directories.</li>
-        <li>Hostname mismatch creating duplicate folders.</li>
-      </ul>
-    </div>
-
-    <div class="block">
-      <h3>Setup Steps</h3>
-      <div class="steps">
-        <div class="step">
-          <div class="num">Step 1</div>
-          <strong>Configure Collector</strong><br>
-          Enable TCP/UDP modules & directory templates.
-        </div>
-        <div class="step">
-          <div class="num">Step 2</div>
-          <strong>Configure Web/DB EC2</strong><br>
-          Add forwarding rule → `*.* @@collector-ip:514`
-        </div>
-        <div class="step">
-          <div class="num">Step 3</div>
-          <strong>Testing</strong><br>
-          `logger -t webtest "hello logs"` to verify output.
-        </div>
-        <div class="step">
-          <div class="num">Step 4</div>
-          <strong>CloudWatch Integration</strong><br>
-          CloudWatch Agent → custom log paths → alarms.
+      <div class="workflow-box">
+        <h3 class="workflow-title">Workflow Diagram</h3>
+        <div class="workflow-img">
+AWS Web EC2 →  
+AWS DB EC2 →  
+→ Rsyslog Log Collector (EC2) →  
+→ CloudWatch Log Group →  
+→ Metrics & Alarms
         </div>
       </div>
     </div>
 
-    <div class="block">
-      <h3>Techniques Learned</h3>
-      <ul class="exp-list">
-        <li>Hostname-based dynamic log routing.</li>
-        <li>Firewall & SG design for internal TCP/UDP traffic.</li>
-        <li>CloudWatch metric filters & security monitoring.</li>
-        <li>Rsyslog debugging via <code>journalctl -u rsyslog -f</code>.</li>
+    <aside class="side-card">
+      <h3 class="section-title">Tech Stack</h3>
+      <ul class="meta-list">
+        <li>EC2 (Ubuntu 22.04)</li>
+        <li>Rsyslog TCP/UDP</li>
+        <li>CloudWatch Agent</li>
+        <li>Security Groups / VPC Networking</li>
+        <li>Linux log forwarding</li>
       </ul>
-    </div>
-
-    <div class="block">
-      <h3>Achievements & Future Enhancements</h3>
-      <p class="lead">Achievements</p>
-      <ul class="exp-list">
-        <li>Fully centralized multi-server logging.</li>
-        <li>CloudWatch dashboards for security keywords.</li>
-        <li>Organized directory structure by hostname.</li>
-      </ul>
-
-      <p class="lead">Future Enhancements</p>
-      <p>Setup OpenSearch for deeper analytics and SIEM-style dashboards.</p>
-    </div>
+    </aside>
 
   </div>
+</section>
 
-  <aside>
-    <div class="block card">
-      <h3>Project Summary</h3>
-      <p class="card-text">Secure multi-tier log collection with CloudWatch monitoring & alarms.</p>
-      <div class="badges">
-        <span class="badge">AWS</span><span class="badge">Rsyslog</span><span class="badge">SIEM</span>
-      </div>
+
+<!-- SETUP -->
+<section class="section-light">
+  <div class="container">
+    <h2 class="section-title">Setup & Implementation</h2>
+
+    <div class="exp-block">
+
+      <h3 class="exp-subtitle">1. Log Collector EC2 Setup</h3>
+      <ul class="exp-list">
+        <li>Created directory <code>/var/log/remote</code> with syslog ownership</li>
+        <li>Enabled TCP & UDP listeners (port 514)</li>
+        <li>Used hostname-based directory templates for log separation</li>
+        <li>Restarted and enabled Rsyslog service</li>
+      </ul>
+
+      <h3 class="exp-subtitle">2. Web & DB Server Setup</h3>
+      <ul class="exp-list">
+        <li>Configured Rsyslog to forward all logs using TCP</li>
+        <li>Used private IPs for intra-VPC security</li>
+        <li>Restarted Rsyslog on all nodes</li>
+      </ul>
+
+      <h3 class="exp-subtitle">3. Testing & Verification</h3>
+      <ul class="exp-list">
+        <li>Tested log forwarding using <code>logger -p local0.info</code></li>
+        <li>Verified folder auto-creation per EC2 hostname</li>
+        <li>Validated real-time logs in CloudWatch log group</li>
+      </ul>
+
     </div>
+  </div>
+</section>
 
-    <div class="block card">
-      <h3>Test Commands</h3>
-      <pre style="color:#9fb8c7;font-size:13px">
-logger -t webtest "hello world"
-nc -vz <collector-ip> 514
-journalctl -u rsyslog -f
-      </pre>
-    </div>
 
-    <div class="block card">
-      <h3>Next Project</h3>
-      <a class="btn btn-primary" href="project4.html">Project 4 →</a>
-    </div>
-  </aside>
-</div>
+<!-- TROUBLESHOOTING -->
+<section class="section-light">
+  <div class="container">
+    <h2 class="section-title">Troubleshooting</h2>
 
-<section style="margin-top:28px;">
-  <a class="btn btn-outline" href="project2.html">← Previous</a>
-  <a class="btn btn-primary" href="project4.html">Next →</a>
+    <ul class="exp-list">
+      <li>Fixed Rsyslog path permissions preventing log creation</li>
+      <li>Resolved UDP packet drops via Security Group adjustments</li>
+      <li>Corrected Rsyslog template errors for directory creation</li>
+      <li>Used <code>journalctl -u rsyslog -f</code> for real-time debugging</li>
+      <li>Ensured CloudWatch agent had correct log file paths</li>
+    </ul>
+  </div>
+</section>
+
+
+<!-- ACHIEVED -->
+<section class="section-light">
+  <div class="container">
+    <h2 class="section-title">What I Achieved</h2>
+
+    <ul class="exp-list">
+      <li>Centralized Linux logs across multiple EC2 servers</li>
+      <li>Real-time CloudWatch monitoring & metric-based alarms</li>
+      <li>Structured log storage based on hostname</li>
+      <li>Improved auditability and troubleshooting visibility</li>
+      <li>Hardened log pipeline security using VPC internal routing</li>
+    </ul>
+
+  </div>
 </section>
 
 </main>
-<footer class="site-footer"><div class="container"><small>© 2025 Rohith JP</small></div></footer>
+
+<footer class="site-footer">
+  <div class="container">
+    <small>© 2025 Rohith J. Periyasamy — AWS Cloud Engineer</small>
+  </div>
+</footer>
+
 </body>
 </html>
