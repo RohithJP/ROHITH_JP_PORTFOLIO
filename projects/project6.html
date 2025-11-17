@@ -1,330 +1,254 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Project 6 – Django CRUD App with MySQL RDS</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Project 5 — PHP Website + MySQL RDS Deployment — Rohith J. Periyasamy</title>
 
-<link rel="stylesheet" href="../style.css?v=6000">
-
-<style>
-body {
-  padding: 40px;
-  max-width: 900px;
-  margin: auto;
-  font-size: 17px;
-  line-height: 1.7;
-}
-
-h1, h2, h3 {
-  font-family: "Orbitron";
-  color: var(--neon-blue);
-  text-shadow: 0 0 12px var(--neon-blue);
-}
-
-.section-box {
-  background: rgba(255,255,255,0.03);
-  padding: 20px;
-  margin: 20px 0;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.06);
-}
-
-code, pre {
-  background: rgba(255,255,255,0.05);
-  padding: 12px;
-  border-radius: 8px;
-  display: block;
-  overflow-x: auto;
-  border: 1px solid rgba(255,255,255,0.1);
-}
-</style>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css?v=1" />
 </head>
 
 <body>
 
-<a href="../index.html" class="btn" style="margin-bottom:20px; display:inline-block;">← Back to Portfolio</a>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand-link" href="../index.html">
+      <span class="brand-logo">ROHITH JP</span>
+    </a>
+    <nav class="nav">
+      <a href="../index.html">Home</a>
+      <a class="active" href="#">Project</a>
+      <a href="../experience/experience.html">Experience</a>
+    </nav>
+  </div>
+</header>
 
-<h1>Django Student CRUD Web App on AWS with MySQL RDS</h1>
-<p><strong>Deploying a full Django CRUD system on EC2 → connected to RDS MySQL → publicly accessible web app</strong></p>
+<main class="container">
 
-<div class="section-box">
-<h2>Project Overview</h2>
-<p><strong>Goal:</strong> Host a Django Student CRUD web application on AWS EC2 and connect it to AWS RDS MySQL.</p>
+  <!-- HERO -->
+  <section class="project-hero">
+    <div class="title">PHP Website Deployment with MySQL RDS</div>
+    <div class="subtitle">
+      End-to-end deployment of a dynamic PHP web application on AWS EC2 using NGINX, PHP-FPM, and Amazon RDS MySQL.
+      Includes debugging 502/500 errors, DB connectivity, and Linux permissions.
+    </div>
+  </section>
 
-<p><strong>Scenario:</strong>  
-A student management system is deployed for real users. Backend runs Django, database runs on RDS.</p>
-</div>
+  <div class="showcase">
 
-<div class="section-box">
-<h2>Learning Objectives</h2>
-<ul>
-<li>Launch EC2 and install Python, pip, virtualenv</li>
-<li>Deploy Django with Gunicorn</li>
-<li>Create & configure MySQL RDS</li>
-<li>Connect Django ORM to RDS</li>
-<li>Run migrations + CRUD operations</li>
-<li>Fix common Django deployment errors</li>
-<li>Manage file permissions, SGs, networking</li>
-</ul>
-</div>
+    <!-- MAIN LEFT CONTENT -->
+    <div>
 
-<div class="section-box">
-<h2>Architecture</h2>
-<p><strong>Flow:</strong></p>
-<p>[GitHub / Local] → Clone → [EC2 Ubuntu] → Django + Gunicorn → [MySQL RDS] → Browser</p>
+      <!-- Architecture -->
+      <div class="block">
+        <h3>Architecture</h3>
+        <p><strong>GitHub → EC2 (NGINX + PHP-FPM) → RDS MySQL → Browser / Users</strong></p>
 
-<ul>
-<li>EC2 (Ubuntu 22.04)</li>
-<li>Django (Python 3.12)</li>
-<li>Gunicorn (WSGI Server)</li>
-<li>AWS RDS (MySQL)</li>
-<li>Security groups + Linux permissions</li>
-</ul>
-</div>
+        <div class="arch-grid">
+          <div>
+            <p class="lead">
+              • EC2 hosts NGINX + PHP-FPM<br>
+              • RDS hosts MySQL with secure inbound rules<br>
+              • Website cloned directly from GitHub<br>
+              • Permissions fixed to avoid 403/500 errors<br>
+              • PHP app connected to RDS endpoint
+            </p>
 
-<div class="section-box">
-<h2>1⃣ EC2 Instance Setup</h2>
+            <div class="badges">
+              <span class="badge">NGINX</span>
+              <span class="badge">PHP-FPM</span>
+              <span class="badge">RDS</span>
+              <span class="badge">EC2</span>
+              <span class="badge">GitHub</span>
+            </div>
+          </div>
 
-<pre><code>chmod 400 mykey.pem
-ssh -i "mykey.pem" ubuntu@&lt;EC2-PUBLIC-IP&gt;
+          <!-- DIAGRAM -->
+          <div class="arch-diagram">
+            <svg class="workflow-svg" viewBox="0 0 980 160" xmlns="http://www.w3.org/2000/svg">
 
-sudo apt update && sudo apt upgrade -y
-sudo apt install git python3-pip python3-venv \
-build-essential libmysqlclient-dev -y
-</code></pre>
-</div>
+              <!-- GitHub -->
+              <rect x="10" y="30" width="200" height="50" rx="10" fill="#05131a" stroke="#2ec4ff" stroke-width="1.6"/>
+              <text x="110" y="62" text-anchor="middle" fill="#2ec4ff" font-family="IBM Plex Mono" font-size="12">GitHub Repo</text>
 
-<div class="section-box">
-<h2>2⃣ Django Project Setup</h2>
+              <!-- EC2 -->
+              <rect x="240" y="30" width="220" height="50" rx="10" fill="#05131a" stroke="#7e3cff" stroke-width="1.6"/>
+              <text x="350" y="62" text-anchor="middle" fill="#7e3cff" font-family="IBM Plex Mono" font-size="12">EC2 (NGINX + PHP-FPM)</text>
 
-<h3>Create environment:</h3>
-<pre><code>mkdir ~/djangoapp
-cd ~/djangoapp
-python3 -m venv venv
-source venv/bin/activate
-</code></pre>
+              <!-- PHP App -->
+              <rect x="490" y="30" width="220" height="50" rx="10" fill="#05131a" stroke="#2ec4ff" stroke-width="1.6"/>
+              <text x="600" y="62" text-anchor="middle" fill="#2ec4ff" font-family="IBM Plex Mono" font-size="12">PHP Application</text>
 
-<h3>Install packages:</h3>
-<pre><code>pip install --upgrade pip
-pip install django mysqlclient gunicorn
-</code></pre>
+              <!-- RDS DB -->
+              <rect x="740" y="30" width="220" height="50" rx="10" fill="#05131a" stroke="#ff9900" stroke-width="1.6"/>
+              <text x="850" y="62" text-anchor="middle" fill="#ff9900" font-family="IBM Plex Mono" font-size="12">MySQL RDS</text>
 
-<h3>Create Django project:</h3>
-<pre><code>django-admin startproject studentcrud
-cd studentcrud
-python manage.py startapp students
-</code></pre>
-</div>
+              <!-- Arrows -->
+              <line x1="210" y1="55" x2="240" y2="55" stroke="#2ec4ff" stroke-width="2" />
+              <line x1="460" y1="55" x2="490" y2="55" stroke="#7e3cff" stroke-width="2" />
+              <line x1="710" y1="55" x2="740" y2="55" stroke="#ff9900" stroke-width="2" />
 
-<div class="section-box">
-<h2>3⃣ Configure AWS RDS MySQL</h2>
+            </svg>
+          </div>
 
-<ul>
-<li>Create RDS MySQL (db.t4g.micro)</li>
-<li>Allow EC2 → RDS on port 3306</li>
-</ul>
+        </div>
+      </div>
 
-<h3>Create DB + user:</h3>
-<pre><code>CREATE DATABASE studentdb CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+      <!-- Overview -->
+      <div class="block">
+        <h3>Project Overview</h3>
+        <p>
+          The objective was to deploy a dynamic PHP website ("sms\_kaliswari\_college") using AWS EC2 with 
+          NGINX + PHP-FPM and connect it to a MySQL RDS instance. The project focused on secure hosting, 
+          database connectivity, and resolving 502/500 application errors.
+        </p>
+      </div>
 
-CREATE USER 'studentuser'@'%' IDENTIFIED BY 'StrongPassword123!';
-GRANT ALL PRIVILEGES ON studentdb.* TO 'studentuser'@'%';
-FLUSH PRIVILEGES;
-</code></pre>
-</div>
+      <!-- Steps -->
+      <div class="block">
+        <h3>Setup & Configuration</h3>
 
-<div class="section-box">
-<h2>4⃣ Connect Django to MySQL RDS</h2>
+        <div class="steps">
 
-<h3>settings.py</h3>
-<pre><code>DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'studentdb',
-        'USER': 'studentuser',
-        'PASSWORD': 'StrongPassword123!',
-        'HOST': '&lt;RDS-ENDPOINT&gt;',
-        'PORT': '3306',
-    }
-}
-</code></pre>
+          <div class="step">
+            <div class="num">Step 1</div>
+            <strong>Launch EC2</strong><br>
+            Ubuntu 22.04 / t2.micro. Install NGINX & basic packages.
+          </div>
 
-<h3>Add students app:</h3>
+          <div class="step">
+            <div class="num">Step 2</div>
+            <strong>Install NGINX</strong><br>
+            <code>sudo apt install nginx -y</code>  
+            Remove default site and configure custom virtual host.
+          </div>
 
-<pre><code>INSTALLED_APPS = [
-    # Django defaults…
-    'students',
-]
-</code></pre>
-</div>
+          <div class="step">
+            <div class="num">Step 3</div>
+            <strong>Install PHP & PHP-FPM</strong><br>
+            <code>sudo apt install php php-fpm php-mysql -y</code>
+          </div>
 
-<div class="section-box">
-<h2>5⃣ Models & Forms</h2>
+          <div class="step">
+            <div class="num">Step 4</div>
+            <strong>Clone Website From GitHub</strong><br>
+            <code>git clone &lt;repo&gt; /var/www/html/mywebsite</code>
+          </div>
 
-<h3>models.py:</h3>
-<pre><code>from django.db import models
+          <div class="step">
+            <div class="num">Step 5</div>
+            <strong>Create MySQL RDS Database</strong><br>
+            Create DB + user + import SQL dump.
+          </div>
 
-class Student(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.EmailField(max_length=100)
-    created_at = models.DateTimeField(auto_now_add=True)
+          <div class="step">
+            <div class="num">Step 6</div>
+            <strong>Connect PHP to RDS</strong><br>
+            Update db.php with RDS endpoint, username, password.
+          </div>
 
-    def __str__(self):
-        return f"{self.name} ({self.email})"
-</code></pre>
+        </div>
+      </div>
 
-<h3>forms.py:</h3>
-<pre><code>from django import forms
-from .models import Student
+      <!-- Troubleshooting -->
+      <div class="block">
+        <h3>Troubleshooting & Fixes</h3>
 
-class StudentForm(forms.ModelForm):
-    class Meta:
-        model = Student
-        fields = ['name', 'email']
-</code></pre>
-</div>
+        <ul class="exp-list">
+          <li><strong>502 Bad Gateway</strong> — PHP-FPM socket mismatch. Fixed in NGINX config.</li>
+          <li><strong>500 Internal Server Error</strong> — Missing PHP modules / DB errors.</li>
+          <li><strong>RDS Access Denied</strong> — EC2 not allowed in RDS SG. Added SG rule.</li>
+          <li><strong>NGINX default page showing</strong> — default site not removed.</li>
+          <li><strong>SSH permission denied</strong> — incorrect PEM permissions.</li>
+        </ul>
 
-<div class="section-box">
-<h2>6⃣ Views (CRUD)</h2>
+      </div>
 
-<h3>views.py:</h3>
-<pre><code>from django.shortcuts import render, redirect, get_object_or_404
-from .models import Student
-from .forms import StudentForm
+      <!-- Techniques Learned -->
+      <div class="block">
+        <h3>Techniques Learned</h3>
+        <ul class="exp-list">
+          <li>Creating and configuring NGINX virtual hosts.</li>
+          <li>Fixing PHP-FPM socket & permission issues.</li>
+          <li>Importing MySQL dumps to RDS from EC2.</li>
+          <li>Debugging 502/500 using NGINX + PHP logs.</li>
+          <li>Linux file permissions (www-data ownership).</li>
+        </ul>
+      </div>
 
-def index(request):
-    students = Student.objects.all().order_by('-created_at')
-    form = StudentForm()
-    return render(request, 'index.html', {'students': students, 'form': form})
+      <!-- Achievements -->
+      <div class="block">
+        <h3>Achievements & Next Steps</h3>
 
-def add_student(request):
-    if request.method == 'POST':
-        form = StudentForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('index')
+        <p class="lead">Achievements</p>
+        <ul class="exp-list">
+          <li>Successfully hosted PHP website on EC2.</li>
+          <li>Connected securely to MySQL RDS.</li>
+          <li>Resolved 502/500 errors and permission issues.</li>
+          <li>Website fully functional and publicly accessible.</li>
+        </ul>
 
-def edit_student(request, id):
-    student = get_object_or_404(Student, id=id)
-    if request.method == 'POST':
-        form = StudentForm(request.POST, instance=student)
-        if form.is_valid():
-            form.save()
-            return redirect('index')
-    else:
-        form = StudentForm(instance=student)
-    return render(request, 'edit.html', {'form': form, 'student': student})
+        <p class="lead">Next Steps</p>
+        <p>
+          Add HTTPS using Let's Encrypt, enable automated deployments,
+          implement caching/CDN, and integrate CloudWatch logs.
+        </p>
+      </div>
 
-def delete_student(request, id):
-    student = get_object_or_404(Student, id=id)
-    if request.method == 'POST':
-        student.delete()
-        return redirect('index')
-    return render(request, 'confirm_delete.html', {'student': student})
-</code></pre>
-</div>
+    </div>
 
-<div class="section-box">
-<h2>7⃣ URLs & Templates</h2>
+    <!-- RIGHT SIDEBAR -->
+    <aside>
 
-<h3>students/urls.py:</h3>
-<pre><code>from django.urls import path
-from . import views
+      <div class="block card">
+        <h3>Project Summary</h3>
+        <p class="card-text">
+          Fully deployed PHP application using NGINX, PHP-FPM, and RDS MySQL
+          with real debugging and production-ready patterns.
+        </p>
+        <div class="badges">
+          <span class="badge">EC2</span>
+          <span class="badge">NGINX</span>
+          <span class="badge">RDS</span>
+          <span class="badge">PHP</span>
+        </div>
+      </div>
 
-urlpatterns = [
-    path('', views.index, name='index'),
-    path('add/', views.add_student, name='add_student'),
-    path('edit/&lt;int:id&gt;/', views.edit_student, name='edit_student'),
-    path('delete/&lt;int:id&gt;/', views.delete_student, name='delete_student'),
-]
-</code></pre>
+      <div class="block card">
+        <h3>Quick Commands</h3>
+<pre style="color:var(--muted);font-size:13px;line-height:1.35">
+# Install packages
+sudo apt install nginx php php-fpm php-mysql -y
 
-<h3>Template: index.html (snippet)</h3>
-<pre><code>&lt;form method="post" action="{% url 'add_student' %}"&gt;
-    {% csrf_token %}
-    {{ form.as_p }}
-    &lt;button type="submit"&gt;Add Student&lt;/button&gt;
-&lt;/form&gt;
+# Clone website
+git clone <repo> /var/www/html/mywebsite
 
-&lt;table&gt;
-&lt;tr&gt;&lt;th&gt;ID&lt;/th&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Email&lt;/th&gt;&lt;th&gt;Actions&lt;/th&gt;&lt;/tr&gt;
-{% for s in students %}
-&lt;tr&gt;
-  &lt;td&gt;{{ s.id }}&lt;/td&gt;
-  &lt;td&gt;{{ s.name }}&lt;/td&gt;
-  &lt;td&gt;{{ s.email }}&lt;/td&gt;
-  &lt;td&gt;
-     &lt;a href="{% url 'edit_student' s.id %}"&gt;Edit&lt;/a&gt; |
-     &lt;a href="{% url 'delete_student' s.id %}"&gt;Delete&lt;/a&gt;
-  &lt;/td&gt;
-&lt;/tr&gt;
-{% endfor %}
-&lt;/table&gt;
-</code></pre>
-</div>
+# Restart services
+sudo systemctl reload nginx
+sudo systemctl restart php8.2-fpm
+</pre>
+      </div>
 
-<div class="section-box">
-<h2>8⃣ Migrations & Run Server</h2>
+      <div class="block card">
+        <h3>Repo & Docs</h3>
+        <p class="card-text">All PHP configs and MySQL scripts included in the repo.</p>
+        <a class="btn btn-primary" href="https://github.com/RohithJP" target="_blank">View Repo</a>
+      </div>
 
-<pre><code>python manage.py makemigrations
-python manage.py migrate
-python manage.py createsuperuser
-python manage.py runserver 0.0.0.0:8000
-</code></pre>
-</div>
+    </aside>
+  </div>
 
-<div class="section-box">
-<h2>9⃣ Troubleshooting & Mistakes</h2>
+  <section style="margin-top:28px;">
+    <a class="btn btn-outline" href="project4.html">← Previous</a>
+    <a class="btn btn-primary" href="project6.html" style="margin-left:12px">Next →</a>
+  </section>
 
-<table>
-<tr><th>Error</th><th>Cause</th><th>Fix</th></tr>
+</main>
 
-<tr>
-<td>OperationalError (2005)</td>
-<td>Wrong RDS endpoint</td>
-<td>Check endpoint & SG</td>
-</tr>
-
-<tr>
-<td>Access denied</td>
-<td>User priv or password wrong</td>
-<td>Grant privileges again</td>
-</tr>
-
-<tr>
-<td>Unknown database</td>
-<td>DB not created</td>
-<td>Create DB first</td>
-</tr>
-
-<tr>
-<td>Django not found</td>
-<td>Not in virtualenv</td>
-<td>Activate venv</td>
-</tr>
-
-<tr>
-<td>mysqlclient fails</td>
-<td>Missing dev libs</td>
-<td>Install libmysqlclient-dev</td>
-</tr>
-
-</table>
-</div>
-
-<div class="section-box">
-<h2>Lessons Learned</h2>
-<ul>
-<li>Cloud deployment must be validated step-by-step</li>
-<li>Django stack traces are extremely helpful</li>
-<li>Permissions matter (chmod, chown)</li>
-<li>RDS SG must allow EC2 inbound</li>
-<li>Virtualenvs prevent dependency conflicts</li>
-</ul>
-</div>
-
-<p><strong>Outcome:</strong> Django CRUD app deployed on EC2 with MySQL RDS — stable, secure, and production-ready.</p>
+<footer class="site-footer">
+  <div class="container"><small>© 2025 Rohith J. Periyasamy</small></div>
+</footer>
 
 </body>
 </html>
