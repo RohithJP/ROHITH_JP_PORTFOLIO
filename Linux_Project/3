@@ -1,0 +1,63 @@
+<!-- save as: linux-security-ctf.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Linux Security & CTF Challenges — Portfolio</title>
+  <meta name="description" content="CTF-style Linux tasks: password extraction, encoding/decoding, permission analysis, and systematic escalation." />
+  <style>
+    :root{--bg:#071226;--card:#081226;--accent:#f472b6;--muted:#a7b7c8;--maxw:920px}
+    body{margin:0;background:linear-gradient(180deg,var(--bg),#020717);color:#f0f8ff;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;padding:28px;min-height:100vh;display:flex;align-items:flex-start;justify-content:center}
+    .wrap{max-width:var(--maxw);width:100%}
+    header{display:flex;gap:14px;align-items:center;margin-bottom:18px}
+    .badge{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#60a5fa);display:flex;align-items:center;justify-content:center;font-weight:700;color:#061226}
+    h1{margin:0;font-size:20px}
+    .card{background:rgba(255,255,255,0.02);padding:20px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.6)}
+    h2{margin-top:10px}
+    ul{color:var(--muted);padding-left:18px}
+    .kv{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .chip{background:rgba(255,255,255,0.03);padding:6px 10px;border-radius:999px;font-weight:600;color:#fff}
+    .actions{margin-top:14px}
+    a.btn{padding:10px 12px;border-radius:8px;text-decoration:none;font-weight:700}
+    a.primary{background:var(--accent);color:#061226}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <div class="badge">CTF</div>
+      <div>
+        <h1>Linux Security & Password Extraction (CTF-Style)</h1>
+        <p style="color:var(--muted);margin:6px 0 0">Solved multi-level encoding and credential puzzles using Linux tooling and forensic techniques.</p>
+      </div>
+    </header>
+
+    <section class="card" aria-labelledby="overview">
+      <h2 id="overview">Project Overview</h2>
+      <p style="color:var(--muted)">A collection of structured security challenges inspired by OverTheWire Bandit and real-world forensic tasks: decoding, searching hidden flags, and analyzing file permissions.</p>
+
+      <h2>Key Activities</h2>
+      <ul>
+        <li>Decoded Base64, hex, and reversed text payloads using CLI tools.</li>
+        <li>Used <code>find</code>, <code>strings</code>, and <code>xxd</code> to locate hidden credentials.</li>
+        <li>Analyzed file permissions and ownership to infer escalation paths.</li>
+        <li>Documented reproducible steps and commands for each challenge level.</li>
+      </ul>
+
+      <h2>Technologies & Tools</h2>
+      <div class="kv">
+        <span class="chip">Linux CLI</span>
+        <span class="chip">grep / find</span>
+        <span class="chip">xxd / strings</span>
+        <span class="chip">Base64 / Encoding</span>
+        <span class="chip">SSH-based challenges</span>
+      </div>
+
+      <div class="actions">
+        <a class="btn primary" href="#">View Challenge Walkthroughs</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
