@@ -1,121 +1,195 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rohith JP — AWS Cloud Portfolio</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rohith J. Periyasamy — AWS Cloud Engineer</title>
 
-  <link rel="stylesheet" href="style.css" />
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css?v=6" />
+
+  <meta name="description" content="Rohith J. Periyasamy — AWS Cloud Engineer. Portfolio showcasing cloud projects, architecture, automation, and DevOps.">
 </head>
-
 <body>
 
-  <!-- NAVBAR -->
-  <div class="nav">
-    <div class="logo">ROHITH JP</div>
-    <div>
-      <a href="index.html">Home</a>
-      <a href="projects/project1.html">Projects</a>
-      <a href="experience/experience.html">Experience</a>
-    </div>
-  </div>
-
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <h1 class="title">AWS Cloud Portfolio</h1>
-    <p class="subtitle">Cloud Engineer | AWS | Linux | DevOps | Automation</p>
-
-    <div class="button-group">
-      <a href="projects/project1.html" class="btn">View Projects</a>
-      <a href="experience/experience.html" class="btn-outline">Read Experience</a>
-    </div>
-  </section>
-
-  <!-- EXPERIENCE PREVIEW (SMALL SECTION) -->
-  <section class="section" id="experience">
-    <h2 class="section-title">Work Experience</h2>
-
-    <p class="section-text">
-      Hands-on experience in deploying secure AWS architectures, automation, Linux administration,
-      cloud networking, two-tier deployments, monitoring, and troubleshooting.
-    </p>
-
-    <a href="experience/experience.html" class="read-more">Read More →</a>
-  </section>
-
-  <!-- SKILLS SECTION -->
-  <section class="section" id="skills">
-    <h2 class="section-title">Skills</h2>
-
-    <div class="skills-container">
-
-      <div class="chip-group">
-        <span>AWS EC2</span>
-        <span>AWS VPC</span>
-        <span>IAM</span>
-        <span>CloudWatch</span>
-        <span>S3</span>
-        <span>RDS</span>
-        <span>Route 53</span>
-        <span>Linux</span>
-        <span>Nginx</span>
-        <span>Apache</span>
-        <span>MySQL</span>
-        <span>Python</span>
-        <span>Bash</span>
-        <span>GitHub</span>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a href="index.html" class="brand-link">
+          <span class="brand-logo">ROHITH JP</span>
+        </a>
       </div>
 
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="projects/project1.html">Projects</a>
+        <a href="experience/experience.html">Experience</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </div>
-  </section>
+  </header>
 
-  <!-- PROJECTS GRID PREVIEW -->
-  <section class="section" id="projects">
-    <h2 class="section-title">Projects</h2>
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-left">
+          <div class="eyebrow">Portfolio</div>
+          <h1 class="hero-title">
+            Rohith J.<br/><span class="hero-last">Periyasamy</span>
+          </h1>
 
-    <div class="card-grid">
+          <p class="hero-sub">
+            AWS Cloud Engineer — Production-grade architectures • Automation • Observability
+          </p>
 
-      <a href="projects/project1.html" class="card">
-        <h3>Project 1</h3>
-        <p>Multi-Tier WordPress Deployment</p>
-      </a>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="projects/project1.html">View Projects</a>
+            <a class="btn btn-outline" href="experience/experience.html">Read Experience</a>
+          </div>
 
-      <a href="projects/project2.html" class="card">
-        <h3>Project 2</h3>
-        <p>Static Website Hosting + Automation</p>
-      </a>
+          <ul class="meta-list">
+            <li><strong>Focus:</strong> VPC, EC2, RDS, CloudWatch, CI/CD</li>
+            <li><strong>Location:</strong> Croydon • UK</li>
+          </ul>
+        </div>
 
-      <a href="projects/project3.html" class="card">
-        <h3>Project 3</h3>
-        <p>Centralized Logging to CloudWatch</p>
-      </a>
+        <div class="hero-right">
+          <!-- small summary card -->
+          <div class="card summary-card">
+            <h3 class="card-title">Profile</h3>
+            <p class="card-text">
+              Cloud engineer specialising in secure infrastructure, automation and production monitoring.
+              I build repeatable, observable stacks using IaC, bash automation and CI pipelines.
+            </p>
+            <div class="card-actions">
+              <a href="mailto:rohithjpu1@gmail.com" class="link">📧 Email</a>
+              <a href="https://github.com/RohithJP" class="link">🐙 GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <a href="projects/project4.html" class="card">
-        <h3>Project 4</h3>
-        <p>SFTP → S3 Secure Transfer</p>
-      </a>
+    <!-- EXPERIENCE PREVIEW -->
+    <section class="section-light">
+      <div class="container two-col">
+        <div>
+          <h2 class="section-title">Experience</h2>
+          <p class="lead">Senior hands-on experience deploying secure AWS environments and automating infrastructure and observability.</p>
 
-      <a href="projects/project5.html" class="card">
-        <h3>Project 5</h3>
-        <p>PHP + MySQL RDS Website</p>
-      </a>
+          <div class="exp-preview">
+            <strong>Cloud Engineer — RR IT Solutions</strong>
+            <div class="muted">Jun 2024 — Present</div>
+            <p class="small-desc">Design and implement VPCs, EC2 architectures, monitoring, and deployment automation for production workloads.</p>
+          </div>
 
-      <a href="projects/project6.html" class="card">
-        <h3>Project 6</h3>
-        <p>Django CRUD App + RDS</p>
-      </a>
+          <a class="link-more" href="experience/experience.html">Read full experience →</a>
+        </div>
 
-      <a href="projects/project7.html" class="card">
-        <h3>Project 7</h3>
-        <p>Two-Tier Web + Private DB</p>
-      </a>
+        <aside>
+          <h3 class="section-title small">Core Skills</h3>
+          <div class="skills-list">
+            <span>AWS EC2</span>
+            <span>VPC / Subnets</span>
+            <span>RDS / MySQL</span>
+            <span>S3 / CloudFront</span>
+            <span>CloudWatch</span>
+            <span>Terraform</span>
+            <span>Bash</span>
+            <span>Django / PHP</span>
+          </div>
+        </aside>
+      </div>
+    </section>
 
+    <!-- PROJECTS -->
+    <section class="section-dark">
+      <div class="container">
+        <h2 class="section-title">Selected Projects</h2>
+        <p class="lead">Production-style projects: networking, automation, logging, secure file transfer, and full application deployments.</p>
+
+        <div class="projects-grid">
+          <a class="project-card" href="projects/project1.html">
+            <div class="proj-index">01</div>
+            <div class="proj-body">
+              <h3>Multi-Tier WordPress</h3>
+              <p>Reverse proxy + web + DB across public/private subnets. Nginx → Apache → MySQL</p>
+            </div>
+          </a>
+
+          <a class="project-card" href="projects/project2.html">
+            <div class="proj-index">02</div>
+            <div class="proj-body">
+              <h3>Automated Static Hosting</h3>
+              <p>EC2 userdata + S3 sync automation for fast deployments and recovery.</p>
+            </div>
+          </a>
+
+          <a class="project-card" href="projects/project3.html">
+            <div class="proj-index">03</div>
+            <div class="proj-body">
+              <h3>Centralized Logging</h3>
+              <p>Rsyslog collector + CloudWatch integration for alerts and structured logs.</p>
+            </div>
+          </a>
+
+          <a class="project-card" href="projects/project4.html">
+            <div class="proj-index">04</div>
+            <div class="proj-body">
+              <h3>SFTP → S3 Workflow</h3>
+              <p>Secure file transfer, chrooted users, S3 sync, and versioning for recovery.</p>
+            </div>
+          </a>
+
+          <a class="project-card" href="projects/project5.html">
+            <div class="proj-index">05</div>
+            <div class="proj-body">
+              <h3>PHP Site + RDS</h3>
+              <p>Deploying PHP app connected to AWS RDS MySQL with secure SGs and backups.</p>
+            </div>
+          </a>
+
+          <a class="project-card" href="projects/project6.html">
+            <div class="proj-index">06</div>
+            <div class="proj-body">
+              <h3>Django CRUD App</h3>
+              <p>Django + Gunicorn on EC2 connected to RDS; migrations & deployment runbook.</p>
+            </div>
+          </a>
+
+          <a class="project-card" href="projects/project7.html">
+            <div class="proj-index">07</div>
+            <div class="proj-body">
+              <h3>Two-Tier Architecture</h3>
+              <p>Public web server + private DB server, NACLs, and troubleshooting playbook.</p>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section-compact" id="contact">
+      <div class="container">
+        <h2 class="section-title">Contact</h2>
+        <p class="lead">Looking to discuss cloud architecture, automation, or a role — reach out.</p>
+        <div class="contact-row">
+          <a class="btn btn-primary" href="mailto:rohithjpu1@gmail.com">Email Me</a>
+          <a class="btn btn-outline" href="https://github.com/RohithJP" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>© 2025 Rohith J. Periyasamy — AWS Cloud Engineer</small>
     </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    © 2025 Rohith JP — AWS Cloud Portfolio
   </footer>
 
 </body>
