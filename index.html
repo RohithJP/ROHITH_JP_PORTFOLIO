@@ -3,194 +3,220 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Rohith J. Periyasamy — AWS Cloud Engineer</title>
+  <title>Rohith Jothilakshmi Periyasamy — AWS Cloud Engineer</title>
 
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css?v=8" />
+
+  <meta name="description" content="Rohith J. Periyasamy — AWS Cloud Engineer. Portfolio showcasing production-grade AWS architectures, automation, and DevOps implementations.">
 </head>
 
 <body>
 
-<header class="site-header">
-  <div class="container header-inner">
-    <div class="brand">
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
       <a href="index.html" class="brand-link">
         <span class="brand-logo">ROHITH JP</span>
       </a>
+
+      <nav class="nav">
+        <a href="index.html" class="active">Home</a>
+        <a href="projects/project1.html">Projects</a>
+        <a href="experience/experience.html">Experience</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </div>
+  </header>
 
-    <nav class="nav">
-      <a class="active" href="index.html">Home</a>
-      <a href="projects/project1.html">Projects</a>
-      <a href="experience/experience.html">Experience</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </div>
-</header>
+  <!-- MAIN -->
+  <main>
 
-<main>
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="container hero-grid">
 
-<!-- HERO -->
-<section class="hero">
-  <div class="container hero-grid">
+        <!-- LEFT -->
+        <div class="hero-left">
 
-    <div class="hero-left">
-      <div class="eyebrow">CLOUD PORTFOLIO</div>
+          <div class="eyebrow">Cloud Portfolio</div>
 
-      <h1 class="hero-title">
-        Rohith J.<br/>
-        <span class="hero-last">Periyasamy</span>
-      </h1>
+          <h1 class="hero-title">
+            <span style="font-size:48px;">ROHITH JOTHILAKSHMI</span><br>
+            <span class="hero-last" style="font-size:50px;">PERIYASAMY</span>
+          </h1>
 
-      <p class="hero-sub">
-        AWS Cloud Engineer specialising in VPC design, automation, observability and production-grade deployments.
-      </p>
+          <p class="hero-sub">
+            AWS Cloud Engineer specialising in VPC design, EC2 architectures,
+            automation, observability, troubleshooting, and production-grade deployments.
+          </p>
 
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="projects/project1.html">View Projects</a>
-        <a class="btn btn-outline" href="experience/experience.html">Read Experience</a>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="projects/project1.html">View Projects</a>
+            <a class="btn btn-outline" href="experience/experience.html">View Experience</a>
+          </div>
+
+          <!-- CONTACT META -->
+          <ul class="meta-list">
+            <li><strong>Focus:</strong> VPC • EC2 • RDS • Monitoring • Automation</li>
+            <li><strong>Location:</strong> Chennai, India</li>
+            <li><strong>Contact:</strong> +91 73588 89412</li>
+            <li><strong>Email:</strong> rohithjpu1@gmail.com</li>
+          </ul>
+
+        </div>
+
+        <!-- RIGHT CARD -->
+        <div class="hero-right">
+          <div class="card summary-card">
+            <h3 class="card-title">Profile Summary</h3>
+
+            <p class="card-text">
+              Cloud Engineer with experience in building secure, scalable AWS architectures
+              using VPC, EC2, RDS, IAM, S3, and CloudWatch. Skilled in automation using
+              Bash, Git, and CI pipelines, with strong troubleshooting capabilities and
+              hands-on production experience.
+            </p>
+
+            <div class="card-actions">
+              <a class="link" href="mailto:rohithjpu1@gmail.com">📧 Email</a>
+              <a class="link" href="https://github.com/RohithJP" target="_blank">🐙 GitHub</a>
+            </div>
+          </div>
+        </div>
+
       </div>
+    </section>
 
-      <ul class="meta-list">
-        <li><strong>Focus:</strong> VPC • EC2 • RDS • Monitoring • Automation</li>
-        <li><strong>Location:</strong> Croydon, United Kingdom</li>
-      </ul>
-    </div>
+    <!-- EXPERIENCE PREVIEW -->
+    <section class="section-light">
+      <div class="container two-col">
 
-    <div class="hero-right">
-      <div class="card summary-card">
-        <h3 class="card-title">Profile Summary</h3>
-        <p class="card-text">
-          Cloud engineer focused on secure AWS architectures, high-availability networking, automated deployments,
-          and production monitoring pipelines.
-        </p>
-        <div class="card-actions">
-          <a class="link" href="mailto:rohithjpu1@gmail.com">📧 Email</a>
-          <a class="link" href="https://github.com/RohithJP" target="_blank">🐙 GitHub</a>
+        <div>
+          <h2 class="section-title">Experience</h2>
+          <p class="lead">Hands-on AWS experience in deploying secure cloud architectures and automated infrastructure.</p>
+
+          <div class="exp-preview">
+            <strong>Cloud Engineer — RR IT Solutions</strong>
+            <div class="muted">Jun 2024 — Present</div>
+            <p class="small-desc">Designed secure VPC architectures, automated deployments, improved monitoring, and optimised production workloads.</p>
+          </div>
+
+          <a class="btn btn-outline" style="margin-top:12px;" href="experience/experience.html">
+            View Full Experience →
+          </a>
+        </div>
+
+        <aside>
+          <h3 class="section-title small">Core Skills</h3>
+          <div class="skills-list">
+            <span>AWS EC2</span>
+            <span>VPC / Subnets</span>
+            <span>RDS / MySQL</span>
+            <span>S3 / CloudFront</span>
+            <span>CloudWatch</span>
+            <span>Terraform</span>
+            <span>Bash</span>
+            <span>Django / PHP</span>
+          </div>
+        </aside>
+
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section-dark">
+      <div class="container">
+        <h2 class="section-title">Selected Projects</h2>
+        <p class="lead">Production-style AWS deployments showcasing networking, automation, logging, and secure architectures.</p>
+
+        <div class="projects-grid">
+
+          <a class="project-card" href="projects/project1.html">
+            <div class="proj-index">01</div>
+            <div class="proj-body">
+              <h3>Multi-Tier WordPress Architecture</h3>
+              <p>Nginx → Apache → MySQL with full VPC segmentation.</p>
+            </div>
+          </a>
+
+          <a class="project-card" href="projects/project2.html">
+            <div class="proj-index">02</div>
+            <div class="proj-body">
+              <h3>Automated EC2 Hosting</h3>
+              <p>Self-provisioning EC2 using User Data + S3 sync automation.</p>
+            </div>
+          </a>
+
+          <a class="project-card" href="projects/project3.html">
+            <div class="proj-index">03</div>
+            <div class="proj-body">
+              <h3>Centralized Logging Pipeline</h3>
+              <p>Rsyslog collector + CloudWatch metrics + structured logs.</p>
+            </div>
+          </a>
+
+          <a class="project-card" href="projects/project4.html">
+            <div class="proj-index">04</div>
+            <div class="proj-body">
+              <h3>Secure SFTP → S3 Workflow</h3>
+              <p>Chrooted SFTP users + automated versioned uploads.</p>
+            </div>
+          </a>
+
+          <a class="project-card" href="projects/project5.html">
+            <div class="proj-index">05</div>
+            <div class="proj-body">
+              <h3>PHP Website + RDS</h3>
+              <p>PHP-FPM + MySQL deployed on hardened AWS stack.</p>
+            </div>
+          </a>
+
+          <a class="project-card" href="projects/project6.html">
+            <div class="proj-index">06</div>
+            <div class="proj-body">
+              <h3>Django CRUD App</h3>
+              <p>Django + Gunicorn on EC2 with secure RDS networking.</p>
+            </div>
+          </a>
+
+          <a class="project-card" href="projects/project7.html">
+            <div class="proj-index">07</div>
+            <div class="proj-body">
+              <h3>Two-Tier VPC Architecture</h3>
+              <p>Public web tier + private DB tier with strict routing.</p>
+            </div>
+          </a>
+
         </div>
       </div>
-    </div>
+    </section>
 
-  </div>
-</section>
+    <!-- CONTACT -->
+    <section id="contact" class="section-compact">
+      <div class="container">
+        <h2 class="section-title">Contact</h2>
+        <p class="lead">Available for cloud engineering, infrastructure automation, and AWS architecture roles.</p>
 
-
-<!-- EXPERIENCE PREVIEW -->
-<section class="section-light">
-  <div class="container two-col">
-
-    <div>
-      <h2 class="section-title">Experience</h2>
-      <p class="lead">Hands-on AWS engineering: VPCs, automation, monitoring, and scalable infrastructure.</p>
-
-      <div class="exp-preview">
-        <strong>Cloud Engineer — RR IT Solutions</strong>
-        <div class="muted">Jun 2024 — Present</div>
-        <p class="small-desc">
-          Designed VPCs, automated deployments, implemented monitoring...
-        </p>
+        <div class="contact-row">
+          <a class="btn btn-primary" href="mailto:rohithjpu1@gmail.com">Email</a>
+          <a class="btn btn-outline" href="tel:+917358889412">Call</a>
+          <a class="btn btn-outline" href="https://github.com/RohithJP" target="_blank">GitHub</a>
+        </div>
       </div>
+    </section>
 
-      <a class="link-more" href="experience/experience.html">Read full experience →</a>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <small>© 2025 Rohith Jothilakshmi Periyasamy — AWS Cloud Engineer</small>
     </div>
-
-    <aside>
-      <h3 class="section-title small">Core Skills</h3>
-      <div class="skills-list">
-        <span>AWS EC2</span>
-        <span>VPC / Subnets</span>
-        <span>RDS / MySQL</span>
-        <span>S3 / CloudFront</span>
-        <span>CloudWatch</span>
-        <span>Terraform</span>
-        <span>Bash</span>
-        <span>Django</span>
-        <span>PHP / NGINX</span>
-      </div>
-    </aside>
-
-  </div>
-</section>
-
-
-<!-- PROJECTS (NEW THEME MATCHED WITH PROJECT PAGES) -->
-<section class="section-dark">
-  <div class="container">
-
-    <h2 class="section-title">Cloud Projects</h2>
-    <p class="lead">Production-style deployments showcasing AWS networking, automation, observability, and secure architectures.</p>
-
-    <div class="projects-list">
-
-      <!-- PROJECT CARD TEMPLATE -->
-      <a href="projects/project1.html" class="project-card-v2">
-        <h3>01 — Multi-Tier WordPress Architecture</h3>
-        <p>3-tier AWS deployment (Nginx + Apache + MySQL) with full VPC segmentation.</p>
-        <span class="project-link">View Project →</span>
-      </a>
-
-      <a href="projects/project2.html" class="project-card-v2">
-        <h3>02 — Automated Static Hosting (EC2 + S3)</h3>
-        <p>Fully automated EC2 provisioning using User Data + S3 sync.</p>
-        <span class="project-link">View Project →</span>
-      </a>
-
-      <a href="projects/project3.html" class="project-card-v2">
-        <h3>03 — Centralized Logging with Rsyslog</h3>
-        <p>End-to-end log collector pipeline + CloudWatch integration.</p>
-        <span class="project-link">View Project →</span>
-      </a>
-
-      <a href="projects/project4.html" class="project-card-v2">
-        <h3>04 — Secure SFTP → S3 Workflow</h3>
-        <p>Chrooted SFTP users + automated uploads + S3 versioning.</p>
-        <span class="project-link">View Project →</span>
-      </a>
-
-      <a href="projects/project5.html" class="project-card-v2">
-        <h3>05 — PHP Website + RDS Deployment</h3>
-        <p>NGINX + PHP-FPM + RDS MySQL + full troubleshooting playbook.</p>
-        <span class="project-link">View Project →</span>
-      </a>
-
-      <a href="projects/project6.html" class="project-card-v2">
-        <h3>06 — Django CRUD App on EC2 + RDS</h3>
-        <p>Django + Gunicorn deployment with EC2/RDS networking.</p>
-        <span class="project-link">View Project →</span>
-      </a>
-
-      <a href="projects/project7.html" class="project-card-v2">
-        <h3>07 — Two-Tier VPC Architecture</h3>
-        <p>Public web server + private DB tier with strict SG routing.</p>
-        <span class="project-link">View Project →</span>
-      </a>
-
-    </div>
-
-  </div>
-</section>
-
-
-<!-- CONTACT -->
-<section class="section-compact" id="contact">
-  <div class="container">
-    <h2 class="section-title">Contact</h2>
-    <p class="lead">Open for cloud engineering roles and freelance AWS projects.</p>
-
-    <div class="contact-row">
-      <a class="btn btn-primary" href="mailto:rohithjpu1@gmail.com">Email Me</a>
-      <a class="btn btn-outline" href="https://github.com/RohithJP">GitHub</a>
-    </div>
-  </div>
-</section>
-
-</main>
-
-<footer class="site-footer">
-  <div class="container">
-    <small>© 2025 Rohith J. Periyasamy — AWS Cloud Engineer</small>
-  </div>
-</footer>
+  </footer>
 
 </body>
-</htm
+</html>
