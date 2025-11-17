@@ -225,3 +225,52 @@ body{
   .projects-grid{grid-template-columns:1fr}
   .proj-index{min-width:40px;padding:8px 10px}
 }
+/* Experience Page */
+.hero-small {
+  padding: 70px 0 20px;
+  text-align: left;
+}
+.page-title {
+  font-family: var(--mono);
+  font-size: 34px;
+  margin-bottom: 10px;
+}
+.exp-block {
+  padding: 24px 0;
+}
+.exp-company {
+  font-family: var(--mono);
+  font-size: 20px;
+  color: var(--accent-2);
+  margin-bottom: 4px;
+}
+.exp-role {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.exp-dates {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 14px;
+}
+.exp-subtitle {
+  margin-top: 14px;
+  font-family: var(--mono);
+  margin-bottom: 6px;
+  color: #d8f5ff;
+}
+.exp-list {
+  padding-left: 20px;
+  margin-bottom: 10px;
+  color: var(--muted);
+}
+.exp-list li {
+  margin-bottom: 6px;
+}
+.nav .active {
+  color: #fff;
+  border-bottom: 1px solid var(--accent-2);
+  padding-bottom: 3px;
+}
+
