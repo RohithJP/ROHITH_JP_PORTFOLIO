@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Linux Project L1 — System Administration & Fundamentals</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css?v=25" />
+</head>
+
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand-link" href="../../index.html">
+      <span class="brand-logo">ROHITH JP</span>
+    </a>
+    <nav class="nav">
+      <a href="../../index.html">Home</a>
+      <a class="active" href="#">Project</a>
+      <a href="../../experience/experience.html">Experience</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- HERO -->
+  <section class="project-hero">
+    <div class="hero-title" style="font-size:32px; font-weight:700;">
+      L1 — Linux System Administration & Fundamentals
+    </div>
+    <p class="subtitle">
+      Hands-on Linux project covering 25+ real-world system administration tasks — users, groups, permissions,
+      services, cron, networking, file systems, logs, and troubleshooting.
+    </p>
+  </section>
+
+  <!-- WORKFLOW / DIAGRAM -->
+  <section class="block">
+    <h3>Core Areas</h3>
+
+    <div class="arch-diagram" style="margin-top:18px; overflow-x:auto;">
+      <svg viewBox="0 0 1400 150"
+           xmlns="http://www.w3.org/2000/svg"
+           class="workflow-svg"
+           style="min-width:1400px; height:150px;">
+
+        <!-- Users -->
+        <rect x="10" y="40" width="260" height="55" rx="10"
+              fill="#05131a" stroke="#2ec4ff" stroke-width="1.8"/>
+        <text x="140" y="72" text-anchor="middle" fill="#2ec4ff"
+              font-family="IBM Plex Mono" font-size="12">Users & Groups</text>
+
+        <!-- File Permissions -->
+        <rect x="300" y="40" width="260" height="55" rx="10"
+              fill="#05131a" stroke="#7e3cff" stroke-width="1.8"/>
+        <text x="430" y="72" text-anchor="middle" fill="#7e3cff"
+              font-family="IBM Plex Mono" font-size="12">Permissions / Ownership</text>
+
+        <!-- Processes -->
+        <rect x="590" y="40" width="260" height="55" rx="10"
+              fill="#05131a" stroke="#ff9900" stroke-width="1.8"/>
+        <text x="720" y="72" text-anchor="middle" fill="#ff9900"
+              font-family="IBM Plex Mono" font-size="12">Processes & Services</text>
+
+        <!-- Networking -->
+        <rect x="880" y="40" width="260" height="55" rx="10"
+              fill="#05131a" stroke="#2ec4ff" stroke-width="1.8"/>
+        <text x="1010" y="72" text-anchor="middle" fill="#2ec4ff"
+              font-family="IBM Plex Mono" font-size="12">Networking & Ports</text>
+
+      </svg>
+    </div>
+  </section>
+
+  <!-- PROJECT OVERVIEW -->
+  <section class="block">
+    <h3>Project Overview</h3>
+    <p>
+      This Linux project demonstrates complete system administration capabilities across users, groups,
+      access control, systemctl services, logs, cron jobs, permissions, file systems, archiving, text processing,
+      and process monitoring. It includes real-world troubleshooting scenarios using core command-line tools.
+    </p>
+  </section>
+
+  <section class="block">
+    <h3>Goal</h3>
+    <p>
+      Build a strong foundation in Linux by executing real sysadmin tasks that mirror production operations:
+      account management, security permissions, service troubleshooting, automation, and system monitoring.
+    </p>
+  </section>
+
+  <!-- Major Tasks -->
+  <section class="block">
+    <h3>Major System Administration Tasks</h3>
+    <ul class="exp-list">
+      <li>Create, modify, lock, and delete users and groups</li>
+      <li>Manage sudo privileges and secure sudoers configurations</li>
+      <li>Adjust file ownership and permissions using chmod/chown</li>
+      <li>Monitor processes using ps, top, htop, systemctl</li>
+      <li>Start, stop, enable and debug services</li>
+      <li>Identify heavy CPU/RAM processes</li>
+      <li>Analyze logs in /var/log and filter with grep</li>
+      <li>Schedule jobs with cron and verify logs</li>
+      <li>Handle file compression (tar, gzip)</li>
+      <li>Use grep, sed, awk for text filtering and automation</li>
+    </ul>
+  </section>
+
+  <!-- Troubleshooting -->
+  <section class="block">
+    <h3>Key Troubleshooting Scenarios</h3>
+    <ul class="exp-list">
+      <li>Fixing broken services using journalctl + systemctl</li>
+      <li>Resolving permission-denied issues</li>
+      <li>Fixing PATH and environment variable errors</li>
+      <li>Investigating background processes & killing stuck ones</li>
+      <li>Diagnosing cron jobs that fail silently</li>
+    </ul>
+  </section>
+
+  <!-- Techniques Learned -->
+  <section class="block">
+    <h3>Techniques Learned</h3>
+    <ul class="exp-list">
+      <li>Deep understanding of Linux file permissions</li>
+      <li>Using systemctl and journalctl effectively</li>
+      <li>Process control and job management</li>
+      <li>Regex and CLI text processing</li>
+      <li>Secure user administration</li>
+    </ul>
+  </section>
+
+  <!-- Achievements -->
+  <section class="block">
+    <h3>Achievements</h3>
+    <ul class="exp-list">
+      <li>Completed 25+ real Linux tasks</li>
+      <li>Mastered user, permission, and process administration</li>
+      <li>Documented troubleshooting steps and command usage</li>
+      <li>Ready for real-world server operational work</li>
+    </ul>
+  </section>
+
+  <!-- NAVIGATION -->
+  <section class="project-nav" style="margin-top:32px; display:flex; gap:16px;">
+    <a class="btn btn-outline" href="../../index.html">← Home</a>
+    <a class="btn btn-primary" href="linux-project2.html">Next →</a>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container"><small>© 2025 Rohith J. Periyasamy</small></div>
+</footer>
+
+</body>
+</html>
