@@ -3,84 +3,94 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Linux Project L2 — Ubuntu Web Hosting</title>
+  <title>L2 — Ubuntu Server Hosting & Deployment</title>
 
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../style.css?v=25" />
+  <link rel="stylesheet" href="../style.css?v=26" />
 </head>
 
 <body>
 
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand-link" href="../../index.html">
+    <a class="brand-link" href="../index.html">
       <span class="brand-logo">ROHITH JP</span>
     </a>
     <nav class="nav">
-      <a href="../../index.html">Home</a>
+      <a href="../index.html">Home</a>
       <a class="active" href="#">Project</a>
-      <a href="../../experience/experience.html">Experience</a>
     </nav>
   </div>
 </header>
 
 <main class="container">
 
+  <!-- HERO -->
   <section class="project-hero">
     <div class="hero-title" style="font-size:32px; font-weight:700;">
-      L2 — Ubuntu Server Hosting & Deployment
+      L2 — Ubuntu Server Hosting & Troubleshooting
     </div>
     <p class="subtitle">
-      Deployment and troubleshooting of web applications on Ubuntu: NGINX, Node.js,
-      systemctl services, firewall rules, ports, and server reliability.
+      Real-world Ubuntu server hosting tasks including NGINX, Node.js apps, port binding, SSL, firewall rules,
+      DNS, and deep troubleshooting of deployment failures.
     </p>
   </section>
 
+  <!-- OVERVIEW -->
   <section class="block">
     <h3>Project Overview</h3>
     <p>
-      This project covers deploying a Node.js web application on Ubuntu, configuring NGINX reverse proxy,
-      diagnosing port conflicts, fixing apt cache lock issues, and performing service-level monitoring &
-      debugging using systemctl and logs.
+      This project covers the deployment, configuration, and debugging of Ubuntu servers hosting real applications.
+      It includes NGINX reverse proxy setup, Node.js hosting, service log debugging, and solving port conflicts,
+      firewall issues, file permission errors, and process-level problems.
     </p>
   </section>
 
+  <!-- IMPLEMENTATION -->
   <section class="block">
-    <h3>Deployment Tasks</h3>
+    <h3>Key Server Hosting Tasks</h3>
     <ul class="exp-list">
-      <li>Host Node.js app with reverse proxy using NGINX</li>
-      <li>Create systemd service file for auto-start</li>
-      <li>Fix “waiting for cache lock” apt issues</li>
-      <li>Resolve port 3000/8080 conflicts</li>
-      <li>Enable UFW and configure firewall</li>
-      <li>Debug service failures using journalctl</li>
-      <li>Check running ports using ss/lsof</li>
+      <li>Installing & configuring NGINX as a reverse proxy</li>
+      <li>Deploying and managing Node.js web applications</li>
+      <li>Fixing port binding errors (EADDRINUSE)</li>
+      <li>Setting up systemd services for auto-starting apps</li>
+      <li>Configuring ufw firewall rules for ports 80/443/3000</li>
+      <li>Troubleshooting HTTP/HTTPS routing issues</li>
+      <li>Debugging server logs using journalctl & syslog</li>
+      <li>Fixing 502/504 gateway errors from NGINX</li>
+      <li>Restarting crashed services and clearing stale locks</li>
     </ul>
   </section>
 
+  <!-- TROUBLESHOOTING -->
   <section class="block">
-    <h3>Troubleshooting</h3>
+    <h3>Major Troubleshooting Scenarios</h3>
     <ul class="exp-list">
-      <li>Service not starting after reboot</li>
-      <li>NGINX failing due to bad config</li>
-      <li>Port already in use (PID conflict)</li>
-      <li>curl showing backend unreachable</li>
-      <li>Failed to bind server on port issue</li>
+      <li>NGINX failing due to misconfigured server blocks</li>
+      <li>Node.js service not starting due to missing environment variables</li>
+      <li>Fixing “address already in use” port conflicts</li>
+      <li>Resolving permission issues for service scripts</li>
+      <li>Correcting DNS resolution errors for hosted sites</li>
+      <li>Fixing blank-page errors due to routing issues</li>
+      <li>Rebuilding systemd service files with correct ExecStart paths</li>
     </ul>
   </section>
 
+  <!-- ACHIEVEMENTS -->
   <section class="block">
     <h3>Achievements</h3>
     <ul class="exp-list">
-      <li>Production-style hosting experience on Ubuntu</li>
-      <li>Reverse proxy + service automation</li>
-      <li>Debugged all port and config issues</li>
+      <li>Successfully deployed a stable Ubuntu production server</li>
+      <li>Configured NGINX reverse proxy with custom routing</li>
+      <li>Documented key troubleshooting workflows</li>
+      <li>Mastered systemd, logs, firewalls, and service management</li>
     </ul>
   </section>
 
-  <section class="project-nav" style="margin-top:32px; display:flex; gap:16px;">
-    <a class="btn btn-outline" href="linux-project1.html">← Previous</a>
-    <a class="btn btn-primary" href="linux-project3.html">Next →</a>
+  <!-- NAV -->
+  <section class="project-nav">
+    <a class="btn-nav-outline" href="project1.html">← Previous</a>
+    <a class="btn-nav-primary" href="project3.html">Next →</a>
   </section>
 
 </main>
