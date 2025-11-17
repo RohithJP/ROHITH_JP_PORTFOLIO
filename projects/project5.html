@@ -1,89 +1,294 @@
-<!-- ================================
-     PROJECT 5 — WORKFLOW DIAGRAM
-=================================== -->
-<section class="section-dark">
-  <h2 class="section-title">Architecture Workflow</h2>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Project 05 — PHP Website + MySQL RDS</title>
 
-  <div class="arch-diagram">
-    <svg class="workflow-svg" viewBox="0 0 1350 160" xmlns="http://www.w3.org/2000/svg">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css?v=50"/>
+</head>
 
-      <!-- GitHub -->
-      <rect x="10" y="45" width="200" height="60" rx="12"
-            fill="#05131a" stroke="#2ec4ff" stroke-width="1.8"/>
-      <text x="110" y="78" text-anchor="middle" fill="#2ec4ff" font-size="13">
-        GitHub Repo
-      </text>
+<body>
 
-      <!-- EC2 -->
-      <rect x="240" y="45" width="240" height="60" rx="12"
-            fill="#05131a" stroke="#7e3cff" stroke-width="1.8"/>
-      <text x="360" y="78" text-anchor="middle" fill="#7e3cff" font-size="13">
-        EC2 (NGINX + PHP-FPM)
-      </text>
-
-      <!-- PHP App -->
-      <rect x="510" y="45" width="240" height="60" rx="12"
-            fill="#05131a" stroke="#2ec4ff" stroke-width="1.8"/>
-      <text x="630" y="78" text-anchor="middle" fill="#2ec4ff" font-size="13">
-        PHP Application
-      </text>
-
-      <!-- RDS -->
-      <rect x="780" y="45" width="240" height="60" rx="12"
-            fill="#05131a" stroke="#ff9900" stroke-width="1.8"/>
-      <text x="900" y="78" text-anchor="middle" fill="#ff9900" font-size="13">
-        MySQL RDS Instance
-      </text>
-
-      <!-- User/Browser -->
-      <rect x="1050" y="45" width="240" height="60" rx="12"
-            fill="#05131a" stroke="#2ec4ff" stroke-width="1.8"/>
-      <text x="1170" y="78" text-anchor="middle" fill="#2ec4ff" font-size="13">
-        Browser / Users
-      </text>
-
-      <!-- Arrows -->
-      <line x1="210" y1="75" x2="240" y2="75" stroke="#2ec4ff" stroke-width="2"/>
-      <line x1="480" y1="75" x2="510" y2="75" stroke="#7e3cff" stroke-width="2"/>
-      <line x1="750" y1="75" x2="780" y2="75" stroke="#2ec4ff" stroke-width="2"/>
-      <line x1="1020" y1="75" x2="1050" y2="75" stroke="#ff9900" stroke-width="2"/>
-
-    </svg>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand-link" href="../index.html">
+      <span class="brand-logo">ROHITH JP</span>
+    </a>
+    <nav class="nav">
+      <a href="../index.html">Home</a>
+      <a class="active" href="#">Project</a>
+      <a href="../experience/experience.html">Experience</a>
+    </nav>
   </div>
+</header>
 
-  <h2 class="section-title">Detailed Explanation</h2>
+<main class="container">
 
-  <p class="lead">
-    This architecture demonstrates a fully deployed dynamic PHP web application running on EC2 with
-    NGINX + PHP-FPM and a secure, production-grade MySQL RDS backend.
-  </p>
+  <!-- HERO -->
+  <section class="project-hero">
+    <div class="hero-title" style="font-size:34px;font-weight:700;">
+      PHP Website Deployment — NGINX + PHP-FPM → AWS RDS MySQL
+    </div>
+    <p class="subtitle">
+      Deploying a dynamic PHP application (sms_kaliswari_college) from GitHub to EC2, connecting it to
+      Amazon RDS MySQL and making it publicly accessible with secure networking and robust troubleshooting.
+    </p>
+  </section>
 
-  <ul class="exp-list">
-    <li>
-      <strong>GitHub Repository:</strong> The PHP app is version-controlled and cloned to the EC2 instance.
-    </li>
+  <!-- WORKFLOW -->
+  <section class="block">
+    <h3>Workflow</h3>
+    <div class="arch-diagram" style="margin-top:18px; overflow-x:auto;">
+      <svg viewBox="0 0 1400 150" xmlns="http://www.w3.org/2000/svg" style="min-width:1100px;height:150px;">
+        <!-- GitHub -->
+        <rect x="10" y="40" width="220" height="55" rx="10" fill="#05131a" stroke="#2ec4ff" stroke-width="1.8"/>
+        <text x="120" y="72" text-anchor="middle" fill="#2ec4ff" font-family="IBM Plex Mono" font-size="12">GitHub Repo</text>
 
-    <li>
-      <strong>EC2 Web Server:</strong> NGINX and PHP-FPM handle routing and dynamic content processing.
-      Permissions, sockets, and virtual hosts are configured to avoid 403/502/500 issues.
-    </li>
+        <!-- EC2 -->
+        <rect x="260" y="40" width="300" height="55" rx="10" fill="#05131a" stroke="#7e3cff" stroke-width="1.8"/>
+        <text x="410" y="72" text-anchor="middle" fill="#7e3cff" font-family="IBM Plex Mono" font-size="12">EC2 (NGINX + PHP-FPM)</text>
 
-    <li>
-      <strong>PHP Application Layer:</strong> Contains the main logic, website content, and database connection files.
-    </li>
+        <!-- RDS -->
+        <rect x="590" y="40" width="300" height="55" rx="10" fill="#05131a" stroke="#ff9900" stroke-width="1.8"/>
+        <text x="740" y="72" text-anchor="middle" fill="#ff9900" font-family="IBM Plex Mono" font-size="12">RDS MySQL (studentmsdb)</text>
 
-    <li>
-      <strong>MySQL RDS Instance:</strong> A fully managed DB with secured inbound rules allowing access
-      only from the EC2 security group. SQL schema imported during setup.
-    </li>
+        <!-- Browser -->
+        <rect x="920" y="40" width="260" height="55" rx="10" fill="#05131a" stroke="#2ec4ff" stroke-width="1.8"/>
+        <text x="1050" y="72" text-anchor="middle" fill="#2ec4ff" font-family="IBM Plex Mono" font-size="12">Browser / Users</text>
 
-    <li>
-      <strong>End Users:</strong> Access the website via public IP / domain, while backend operations stay private.
-    </li>
+        <!-- Arrows -->
+        <line x1="230" y1="67" x2="260" y2="67" stroke="#2ec4ff" stroke-width="2.5"/>
+        <line x1="560" y1="67" x2="590" y2="67" stroke="#7e3cff" stroke-width="2.5"/>
+        <line x1="890" y1="67" x2="920" y2="67" stroke="#ff9900" stroke-width="2.5"/>
+      </svg>
+    </div>
+  </section>
 
-    <li>
-      <strong>Security Focus:</strong> SG referencing, principle of least privilege, no DB exposure,
-      PHP-FPM tuning, and MySQL optimizations.
-    </li>
-  </ul>
-</section>
+  <!-- OVERVIEW -->
+  <section class="block">
+    <h3>Project Overview</h3>
+    <p>
+      Deploy a dynamic PHP website (sms_kaliswari_college) from GitHub to an AWS EC2 instance
+      running NGINX & PHP-FPM, connect it to an Amazon RDS MySQL instance, import the database,
+      and make the site publicly accessible with secure networking and correct permissions.
+    </p>
+  </section>
+
+  <section class="block">
+    <h3>Goal</h3>
+    <p>Deploy the site, connect to RDS, resolve runtime errors (502/500), and ensure stable production behavior.</p>
+  </section>
+
+  <section class="block">
+    <h3>Learning Objectives</h3>
+    <ul class="exp-list">
+      <li>Launch and configure EC2</li>
+      <li>Install & configure NGINX</li>
+      <li>Install PHP & PHP-FPM and required extensions</li>
+      <li>Create and configure AWS RDS MySQL</li>
+      <li>Connect the PHP app to RDS and import SQL</li>
+      <li>Troubleshoot common 502 / 500 errors</li>
+      <li>Manage Linux permissions, SGs and networking</li>
+    </ul>
+  </section>
+
+  <section class="block">
+    <h3>Architecture</h3>
+    <p class="lead">GitHub → EC2 (NGINX + PHP-FPM) → RDS MySQL → Browser / Users</p>
+    <ul class="exp-list">
+      <li>EC2: Ubuntu 22.04 (NGINX + PHP-FPM)</li>
+      <li>Database: Amazon RDS MySQL (studentmsdb)</li>
+      <li>Security: SGs for EC2 & RDS, SSH access restricted, DB port only allowed from EC2</li>
+    </ul>
+  </section>
+
+  <section class="block">
+    <h3>Implementation Steps</h3>
+
+    <h4>1️⃣ EC2 Instance Setup</h4>
+    <pre class="code-block">
+# Locally
+chmod 400 mykey.pem
+ssh -i "mykey.pem" ubuntu@&lt;EC2-PUBLIC-IP&gt;
+
+# On EC2
+sudo apt update && sudo apt upgrade -y
+sudo apt install git unzip curl -y
+    </pre>
+
+    <h4>2️⃣ NGINX Installation & Configuration</h4>
+    <pre class="code-block">
+sudo apt install nginx -y
+sudo systemctl start nginx
+sudo systemctl enable nginx
+
+# Create site config /etc/nginx/sites-available/mywebsite
+server {
+    listen 80;
+    server_name _;
+
+    root /var/www/html/mywebsite;
+    index index.php index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php8.2-fpm.sock;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}
+
+sudo ln -s /etc/nginx/sites-available/mywebsite /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl reload nginx
+    </pre>
+
+    <h4>3️⃣ PHP & PHP-FPM Installation</h4>
+    <pre class="code-block">
+sudo apt install php php-fpm php-mysql php-mbstring php-xml -y
+
+# Verify PHP-FPM
+sudo systemctl start php8.2-fpm
+sudo systemctl enable php8.2-fpm
+
+# Test phpinfo:
+echo "&lt;?php phpinfo(); ?&gt;" | sudo tee /var/www/html/mywebsite/test.php
+    </pre>
+
+    <h4>4️⃣ Deploy Website from GitHub</h4>
+    <pre class="code-block">
+sudo git clone https://github.com/Thousif10/sms_kaliswari_college.git /var/www/html/mywebsite
+
+# Permissions
+sudo chown -R www-data:www-data /var/www/html/mywebsite
+sudo find /var/www/html/mywebsite -type d -exec chmod 755 {} \;
+sudo find /var/www/html/mywebsite -type f -exec chmod 644 {} \;
+    </pre>
+
+    <h4>5️⃣ AWS RDS MySQL Setup</h4>
+    <pre class="code-block">
+# In RDS console:
+# - Create MySQL instance (db.t4g.micro)
+# - Create DB: studentmsdb
+# - Ensure SG allows EC2 security group on port 3306
+
+# Import SQL from EC2
+mysql -h &lt;RDS-ENDPOINT&gt; -u admin -p studentmsdb &lt; /var/www/html/mywebsite/studentmsdb.sql
+    </pre>
+
+    <h4>6️⃣ Connect PHP to RDS</h4>
+    <pre class="code-block">
+# /var/www/html/mywebsite/includes/db.php
+&lt;?php
+$servername = "&lt;RDS-ENDPOINT&gt;";
+$username = "admin";
+$password = "YOUR_RDS_PASSWORD";
+$database = "studentmsdb";
+
+$conn = mysqli_connect($servername, $username, $password, $database);
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+?&gt;
+
+# Then include('includes/db.php') in pages that need DB access
+    </pre>
+  </section>
+
+  <section class="block">
+    <h3>Troubleshooting & Lessons Learned</h3>
+    <table style="width:100%; color:var(--muted); font-family:var(--mono); font-size:14px;">
+      <tr>
+        <td><strong>502 Bad Gateway</strong></td>
+        <td>PHP-FPM not running or wrong socket</td>
+        <td>Start PHP-FPM and ensure fastcgi_pass socket path matches</td>
+      </tr>
+      <tr>
+        <td><strong>500 Internal Server Error</strong></td>
+        <td>Missing PHP extensions or DB errors</td>
+        <td>Install php-mysql, php-mbstring; check PHP & Nginx logs</td>
+      </tr>
+      <tr>
+        <td><strong>NGINX default page</strong></td>
+        <td>Default site still enabled</td>
+        <td>Remove default site and enable your site</td>
+      </tr>
+      <tr>
+        <td><strong>DB connection fails</strong></td>
+        <td>SG or incorrect endpoint</td>
+        <td>Allow EC2 SG in RDS security group; verify endpoint/credentials</td>
+      </tr>
+      <tr>
+        <td><strong>SSH permission denied</strong></td>
+        <td>Wrong PEM permissions / username</td>
+        <td>chmod 400 key.pem and use ubuntu user</td>
+      </tr>
+    </table>
+
+    <p class="lead" style="margin-top:12px;">
+      Useful logs:
+      <br/><code>sudo tail -f /var/log/nginx/error.log</code>
+      <br/><code>sudo journalctl -u php8.2-fpm -n 50</code>
+    </p>
+  </section>
+
+  <section class="block">
+    <h3>Lessons Learned</h3>
+    <ul class="exp-list">
+      <li>Validate PHP-FPM socket path vs NGINX config.</li>
+      <li>RDS SG must allow EC2’s security group or CIDR.</li>
+      <li>Correct file ownership (www-data) prevents permission errors.</li>
+      <li>Logs are essential for root-cause analysis.</li>
+    </ul>
+  </section>
+
+  <section class="block">
+    <h3>Cost Optimization Tips</h3>
+    <ul class="exp-list">
+      <li>Use t2.micro or free-tier instances where possible.</li>
+      <li>Stop EC2 when not testing to save charges.</li>
+      <li>Use RDS free-tier or smaller instance classes for dev/test environments.</li>
+      <li>Remove large test data sets after verification.</li>
+    </ul>
+  </section>
+
+  <section class="block">
+    <h3>Future Enhancements</h3>
+    <ul class="exp-list">
+      <li>Enable HTTPS (Let's Encrypt) for secure production traffic.</li>
+      <li>Automate deployments using CI/CD (GitHub Actions → S3/EC2 or deploy script).</li>
+      <li>Enable RDS automated backups and monitoring.</li>
+      <li>Implement caching (Redis / FastCGI cache) & CDN for performance.</li>
+    </ul>
+  </section>
+
+  <section class="block">
+    <h3>Outcome</h3>
+    <p>
+      The PHP web application was deployed to EC2, connected to RDS MySQL, runtime issues (502/500) were resolved,
+      and the site is live and ready for further production hardening and automation.
+    </p>
+  </section>
+
+  <!-- NAVIGATION -->
+  <section class="project-nav" style="margin-top:35px; display:flex; gap:16px;">
+    <a class="btn btn-outline" href="project4.html">← Previous</a>
+    <a class="btn btn-primary" href="project6.html">Next →</a>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container"><small>© 2025 Rohith Jothilakshmi Periyasamy</small></div>
+</footer>
+
+</body>
+</html>
