@@ -3,19 +3,22 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Project 7 — Two-Tier Architecture — Rohith J. Periyasamy</title>
+  <title>Project 07 — Two-Tier Architecture</title>
+
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../style.css?v=1" />
+  <link rel="stylesheet" href="../style.css?v=24" />
 </head>
 
 <body>
+
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand-link" href="../index.html"><span class="brand-logo">ROHITH JP</span></a>
     <nav class="nav">
       <a href="../index.html">Home</a>
-      <a class="active" href="#">Project</a>
+      <a href="project1.html">Projects</a>
       <a href="../experience/experience.html">Experience</a>
+      <a href="../index.html#contact">Contact</a>
     </nav>
   </div>
 </header>
@@ -23,195 +26,109 @@
 <main class="container">
 
   <section class="project-hero">
-    <div class="title">Two-Tier Architecture — Public Web Server + Private Database</div>
-    <div class="subtitle">Secure two-tier VPC design: public EC2 (Nginx + PHP) serves traffic, private EC2 runs MySQL. Focus: networking (SGs/NACLs), MySQL host rules, and repeatable recovery playbook.</div>
+    <h1 class="title">07 — Two-Tier Architecture (Web + Private DB)</h1>
+    <p class="subtitle">
+      Secure VPC design: public EC2 web server talks to private EC2 MySQL database.
+      Emphasis: SG/NACL design, MySQL host rules, troubleshooting runbook.
+    </p>
   </section>
 
   <div class="showcase">
+
     <div>
-      <!-- Architecture + Diagram -->
+
+      <!-- Architecture -->
       <div class="block">
         <h3>Architecture</h3>
-        <p><strong>Internet → Public Subnet (Web EC2 : Nginx + PHP) → Private Subnet (DB EC2 : MySQL)</strong></p>
+        <p><strong>Internet → Public Web EC2 → Private DB EC2 (MySQL)</strong></p>
 
         <div class="arch-grid">
           <div>
             <p class="lead">
-              • VPC: 10.10.0.0/16 with public subnet 10.10.1.0/24 and private subnet 10.10.2.0/24.<br/>
-              • Public EC2 serves web traffic. Private EC2 hosts MySQL and is not accessible from the internet.<br/>
-              • Security Groups and NACLs restrict traffic; optional NAT used only for package installs.
+              • Public EC2: Nginx + PHP<br>
+              • Private EC2: MySQL only<br>
+              • SG reference used to allow only web→db traffic<br>
+              • NACLs control subnets (stateless)
             </p>
 
             <div class="badges">
-              <span class="badge">VPC</span><span class="badge">Security Groups</span><span class="badge">NACLs</span>
-              <span class="badge">EC2</span><span class="badge">MySQL</span>
+              <span class="badge">VPC</span>
+              <span class="badge">EC2</span>
+              <span class="badge">MySQL</span>
+              <span class="badge">SG</span>
+              <span class="badge">NACL</span>
             </div>
           </div>
 
           <div class="arch-diagram">
-            <svg class="workflow-svg" viewBox="0 0 980 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two-tier architecture">
-              <!-- Internet -->
-              <rect x="10" y="20" width="160" height="50" rx="10" fill="#05131a" stroke="#2ec4ff" stroke-width="1.6"/>
-              <text x="90" y="52" text-anchor="middle" fill="#2ec4ff" font-family="IBM Plex Mono" font-size="12">Internet</text>
-
-              <!-- Public Subnet / Web -->
-              <rect x="200" y="10" width="260" height="70" rx="10" fill="#05131a" stroke="#7e3cff" stroke-width="1.6"/>
-              <text x="330" y="48" text-anchor="middle" fill="#7e3cff" font-family="IBM Plex Mono" font-size="12">Public Subnet — Web EC2 (Nginx + PHP)</text>
-              <text x="330" y="64" text-anchor="middle" fill="#9fb8c7" font-family="IBM Plex Mono" font-size="11">SG: ssh from admin IP, http/https from 0.0.0.0/0</text>
-
-              <!-- Private Subnet / DB -->
-              <rect x="520" y="10" width="320" height="70" rx="10" fill="#05131a" stroke="#ff9900" stroke-width="1.6"/>
-              <text x="680" y="36" text-anchor="middle" fill="#ff9900" font-family="IBM Plex Mono" font-size="12">Private Subnet — DB EC2 (MySQL)</text>
-              <text x="680" y="52" text-anchor="middle" fill="#9fb8c7" font-family="IBM Plex Mono" font-size="11">SG: mysql (3306) from web SG only</text>
-
-              <!-- Arrows -->
-              <line x1="170" y1="45" x2="200" y2="45" stroke="#2ec4ff" stroke-width="2"/>
-              <line x1="460" y1="45" x2="520" y2="45" stroke="#7e3cff" stroke-width="2"/>
-            </svg>
+            (keep your SVG)
           </div>
+
         </div>
       </div>
 
-      <!-- Project Overview -->
+      <!-- Overview -->
       <div class="block">
         <h3>Project Overview</h3>
         <p>
-          Built a secure two-tier environment that separates public web traffic and private database services. The public EC2
-          runs the web stack (Nginx + PHP) and communicates with the private EC2 MySQL server over internal VPC networking only.
-          Emphasis was on correct SG references, NACL rules, MySQL bind & user host patterns, and a troubleshooting runbook.
+          Secure separation of public-facing and private database layers.
         </p>
       </div>
 
-      <!-- Setup & Step-by-step -->
+      <!-- Setup & Runbook -->
       <div class="block">
         <h3>Setup & Runbook</h3>
         <div class="steps">
-          <div class="step">
-            <div class="num">1</div>
-            <strong>Create VPC & Subnets</strong><br/>VPC 10.10.0.0/16, public 10.10.1.0/24, private 10.10.2.0/24.
-          </div>
-
-          <div class="step">
-            <div class="num">2</div>
-            <strong>IGW & Route Tables</strong><br/>Attach IGW to public route table (0.0.0.0/0 → IGW). Private retains local route; NAT optional for apt.
-          </div>
-
-          <div class="step">
-            <div class="num">3</div>
-            <strong>Security Groups</strong><br/>sg_web: SSH from your IP, HTTP/HTTPS from 0.0.0.0/0. sg_db: MySQL (3306) and SSH from sg_web only (SG reference).
-          </div>
-
-          <div class="step">
-            <div class="num">4</div>
-            <strong>Launch Instances</strong><br/>Public EC2 with public IP; private EC2 with no public IP (same keypair for both).
-          </div>
-
-          <div class="step">
-            <div class="num">5</div>
-            <strong>Install Services</strong><br/>Public: Nginx + PHP-FPM. Private: MySQL server; set bind-address to 0.0.0.0 and create host-scoped users (e.g., sms_user@10.10.%).
-          </div>
-
-          <div class="step">
-            <div class="num">6</div>
-            <strong>Validation</strong><br/>From public: <code>nc -zv &lt;private-ip&gt; 3306</code>. Fix configs, update SGs, re-run checks.
-          </div>
+          <div class="step"><div class="num">01</div>Create VPC and subnets</div>
+          <div class="step"><div class="num">02</div>Configure IGW, NAT, route tables</div>
+          <div class="step"><div class="num">03</div>Setup SG references for DB access</div>
+          <div class="step"><div class="num">04</div>Install Nginx + PHP + MySQL</div>
         </div>
       </div>
 
       <!-- Troubleshooting -->
       <div class="block">
-        <h3>Troubleshooting & Root Causes</h3>
+        <h3>Troubleshooting</h3>
         <ul class="exp-list">
-          <li><strong>SSH / connection timed out</strong> — NACL blocked ephemeral return ports; ensure stateless NACL allows ephemeral ranges 1024–65535.</li>
-          <li><strong>Connection refused</strong> — MySQL bound to 127.0.0.1; change <code>bind-address=0.0.0.0</code>.</li>
-          <li><strong>Host not allowed</strong> — MySQL users created with wrong host patterns (e.g., 'user'@'localhost'); create 'user'@'10.10.%'.</li>
-          <li><strong>NGINX 502/500</strong> — PHP-FPM socket mismatch or missing PHP modules; check <code>/run/php/</code> and logs.</li>
-          <li><strong>APT hang</strong> — NAT missing when private instance requires internet for installs; create NAT temporarily then remove to save cost.</li>
+          <li>MySQL bind-address incorrectly set</li>
+          <li>SG missing reference from web to db</li>
+          <li>NACL blocking ephemeral ports</li>
+          <li>PHP 502/500 — PHP-FPM mismatch</li>
         </ul>
       </div>
 
-      <!-- Diagnostic Commands -->
-      <div class="block">
-        <h3>Diagnostic Commands (kept handy)</h3>
-        <pre style="color:var(--muted);font-size:13px;line-height:1.35">
-# Network & reachability
-ssh -vvv -i key.pem ubuntu@<public-ip>
-nc -zv <private-ip> 3306
-ping -c4 <private-ip>
-
-# Services & logs
-sudo systemctl status mysql
-ss -tulpen | grep 3306
-sudo tail -n 200 /var/log/mysql/error.log
-
-# MySQL user check
-sudo mysql -e "SELECT user,host FROM mysql.user;"
-        </pre>
-      </div>
-
-      <!-- Techniques Learned -->
+      <!-- Techniques -->
       <div class="block">
         <h3>Techniques Learned</h3>
         <ul class="exp-list">
-          <li>Difference between SGs (stateful) and NACLs (stateless) and common pitfalls.</li>
-          <li>Using SG references to allow only web→db traffic (no public exposure).</li>
-          <li>MySQL host pattern matching and bind-address implications.</li>
-          <li>Using SSH ProxyJump for private instance access and bastion patterns.</li>
+          <li>NACL vs SG logic</li>
+          <li>SSH ProxyJump for private EC2</li>
+          <li>MySQL host rules</li>
         </ul>
       </div>
-
-      <!-- Achievements & Next Steps -->
-      <div class="block">
-        <h3>Achievements & Next Steps</h3>
-
-        <p class="lead">Achievements</p>
-        <ul class="exp-list">
-          <li>Working two-tier deployment: web → private DB with secure SGs and validated connectivity.</li>
-          <li>Documented full troubleshooting playbook for quick recovery.</li>
-          <li>Removed unnecessary NAT to reduce recurring cost after setup.</li>
-        </ul>
-
-        <p class="lead">Next Steps</p>
-        <p>
-          Move DB to RDS for managed backups and Multi-AZ, use Secrets Manager for credentials, add TLS for MySQL, and implement Terraform to capture infra as code.
-        </p>
-      </div>
-
     </div>
 
     <!-- Sidebar -->
     <aside>
+
       <div class="block card">
         <h3>Project Summary</h3>
-        <p class="card-text">A secure two-tier AWS deployment demonstrating networking, MySQL host rules, NACL/SG troubleshooting and production runbook.</p>
-        <div class="badges">
-          <span class="badge">VPC</span><span class="badge">NACL</span><span class="badge">SG</span><span class="badge">MySQL</span>
-        </div>
+        <p class="card-text">Secure web → private DB architecture.</p>
       </div>
 
       <div class="block card">
-        <h3>Quick Fix Snippets</h3>
-        <pre style="color:var(--muted);font-size:13px;line-height:1.35">
-# Make MySQL bind to all interfaces
-sudo sed -i 's/^bind-address.*/bind-address = 0.0.0.0/' /etc/mysql/mysql.conf.d/mysqld.cnf
-sudo systemctl restart mysql
-
-# Create host-scoped user
-sudo mysql -e "CREATE USER 'sms_user'@'10.10.%' IDENTIFIED BY 'StrongSmsPassword!23'; GRANT ALL ON sms_db.* TO 'sms_user'@'10.10.%'; FLUSH PRIVILEGES;"
-        </pre>
+        <h3>Repository</h3>
+        <a class="btn-nav-primary" href="https://github.com/RohithJP" target="_blank">View Repo</a>
       </div>
 
-      <div class="block card">
-        <h3>Links & Repo</h3>
-        <p class="card-text">Runbook, troubleshooting notes and config snippets are stored in the portfolio repo.</p>
-        <a class="btn btn-primary" href="https://github.com/RohithJP" target="_blank" rel="noopener">View Repo</a>
-      </div>
     </aside>
+
   </div>
 
-  <section style="margin-top:28px;">
-    <a class="btn btn-outline" href="project6.html">← Previous</a>
-    <a class="btn btn-primary" href="../index.html" style="margin-left:12px">Back to Home</a>
+  <!-- NAVIGATION -->
+  <section class="project-nav">
+    <a class="btn-nav-outline" href="project6.html">← Previous</a>
+    <a class="btn-nav-primary" href="project1.html">Next →</a>
   </section>
 
 </main>
