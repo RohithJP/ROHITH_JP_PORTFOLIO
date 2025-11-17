@@ -322,3 +322,50 @@ html, body {
   .hero-last { font-size: 36px; }
   .nav a { margin-left: 14px; font-size: 14px; }
 }
+/* remove underline everywhere */
+.no-underline, a {
+  text-decoration: none !important;
+}
+
+/* stronger hero buttons */
+.btn-strong {
+  background: #2ecbff;
+  color: #00111a;
+  padding: 12px 26px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  display: inline-block;
+}
+
+.btn-strong:hover {
+  background: #5de1ff;
+}
+
+/* outline button */
+.btn-outline-strong {
+  border: 2px solid #2ecbff;
+  padding: 11px 22px;
+  border-radius: 10px;
+  color: #2ecbff;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.btn-outline-strong:hover {
+  background: rgba(46, 203, 255, 0.15);
+}
+
+/* email + github buttons small */
+.btn-small {
+  background: #12222d;
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: #2ecbff;
+  font-weight: 600;
+}
+
+.btn-small:hover {
+  background: #1b2e3a;
+}
+
