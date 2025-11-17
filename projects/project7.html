@@ -1,141 +1,115 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Project 07 — Two-Tier Architecture</title>
+<!-- ================================
+     PROJECT 7 — WORKFLOW DIAGRAM
+=================================== -->
+<section class="section-dark">
+  <h2 class="section-title">Architecture Workflow</h2>
 
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../style.css?v=24" />
-</head>
+  <div class="arch-diagram">
+    <svg class="workflow-svg" viewBox="0 0 1500 200" xmlns="http://www.w3.org/2000/svg">
 
-<body>
+      <!-- Internet -->
+      <rect x="10" y="60" width="200" height="70" rx="14"
+            fill="#05131a" stroke="#2ec4ff" stroke-width="2"/>
+      <text x="110" y="102" text-anchor="middle" fill="#2ec4ff" font-size="14">
+        Internet / User Browser
+      </text>
 
-<header class="site-header">
-  <div class="container header-inner">
-    <a class="brand-link" href="../index.html"><span class="brand-logo">ROHITH JP</span></a>
-    <nav class="nav">
-      <a href="../index.html">Home</a>
-      <a href="project1.html">Projects</a>
-      <a href="../experience/experience.html">Experience</a>
-      <a href="../index.html#contact">Contact</a>
-    </nav>
-  </div>
-</header>
+      <!-- Public Subnet (Web EC2) -->
+      <rect x="260" y="40" width="300" height="110" rx="14"
+            fill="#05131a" stroke="#7e3cff" stroke-width="2"/>
+      <text x="410" y="85" text-anchor="middle" fill="#7e3cff" font-size="14">
+        Public Subnet (10.10.1.0/24)
+      </text>
+      <text x="410" y="110" text-anchor="middle" fill="#9fb8c7" font-size="12">
+        Web EC2 — Nginx + PHP
+      </text>
 
-<main class="container">
+      <!-- Private Subnet (DB EC2) -->
+      <rect x="620" y="40" width="340" height="110" rx="14"
+            fill="#05131a" stroke="#ff9900" stroke-width="2"/>
+      <text x="790" y="85" text-anchor="middle" fill="#ff9900" font-size="14">
+        Private Subnet (10.10.2.0/24)
+      </text>
+      <text x="790" y="110" text-anchor="middle" fill="#9fb8c7" font-size="12">
+        MySQL Database EC2
+      </text>
 
-  <section class="project-hero">
-    <h1 class="title">07 — Two-Tier Architecture (Web + Private DB)</h1>
-    <p class="subtitle">
-      Secure VPC design: public EC2 web server talks to private EC2 MySQL database.
-      Emphasis: SG/NACL design, MySQL host rules, troubleshooting runbook.
-    </p>
-  </section>
+      <!-- Optional NAT -->
+      <rect x="1010" y="60" width="220" height="70" rx="14"
+            fill="#05131a" stroke="#2ec4ff" stroke-width="2"/>
+      <text x="1120" y="102" text-anchor="middle" fill="#2ec4ff" font-size="13">
+        (Optional) NAT Gateway
+      </text>
 
-  <div class="showcase">
+      <!-- Arrows -->
+      <line x1="210" y1="95" x2="260" y2="95" stroke="#2ec4ff" stroke-width="2"/>
+      <line x1="560" y1="95" x2="620" y2="95" stroke="#7e3cff" stroke-width="2"/>
+      <line x1="960" y1="95" x2="1010" y2="95" stroke="#ff9900" stroke-width="2"/>
 
-    <div>
-
-      <!-- Architecture -->
-      <div class="block">
-        <h3>Architecture</h3>
-        <p><strong>Internet → Public Web EC2 → Private DB EC2 (MySQL)</strong></p>
-
-        <div class="arch-grid">
-          <div>
-            <p class="lead">
-              • Public EC2: Nginx + PHP<br>
-              • Private EC2: MySQL only<br>
-              • SG reference used to allow only web→db traffic<br>
-              • NACLs control subnets (stateless)
-            </p>
-
-            <div class="badges">
-              <span class="badge">VPC</span>
-              <span class="badge">EC2</span>
-              <span class="badge">MySQL</span>
-              <span class="badge">SG</span>
-              <span class="badge">NACL</span>
-            </div>
-          </div>
-
-          <div class="arch-diagram">
-            (keep your SVG)
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Overview -->
-      <div class="block">
-        <h3>Project Overview</h3>
-        <p>
-          Secure separation of public-facing and private database layers.
-        </p>
-      </div>
-
-      <!-- Setup & Runbook -->
-      <div class="block">
-        <h3>Setup & Runbook</h3>
-        <div class="steps">
-          <div class="step"><div class="num">01</div>Create VPC and subnets</div>
-          <div class="step"><div class="num">02</div>Configure IGW, NAT, route tables</div>
-          <div class="step"><div class="num">03</div>Setup SG references for DB access</div>
-          <div class="step"><div class="num">04</div>Install Nginx + PHP + MySQL</div>
-        </div>
-      </div>
-
-      <!-- Troubleshooting -->
-      <div class="block">
-        <h3>Troubleshooting</h3>
-        <ul class="exp-list">
-          <li>MySQL bind-address incorrectly set</li>
-          <li>SG missing reference from web to db</li>
-          <li>NACL blocking ephemeral ports</li>
-          <li>PHP 502/500 — PHP-FPM mismatch</li>
-        </ul>
-      </div>
-
-      <!-- Techniques -->
-      <div class="block">
-        <h3>Techniques Learned</h3>
-        <ul class="exp-list">
-          <li>NACL vs SG logic</li>
-          <li>SSH ProxyJump for private EC2</li>
-          <li>MySQL host rules</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Sidebar -->
-    <aside>
-
-      <div class="block card">
-        <h3>Project Summary</h3>
-        <p class="card-text">Secure web → private DB architecture.</p>
-      </div>
-
-      <div class="block card">
-        <h3>Repository</h3>
-        <a class="btn-nav-primary" href="https://github.com/RohithJP" target="_blank">View Repo</a>
-      </div>
-
-    </aside>
-
+    </svg>
   </div>
 
-  <!-- NAVIGATION -->
-  <section class="project-nav">
-    <a class="btn-nav-outline" href="project6.html">← Previous</a>
-    <a class="btn-nav-primary" href="project1.html">Next →</a>
-  </section>
+  <!-- Explanation Section -->
+  <h2 class="section-title">Detailed Explanation</h2>
 
-</main>
+  <p class="lead">
+    This project demonstrates a production-ready **two-tier AWS architecture** where the web server runs
+    in a public subnet while the MySQL database runs in a fully isolated private subnet. Strict networking,
+    security group references, and NACL rules ensure secure and predictable communication.
+  </p>
 
-<footer class="site-footer">
-  <div class="container"><small>© 2025 Rohith J. Periyasamy</small></div>
-</footer>
+  <ul class="exp-list">
 
-</body>
-</html>
+    <li>
+      <strong>Internet User Access:</strong>
+      Users reach the application through the public web server hosted on an EC2 instance. Only HTTP/HTTPS
+      ports are exposed to the internet to follow least-privilege security.
+    </li>
+
+    <li>
+      <strong>Public Subnet — Web EC2:</strong>
+      Hosts Nginx + PHP. Accepts public traffic, processes requests, and communicates with the database tier.
+      It has a security group that allows:
+      <ul>
+        <li>HTTP/HTTPS from anywhere</li>
+        <li>SSH only from admin IP</li>
+      </ul>
+    </li>
+
+    <li>
+      <strong>Private Subnet — DB EC2:</strong>
+      MySQL is installed on a separate EC2 instance with <strong>no public IP</strong>. It is accessible only
+      from the Web EC2 using a security group reference (not IP-based). Database user rules (e.g.,
+      <code>user@10.10.%</code>) allow VPC-restricted authentication.
+    </li>
+
+    <li>
+      <strong>Security Groups:</strong>
+      <ul>
+        <li><strong>sg_web:</strong> Allows HTTP/HTTPS + SSH</li>
+        <li><strong>sg_db:</strong> Allows MySQL (3306) <strong>only from sg_web</strong></li>
+      </ul>
+      The SG reference ensures DB is completely hidden from the outside world.
+    </li>
+
+    <li>
+      <strong>NACL Rules:</strong>
+      Stateless rules applied at subnet level. Correct ephemeral port return paths are essential to avoid dropped packets.
+    </li>
+
+    <li>
+      <strong>Optional NAT Gateway:</strong>
+      Used for installing packages (apt update) on the private instance. Can be disabled after setup to avoid extra billing.
+    </li>
+
+    <li>
+      <strong>Traffic Flow Summary:</strong>
+      <ul>
+        <li>User → Public EC2 (Nginx/PHP)</li>
+        <li>Public EC2 → Database EC2 (3306)</li>
+        <li>Private EC2 never communicates directly with the internet</li>
+      </ul>
+    </li>
+
+  </ul>
+</section>
