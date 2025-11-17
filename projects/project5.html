@@ -1,164 +1,254 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Project 5 – PHP Website Hosting with AWS RDS</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Project 5 — PHP Website + MySQL RDS Deployment — Rohith J. Periyasamy</title>
 
-<link rel="stylesheet" href="../style.css?v=5000">
-
-<style>
-body {
-  padding: 40px;
-  max-width: 900px;
-  margin: auto;
-  font-size: 17px;
-  line-height: 1.7;
-}
-
-h1, h2, h3 {
-  font-family: "Orbitron";
-  color: var(--neon-blue);
-  text-shadow: 0 0 12px var(--neon-blue);
-}
-
-.section-box {
-  background: rgba(255,255,255,0.03);
-  padding: 18px 22px;
-  margin: 18px 0;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.06);
-}
-
-code, pre {
-  background: rgba(255,255,255,0.05);
-  padding: 12px;
-  border-radius: 8px;
-  display: block;
-  overflow-x: auto;
-  border: 1px solid rgba(255,255,255,0.08);
-}
-</style>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css?v=1" />
 </head>
 
 <body>
 
-<a href="../index.html" class="btn" style="margin-bottom:20px; display:inline-block;">← Back to Portfolio</a>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand-link" href="../index.html">
+      <span class="brand-logo">ROHITH JP</span>
+    </a>
+    <nav class="nav">
+      <a href="../index.html">Home</a>
+      <a class="active" href="#">Project</a>
+      <a href="../experience/experience.html">Experience</a>
+    </nav>
+  </div>
+</header>
 
-<h1>Hosting a PHP Website on AWS with MySQL RDS</h1>
-<p><strong>Deploying a dynamic PHP website from GitHub → EC2 → RDS → Public website</strong></p>
+<main class="container">
 
-<div class="section-box">
-<h2>Project Overview</h2>
-<p><strong>Goal:</strong> Host a production-ready PHP website on AWS EC2, connect it to RDS MySQL, and make it publicly accessible.</p>
+  <!-- HERO -->
+  <section class="project-hero">
+    <div class="title">PHP Website Deployment with MySQL RDS</div>
+    <div class="subtitle">
+      End-to-end deployment of a dynamic PHP web application on AWS EC2 using NGINX, PHP-FPM, and Amazon RDS MySQL.
+      Includes debugging 502/500 errors, DB connectivity, and Linux permissions.
+    </div>
+  </section>
 
-<p><strong>Scenario:</strong></p>
-<ul>
-<li>Clone website from GitHub</li>
-<li>Deploy on EC2 using NGINX + PHP-FPM</li>
-<li>Create RDS MySQL and connect it</li>
-<li>Import SQL database</li>
-</ul>
+  <div class="showcase">
 
-<p>This project demonstrates real-world Linux, DB, web server, and cloud deployment skills.</p>
-</div>
+    <!-- MAIN LEFT CONTENT -->
+    <div>
 
-<div class="section-box">
-<h2>Learning Objectives</h2>
-<ul>
-<li>Launch & configure EC2</li>
-<li>Install & configure NGINX</li>
-<li>Install PHP & PHP-FPM</li>
-<li>Create RDS MySQL DB</li>
-<li>Import SQL data</li>
-<li>Connect PHP → RDS</li>
-<li>Troubleshoot 502 / 500 errors</li>
-<li>Manage Linux permissions, security groups, networking</li>
-</ul>
-</div>
+      <!-- Architecture -->
+      <div class="block">
+        <h3>Architecture</h3>
+        <p><strong>GitHub → EC2 (NGINX + PHP-FPM) → RDS MySQL → Browser / Users</strong></p>
 
-<div class="section-box">
-<h2>Architecture</h2>
-<p><strong>Flow:</strong></p>
-<p>[GitHub Repository] → Clone → [EC2 Ubuntu] → [NGINX + PHP-FPM] → [RDS MySQL] → [Users]</p>
+        <div class="arch-grid">
+          <div>
+            <p class="lead">
+              • EC2 hosts NGINX + PHP-FPM<br>
+              • RDS hosts MySQL with secure inbound rules<br>
+              • Website cloned directly from GitHub<br>
+              • Permissions fixed to avoid 403/500 errors<br>
+              • PHP app connected to RDS endpoint
+            </p>
 
-<ul>
-<li>EC2 (Ubuntu 22.04)</li>
-<li>NGINX Web Server</li>
-<li>PHP-FPM</li>
-<li>AWS RDS (MySQL)</li>
-<li>Linux permissions & AWS security groups</li>
-</ul>
-</div>
+            <div class="badges">
+              <span class="badge">NGINX</span>
+              <span class="badge">PHP-FPM</span>
+              <span class="badge">RDS</span>
+              <span class="badge">EC2</span>
+              <span class="badge">GitHub</span>
+            </div>
+          </div>
 
-<div class="section-box">
-<h2>1⃣ EC2 Instance Setup</h2>
+          <!-- DIAGRAM -->
+          <div class="arch-diagram">
+            <svg class="workflow-svg" viewBox="0 0 980 160" xmlns="http://www.w3.org/2000/svg">
 
-<pre><code>chmod 400 mykey.pem
-ssh -i "mykey.pem" ubuntu@&lt;EC2-PUBLIC-IP&gt;
+              <!-- GitHub -->
+              <rect x="10" y="30" width="200" height="50" rx="10" fill="#05131a" stroke="#2ec4ff" stroke-width="1.6"/>
+              <text x="110" y="62" text-anchor="middle" fill="#2ec4ff" font-family="IBM Plex Mono" font-size="12">GitHub Repo</text>
 
-sudo apt update && sudo apt upgrade -y
-sudo apt install git unzip curl -y
-</code></pre>
-</div>
+              <!-- EC2 -->
+              <rect x="240" y="30" width="220" height="50" rx="10" fill="#05131a" stroke="#7e3cff" stroke-width="1.6"/>
+              <text x="350" y="62" text-anchor="middle" fill="#7e3cff" font-family="IBM Plex Mono" font-size="12">EC2 (NGINX + PHP-FPM)</text>
 
-<div class="section-box">
-<h2>2⃣ NGINX Installation & Configuration</h2>
+              <!-- PHP App -->
+              <rect x="490" y="30" width="220" height="50" rx="10" fill="#05131a" stroke="#2ec4ff" stroke-width="1.6"/>
+              <text x="600" y="62" text-anchor="middle" fill="#2ec4ff" font-family="IBM Plex Mono" font-size="12">PHP Application</text>
 
-<pre><code>sudo apt install nginx -y
-sudo systemctl start nginx
-sudo systemctl enable nginx
-</code></pre>
+              <!-- RDS DB -->
+              <rect x="740" y="30" width="220" height="50" rx="10" fill="#05131a" stroke="#ff9900" stroke-width="1.6"/>
+              <text x="850" y="62" text-anchor="middle" fill="#ff9900" font-family="IBM Plex Mono" font-size="12">MySQL RDS</text>
 
-<p>Remove default site:</p>
-<pre><code>sudo rm /etc/nginx/sites-enabled/default
-</code></pre>
+              <!-- Arrows -->
+              <line x1="210" y1="55" x2="240" y2="55" stroke="#2ec4ff" stroke-width="2" />
+              <line x1="460" y1="55" x2="490" y2="55" stroke="#7e3cff" stroke-width="2" />
+              <line x1="710" y1="55" x2="740" y2="55" stroke="#ff9900" stroke-width="2" />
 
-<h3>Create custom site:</h3>
-<pre><code>sudo nano /etc/nginx/sites-available/mywebsite
-</code></pre>
+            </svg>
+          </div>
 
-<h3>NGINX config:</h3>
-<pre><code>server {
-    listen 80;
-    server_name _;
+        </div>
+      </div>
 
-    root /var/www/html/mywebsite;
-    index index.php index.html index.htm;
+      <!-- Overview -->
+      <div class="block">
+        <h3>Project Overview</h3>
+        <p>
+          The objective was to deploy a dynamic PHP website ("sms\_kaliswari\_college") using AWS EC2 with 
+          NGINX + PHP-FPM and connect it to a MySQL RDS instance. The project focused on secure hosting, 
+          database connectivity, and resolving 502/500 application errors.
+        </p>
+      </div>
 
-    location / {
-        try_files $uri $uri/ =404;
-    }
+      <!-- Steps -->
+      <div class="block">
+        <h3>Setup & Configuration</h3>
 
-    location ~ \.php$ {
-        include snippets/fastcgi-php.conf;
-        fastcgi_pass unix:/run/php/php8.2-fpm.sock;
-    }
+        <div class="steps">
 
-    location ~ /\.ht {
-        deny all;
-    }
-}
-</code></pre>
+          <div class="step">
+            <div class="num">Step 1</div>
+            <strong>Launch EC2</strong><br>
+            Ubuntu 22.04 / t2.micro. Install NGINX & basic packages.
+          </div>
 
-<h3>Enable site:</h3>
-<pre><code>sudo ln -s /etc/nginx/sites-available/mywebsite /etc/nginx/sites-enabled/
-sudo nginx -t
+          <div class="step">
+            <div class="num">Step 2</div>
+            <strong>Install NGINX</strong><br>
+            <code>sudo apt install nginx -y</code>  
+            Remove default site and configure custom virtual host.
+          </div>
+
+          <div class="step">
+            <div class="num">Step 3</div>
+            <strong>Install PHP & PHP-FPM</strong><br>
+            <code>sudo apt install php php-fpm php-mysql -y</code>
+          </div>
+
+          <div class="step">
+            <div class="num">Step 4</div>
+            <strong>Clone Website From GitHub</strong><br>
+            <code>git clone &lt;repo&gt; /var/www/html/mywebsite</code>
+          </div>
+
+          <div class="step">
+            <div class="num">Step 5</div>
+            <strong>Create MySQL RDS Database</strong><br>
+            Create DB + user + import SQL dump.
+          </div>
+
+          <div class="step">
+            <div class="num">Step 6</div>
+            <strong>Connect PHP to RDS</strong><br>
+            Update db.php with RDS endpoint, username, password.
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Troubleshooting -->
+      <div class="block">
+        <h3>Troubleshooting & Fixes</h3>
+
+        <ul class="exp-list">
+          <li><strong>502 Bad Gateway</strong> — PHP-FPM socket mismatch. Fixed in NGINX config.</li>
+          <li><strong>500 Internal Server Error</strong> — Missing PHP modules / DB errors.</li>
+          <li><strong>RDS Access Denied</strong> — EC2 not allowed in RDS SG. Added SG rule.</li>
+          <li><strong>NGINX default page showing</strong> — default site not removed.</li>
+          <li><strong>SSH permission denied</strong> — incorrect PEM permissions.</li>
+        </ul>
+
+      </div>
+
+      <!-- Techniques Learned -->
+      <div class="block">
+        <h3>Techniques Learned</h3>
+        <ul class="exp-list">
+          <li>Creating and configuring NGINX virtual hosts.</li>
+          <li>Fixing PHP-FPM socket & permission issues.</li>
+          <li>Importing MySQL dumps to RDS from EC2.</li>
+          <li>Debugging 502/500 using NGINX + PHP logs.</li>
+          <li>Linux file permissions (www-data ownership).</li>
+        </ul>
+      </div>
+
+      <!-- Achievements -->
+      <div class="block">
+        <h3>Achievements & Next Steps</h3>
+
+        <p class="lead">Achievements</p>
+        <ul class="exp-list">
+          <li>Successfully hosted PHP website on EC2.</li>
+          <li>Connected securely to MySQL RDS.</li>
+          <li>Resolved 502/500 errors and permission issues.</li>
+          <li>Website fully functional and publicly accessible.</li>
+        </ul>
+
+        <p class="lead">Next Steps</p>
+        <p>
+          Add HTTPS using Let's Encrypt, enable automated deployments,
+          implement caching/CDN, and integrate CloudWatch logs.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- RIGHT SIDEBAR -->
+    <aside>
+
+      <div class="block card">
+        <h3>Project Summary</h3>
+        <p class="card-text">
+          Fully deployed PHP application using NGINX, PHP-FPM, and RDS MySQL
+          with real debugging and production-ready patterns.
+        </p>
+        <div class="badges">
+          <span class="badge">EC2</span>
+          <span class="badge">NGINX</span>
+          <span class="badge">RDS</span>
+          <span class="badge">PHP</span>
+        </div>
+      </div>
+
+      <div class="block card">
+        <h3>Quick Commands</h3>
+<pre style="color:var(--muted);font-size:13px;line-height:1.35">
+# Install packages
+sudo apt install nginx php php-fpm php-mysql -y
+
+# Clone website
+git clone <repo> /var/www/html/mywebsite
+
+# Restart services
 sudo systemctl reload nginx
-</code></pre>
-</div>
+sudo systemctl restart php8.2-fpm
+</pre>
+      </div>
 
-<div class="section-box">
-<h2>3⃣ PHP & PHP-FPM Installation</h2>
+      <div class="block card">
+        <h3>Repo & Docs</h3>
+        <p class="card-text">All PHP configs and MySQL scripts included in the repo.</p>
+        <a class="btn btn-primary" href="https://github.com/RohithJP" target="_blank">View Repo</a>
+      </div>
 
-<pre><code>sudo apt install php php-fpm php-mysql php-mbstring php-xml -y
-php -v
-sudo systemctl enable php8.2-fpm
-</code></pre>
+    </aside>
+  </div>
 
-<p>Test PHP:</p>
-<pre><code>sudo nano /var/www/html/mywebsite/test.php
-</code></pre>
+  <section style="margin-top:28px;">
+    <a class="btn btn-outline" href="project4.html">← Previous</a>
+    <a class="btn btn-primary" href="project6.html" style="margin-left:12px">Next →</a>
+  </section>
 
-```php
-<?php phpinfo(); ?>
+</main>
+
+<footer class="site-footer">
+  <div class="container"><small>© 2025 Rohith J. Periyasamy</small></div>
+</footer>
+
+</body>
+</html>
